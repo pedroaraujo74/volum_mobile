@@ -96,7 +96,7 @@
                 </div>
                 <div *ngIf="numberConfirmeds == 0" class="font-md bold font-grey4" style="margin-left: -10px">Não existem confirmados.</div>
                 <div class="v-button" item-right *ngIf="numberConfirmeds > 0">
-                    <button ion-button small clear item-right (tap)="goParticipants('confirmados')">Ver tudo</button>
+                    <button ion-button small clear item-right (tap)="goParticipants('confirmed')">Ver tudo</button>
                 </div>
             </div>
 
@@ -114,7 +114,7 @@
                 </div>
                 <div *ngIf="numberCandidates == 0" class="font-md bold font-grey4" style="margin-left: -10px">Não existem candidados.</div>
                 <div class="v-button" item-right *ngIf="numberCandidates > 0">
-                    <button color="secondary" ion-button small clear item-right (tap)="goParticipants('candidatos')">Ver tudo</button>
+                    <button color="secondary" ion-button small clear item-right (tap)="goParticipants('candidates')">Ver tudo</button>
                 </div>
             </div>
         </div>

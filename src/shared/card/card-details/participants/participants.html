@@ -11,10 +11,10 @@
     </ion-navbar>
 
     <ion-segment [(ngModel)]="tabs" class="segmentDetails" color="light" mode="md">
-        <ion-segment-button value="confirmados">
+        <ion-segment-button value="confirmed" [disabled]="!confirmeds">
             Confirmados
         </ion-segment-button>
-        <ion-segment-button value="candidatos">
+        <ion-segment-button value="candidates" [disabled]="!candidates">
             Candidatos
         </ion-segment-button>
     </ion-segment>
@@ -23,13 +23,13 @@
 
 <ion-content  class="content-background" [ngSwitch]="tabs" padding-top>
      <!-- CONFIRMADOS -->
-    <div *ngSwitchCase="'confirmados'">
+    <div *ngSwitchCase="'confirmed'">
         <ion-list no-border no-lines mode="md">
-            <button ion-item>
+            <button ion-item *ngFor="let confirmed of confirmeds">
                 <ion-avatar item-left>
-                    <img src="./assets/imgs/avatar.png">
+                    <img [src]="confirmed?.photo_url">
                 </ion-avatar>
-                <h2 class="font-grey4 font-md bold">João Tavares</h2>
+                <h2 class="font-grey4 font-md bold">{{confirmed?.name}}</h2>
                 <div class="marginTopNeg">
                     <ion-icon name="star" class="font-md2" color="secondary"></ion-icon>
                     <ion-icon name="star" class="font-md2" color="secondary"></ion-icon>
@@ -42,55 +42,17 @@
                 </button>
                 -->
             </button>
-            <button ion-item>
-                <ion-avatar item-left>
-                    <img src="./assets/imgs/vasco.png">
-                </ion-avatar>
-                <h2 class="font-grey4 font-md bold">Vasco Silva</h2>
-                <div class="marginTopNeg">
-                    <ion-icon name="star" class="font-md2" color="secondary"></ion-icon>
-                    <ion-icon name="star" class="font-md2" color="secondary"></ion-icon>
-                    <ion-icon name="star" class="font-md2" color="secondary"></ion-icon>
-                    <ion-icon name="star" class="font-md2" color="secondary"></ion-icon>
-                    <ion-icon name="star" class="font-md2" color="secondary"></ion-icon>
-                </div>
-            </button>
-            <button ion-item>
-                <ion-avatar item-left>
-                    <img src="./assets/imgs/pedro.png">
-                </ion-avatar>
-                <h2 class="font-grey4 font-md bold">Pedro Araújo</h2>
-                <div class="marginTopNeg">
-                    <ion-icon name="star" class="font-md2" color="secondary"></ion-icon>
-                    <ion-icon name="star" class="font-md2" color="secondary"></ion-icon>
-                    <ion-icon name="star" class="font-md2" color="secondary"></ion-icon>
-                    <ion-icon name="star" class="font-md2" color="secondary"></ion-icon>
-                </div>
-            </button>
-            <button ion-item>
-                <ion-avatar item-left>
-                    <img src="./assets/imgs/andre.png">
-                </ion-avatar>
-                <h2 class="font-grey4 font-md bold">André Martins</h2>
-                <div class="marginTopNeg">
-                    <ion-icon name="star" class="font-md2" color="secondary"></ion-icon>
-                    <ion-icon name="star" class="font-md2" color="secondary"></ion-icon>
-                    <ion-icon name="star" class="font-md2" color="secondary"></ion-icon>
-                    <ion-icon name="star" class="font-md2" color="secondary"></ion-icon>
-                    <ion-icon name="star" class="font-md2" color="secondary"></ion-icon>
-                </div>
-            </button>
         </ion-list>
     </div>
 
-    <div *ngSwitchCase="'candidatos'">
+    <div *ngSwitchCase="'candidates'">
        <ion-list no-border no-lines mode="md">
-            <button ion-item>
+            <button ion-item *ngFor="let candidate of candidates">
                 <ion-avatar item-left>
-                    <img src="./assets/imgs/avatar.png">
+                    <img [src]="candidate?.photo_url">
                 </ion-avatar>
-                <h2 class="font-grey4 font-md bold">João Tavares</h2>
-                 <div class="marginTopNeg">
+                <h2 class="font-grey4 font-md bold">{{candidate?.name}}</h2>
+                <div class="marginTopNeg">
                     <ion-icon name="star" class="font-md2" color="secondary"></ion-icon>
                     <ion-icon name="star" class="font-md2" color="secondary"></ion-icon>
                     <ion-icon name="star" class="font-md2" color="secondary"></ion-icon>
@@ -102,32 +64,6 @@
                     Aceitar
                 </button>
                 -->
-            </button>
-            <button ion-item>
-                <ion-avatar item-left>
-                    <img src="./assets/imgs/vasco.png">
-                </ion-avatar>
-                <h2 class="font-grey4 font-md bold">Vasco Silva</h2>
-                 <div class="marginTopNeg">
-                    <ion-icon name="star" class="font-md2" color="secondary"></ion-icon>
-                    <ion-icon name="star" class="font-md2" color="secondary"></ion-icon>
-                    <ion-icon name="star" class="font-md2" color="secondary"></ion-icon>
-                    <ion-icon name="star" class="font-md2" color="secondary"></ion-icon>
-                    <ion-icon name="star" class="font-md2" color="secondary"></ion-icon>
-                </div>
-            </button>
-            <button ion-item>
-                <ion-avatar item-left>
-                    <img src="./assets/imgs/pedro.png">
-                </ion-avatar>
-                <h2 class="font-grey4 font-md bold">Pedro Araujo</h2>
-                 <div class="marginTopNeg">
-                    <ion-icon name="star" class="font-md2" color="secondary"></ion-icon>
-                    <ion-icon name="star" class="font-md2" color="secondary"></ion-icon>
-                    <ion-icon name="star" class="font-md2" color="secondary"></ion-icon>
-                    <ion-icon name="star" class="font-md2" color="secondary"></ion-icon>
-                    <ion-icon name="star" class="font-md2" color="secondary"></ion-icon>
-                </div>
             </button>
         </ion-list>
     </div>

@@ -15,8 +15,8 @@ export class CardDetails {
     public getVolId: any;
     public volDetails = {};
     public volName: string;
-
-    // ENDEREÇO
+    
+    // ADDRESS
     public addressData: any;
     public address: any;
     public addressSub : any;
@@ -40,6 +40,8 @@ export class CardDetails {
     public candidatesNumber: any;
     public numberCandidates: any;
     public candidates: any;
+
+    // APPLY TO VOL
 
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public modalController: ModalController, public popoverCtrl: PopoverController, public volsService: VolsService, public loadingCtrl: LoadingController) {
@@ -124,7 +126,7 @@ export class CardDetails {
         .catch(err => console.log(err));
     }
 
-    // CANDIDATES
+    // GET CANDIDATES
     getCandidates(volId, amount) {
         this.volsService.getCandidates(volId, amount)
         .then(res => {
@@ -142,9 +144,18 @@ export class CardDetails {
         .catch(err => console.log(err));
     }
 
+    // APPLY TO VOL
+    /*
+    apply(id_vol) {
+        this.volsService.apply(this.context.id_user, id_vol).then(res => {
+        });
+    }
+    */
+
     goParticipants(value) {
         this.navCtrl.push("Participants", {
             participants: value,
+            volId: this.getVolId
         });
     }
 
