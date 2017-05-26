@@ -1,0 +1,262 @@
+
+
+.content-background{
+    background-color: #F7F8FA;
+}
+
+.backgroundBlue{
+    background-color: #0F76F7;
+}
+
+.segmentDetails{
+    background-color: #0F76F7;
+}
+
+// FONT SIZES 
+.font-sm{
+  font-size: 1.2rem!important;
+}
+
+.font-md{
+  font-size: 1.4rem!important;
+}
+
+.font-md2{
+  font-size: 1.5rem!important;
+}
+
+.font-md3{
+  font-size: 1.6rem!important;
+}
+
+.font-lg{
+  font-size: 1.7rem!important;
+}
+
+// MARGIN 
+.marginTopNeg{
+    margin-top: -3px!important;
+}
+
+// BOLD
+.bold{
+  font-weight: 600!important;
+}
+
+// COLOR
+.font-primary{
+  color: #0F76F7!important
+}
+.font-second{
+  color: #FFCB2B!important
+}
+.font-third{
+  color: #FF8A65!important
+}
+.font-light{
+  color: #FFFFFF!important
+}
+.font-grey2{
+  color: #d4d4d4!important
+}
+.font-grey3{
+  color: #919191!important
+}
+.font-grey4{
+  color: #4A4A4A!important
+}
+
+// BORDER
+.border-bottom{
+    border-bottom: 0.55px solid rgba(0, 0, 0, 0.06)!important;
+}
+
+.border-top{
+    border-top: 0.55px solid rgba(0, 0, 0, 0.06)!important;
+}
+
+//Margin-top
+.no-margin-top{
+    margin-top: 0px!important;
+}
+
+//Margin item
+.margin-item{
+    margin-top: 8px!important;
+}
+
+
+// CARD
+.cardVolum{
+    width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+// FIX
+.fixCard{
+    padding-top: 8px;
+}
+
+
+// LIST HEADER
+.list-header-md{
+    background-color: #F7F8FA!important;
+    border-top: 0px solid #dedede!important;
+}
+
+.list-header{
+    color: #4A4A4A;
+}
+
+.list-header-ios{
+    border-bottom: none;
+}
+
+// EVENT
+.searchDay{
+    position: absolute;
+    width: 56px;
+    height: 56px;
+    background-color: rgba(15, 118, 247, 0.5)!important;
+    left: 16px;
+    color: #FFF;
+    text-align: center;
+    top: 8px;
+    vertical-align: middle;
+}
+
+.searchDayNoImage{
+    background-color: rgba(15, 118, 247, 1)!important;
+}
+
+.searchDaySize{
+    font-weight: 600;
+    margin-top: 15px;
+}
+
+.searchMounthSize{
+    font-size: 1.2rem;
+}
+
+
+.item-md ion-thumbnail img {
+    max-width: 56px;
+    max-height: 56px;
+}
+
+.item-md ion-thumbnail {
+    min-width: 56px!important;
+    min-height: 56px!important;
+}
+
+.item-md{
+   .searchDay{
+       top:9px;
+   } 
+}
+
+.item-md{
+    .searchDayCard{
+        top: 10px!important
+    }
+}
+
+// LOGIN - REGISTER
+.listRegister ion-item{
+    background-color: transparent!important;
+    padding-right: 16px;
+}
+
+.listRegister ion-item .item-inner{
+    padding-right: 0!important;
+}
+
+.listRegister ion-item ion-label{
+    color: #FFF;
+}
+
+.listRegister ion-item ion-input{
+    color: #FFF;
+    border-bottom: 1px solid #FFF!important;
+}
+
+.listRegister ion-item ion-datetime{
+    color: #FFF;
+    border-bottom: 1px solid #FFF!important;
+}
+
+.listRegister ion-item button{
+    margin: 0!important;
+}
+
+.navbarNumber{
+    padding-right:6px;
+}
+
+.textEntryInfo{
+    text-align: justify!important;
+    text-justify: inter-word!important;
+}
+
+//FAB
+.fab{
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+}
+
+
+//Segment Header
+.segmentColor{
+    background-color: #0F76F7;
+}
+
+//Padding Card Invite
+.fixPadding{
+    padding-left: 10px!important;
+    padding-right: 10px!important;
+}
+
+.fixPaddingTopBottom{
+    padding-top:5px;
+    padding-bottom: 5px;
+}
+
+//Fix Avatar
+.fixAvatar > ion-avatar{
+     display: -webkit-flex!important;
+  display: flex!important;
+  -webkit-align-items: center!important;
+  align-items: center!important;
+}
+
+//CardInvite
+.btnInvite{
+    border-radius: 2px;
+}
+
+
+//LIST BACKGROUND
+.listBack{
+    background-color: #FFFFFF;
+}
+
+//Icon Ver tudo
+.iconViewAll{
+    vertical-align: middle;
+    margin-left: 6px;
+}
+
+//INPUT
+.sizeLabel{
+    width: 150px!important;
+    min-width: 150px!important;
+}
+
+.toast-error{
+    .toast-container{
+        background: #f53d3d;
+        border-radius: 3px;
+    }
+}

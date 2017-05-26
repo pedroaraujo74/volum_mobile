@@ -1,0 +1,157 @@
+<ion-header no-border>
+    <ion-navbar color="primary">
+        <ion-title>
+            {{volName}}
+        </ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only color="white" (click)="openMenusHeader($event)">
+                <ion-icon name="more"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+
+    <ion-segment [(ngModel)]="tabs" class="segmentDetails" color="light" mode="md">
+        <ion-segment-button value="about">
+            Sobre
+        </ion-segment-button>
+        <ion-segment-button value="discussion">
+            Discussão
+        </ion-segment-button>
+    </ion-segment>
+</ion-header>
+
+
+<ion-content class="content-background" [ngSwitch]="tabs" padding-top>
+    <div *ngSwitchCase="'about'">
+
+        <ion-list no-lines no-margin>
+            <ion-item>
+                <ion-avatar item-left>
+                    <img [src]="volDetails.user?.photo_url">
+                </ion-avatar>
+                <p text-wrap>
+                    <span class="font-primary bold font-md2">
+                         {{volDetails.user?.name}}
+                    </span>
+                    <ion-icon *ngIf="volDetails.user?.certification == 1" name="checkmark-circle" color="primary" class="font-md font-md2"></ion-icon> 
+                    <span class="font-grey4">criou a</span>
+                    <span class="bold font-third">ação</span>
+                </p>
+                <p class="font-sm">{{volDetails?.date_creation | date:"d/M"}} às {{volDetails?.date_creation | amDateFormat: 'HH:mm'}}</p>
+                <button ion-button clear item-right icon-only color="grey3" (click)="openMenus($event, volDetails.user.id_user, volDetails.idVol)">
+                    <ion-icon name="more"></ion-icon>
+                </button>
+            </ion-item> 
+        </ion-list>
+
+        <!-- DESCRIPTION -->
+        <div class="listDescription" padding margin-top>
+            <div class="descriptionTitle font-primary">{{volDetails.name}}</div>
+            <div class="description">{{volDetails.description}}</div>
+        </div>
+
+        <!-- LIST TIME LOCATIONS -->
+        <ion-list no-lines no-margin margin-bottom margin-top class="listTimeLocation">
+            <ion-item>
+                <ion-icon name="time" item-left color="grey3"></ion-icon>
+                <h2 class="font-grey4 font-md bold" *ngIf="!volDetails?.date_end">Início a {{volDetails?.date_begin | date:"d"}} de {{volDetails?.date_begin | date:"MMMM"}}</h2>
+                <h2 class="font-grey4 font-md bold" *ngIf="volDetails?.date_end">De {{volDetails?.date_begin | date:"d"}} de {{volDetails?.date_begin | date:"MMMM"}} até {{volDetails?.date_end | date:"d"}} de {{volDetails?.date_end | date:"MMMM"}}</h2>
+                <p color="grey3" class="font-md">
+                    <span *ngIf="volDetails?.start_time && volDetails?.end_time">{{hora_inicio}}:{{minutos_inicio}}h até às {{hora_fim}}:{{minutos_fim}}h</span>
+                    <span *ngIf="volDetails?.start_time && !volDetails?.end_time">{{hora_inicio}}:{{minutos_inicio}}h</span>
+                    <span *ngIf="volDetails?.start_time && volDetails?.duration"> - </span>
+                    <span *ngIf="volDetails?.duration > 1">{{volDetails?.duration}} horas diárias</span><span *ngIf="volDetails?.duration < 2 && volDetails?.duration > 0">{{volDetails?.duration}} hora diária</span>
+                </p>
+            </ion-item>
+            <ion-item *ngIf="address">
+                <ion-icon name="navigate" item-left color="grey3"></ion-icon>
+                <h2 class="font-grey4 font-md bold" text-wrap>{{address}}</h2>
+            </ion-item>
+        </ion-list>
+
+        <!-- LIST TIME LOCATIONS -->
+        <ion-list no-border no-lines no-margin margin-bottom margin-top>
+            <ion-item>
+                <h2 class="font-md2 font-grey4">Categoria</h2><ion-badge item-right color="third">Defesa do Consumidor</ion-badge>
+            </ion-item>
+            <ion-item *ngIf="volDetails?.insurance == 1">
+                <h2 class="font-md2 font-grey4">Seguro</h2><ion-badge item-right color="four">Sim</ion-badge>
+            </ion-item>
+        </ion-list>
+
+        <!-- VOLUMS -->
+        <div class="volun">
+            <div class="v-confirm">
+                <div class="v-text">
+                    <span class="v-number font-primary">{{numberConfirmeds}}</span><span class="font-md font-grey4"> <span *ngIf="numberConfirmeds == 1">confirmado</span><span *ngIf="numberConfirmeds > 1 || numberConfirmeds == 0">confirmados</span></span>
+                </div>
+                <div class="v-imgs-confirm">
+                    <div *ngFor="let confirmed of confirmeds">
+                        <img [src]="confirmed?.photo_url">
+                    </div>
+                   
+                    <div class="lastCount" *ngIf="numberConfirmeds>10">
+                        +{{numberConfirmeds-10}}
+                    </div>
+                </div>
+                <div *ngIf="numberConfirmeds == 0" class="font-md bold font-grey4" style="margin-left: -10px">Não existem confirmados.</div>
+                <div class="v-button" item-right *ngIf="numberConfirmeds > 0">
+                    <button ion-button small clear item-right (tap)="goParticipants('confirmados')">Ver tudo</button>
+                </div>
+            </div>
+
+            <div class="v-offer">
+                <div class="v-text">
+                    <span class="v-number font-second">{{numberCandidates}}</span><span class="font-md font-grey4"> <span *ngIf="numberCandidates == 1">candidato</span><span *ngIf="numberCandidates > 1 || numberCandidates == 0">candidatos</span></span>
+                </div>
+                <div class="v-imgs-confirm">
+                    <div *ngFor="let candidate of candidates">
+                        <img [src]="candidate?.photo_url">
+                    </div>
+                    <div class="lastCount" *ngIf="numberCandidates>10">
+                        +{{numberCandidates-10}}
+                    </div>
+                </div>
+                <div *ngIf="numberCandidates == 0" class="font-md bold font-grey4" style="margin-left: -10px">Não existem candidados.</div>
+                <div class="v-button" item-right *ngIf="numberCandidates > 0">
+                    <button color="secondary" ion-button small clear item-right (tap)="goParticipants('candidatos')">Ver tudo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngSwitchCase="'discussion'">
+
+        <ion-list no-lines no-margin margin-bottom>
+            <ion-item (tap)="openModalNewDiscussion()">
+                <ion-avatar item-left>
+                    <img src="./assets/imgs/avatar5.png">
+                </ion-avatar>
+                <h2 ion-text color="grey4" class="font-md2">Escreva algo...</h2>
+            </ion-item>
+        </ion-list>
+
+        <ion-card class="cardVolum fixCard" no-margin margin-bottom>
+            <ion-item>
+                <ion-avatar item-left>
+                    <img src="./assets/imgs/caritas.png">
+                </ion-avatar>
+                <h2 ion-text color="primary" class="font-md bold">Cáritas Aveiro</h2>
+                <p ion-text color="grey3" class="marginTopNeg font-sm">1 horas</p>
+                <button ion-button clear item-right icon-only color="grey3" (click)="openMenusCard($event)">
+                    <ion-icon name="more"></ion-icon>
+                </button>
+            </ion-item>
+
+            <ion-card-content>
+                <span ion-text class="font-md font-grey4">Hoje em dia, as instituições apenas recebem os alimentos do Banco Alimentar e muitas delas organizam recolhas de alimentos para atenuar essa falta, adiantou Isabel Jonet.</span>
+            </ion-card-content>
+        </ion-card>
+    </div>
+</ion-content>
+
+<ion-footer no-border>
+    <ion-toolbar color="light" padding *ngIf="tabs == 'about'">
+        <button class="btnOffer" ion-button color="secondary" no-margin full mode="ios">Candidatar</button>
+    </ion-toolbar>
+</ion-footer>

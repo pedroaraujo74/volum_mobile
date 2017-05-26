@@ -1,0 +1,23 @@
+<ion-header no-border>
+    <ion-navbar transparent color="primary">
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding-top class="backgroundBlue">
+    <ion-list class="listRegister" no-lines radio-group [(ngModel)]="gender">
+        <ion-item>
+            <h1 class="textWhite" text-wrap>Qual é o seu género?</h1>
+        </ion-item>
+        <ion-item>
+            <ion-label>Feminino</ion-label>
+            <ion-radio value="0" color="secondary"></ion-radio>
+        </ion-item>
+        <ion-item padding-bottom>
+            <ion-label>Masculino</ion-label>
+            <ion-radio value="1" color="secondary"></ion-radio>
+        </ion-item>
+        <ion-item padding-top>
+            <button ion-fab color="light" item-right no-margin mode="ios" (tap)="onSubmit()"><ion-icon name="arrow-forward"></ion-icon></button>
+        </ion-item>
+    </ion-list>
+</ion-content>

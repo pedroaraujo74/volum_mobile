@@ -1,0 +1,84 @@
+<ion-header no-border>
+  <ion-navbar color="primary">
+    <ion-title>
+        Ações
+    </ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only color="light" (click)="openMenusHeader($event)">
+            <ion-icon name="more"></ion-icon>
+        </button>
+    </ion-buttons>
+  </ion-navbar>
+  <ion-segment [(ngModel)]="tabsActions" class="segmentColor" mode="md" color="white">
+        <ion-segment-button value="nextActions">
+            Explorar
+        </ion-segment-button>
+        <ion-segment-button value="myActions" color="white">
+            Minhas ações 
+        </ion-segment-button>
+        <ion-segment-button value="invites" color="white">
+            Convites
+        </ion-segment-button>
+    </ion-segment>
+</ion-header>
+
+
+<ion-content class="content-background" [ngSwitch]="tabsActions">
+
+    <!-- NEXT ACTIONS -->
+    <div *ngSwitchCase="'nextActions'">
+        <ion-list no-lines no-border margin-top>
+            <ion-item class="font-md bold font-grey4 border-bottom">Ações próximas</ion-item>
+            <cardList></cardList>
+        </ion-list>
+
+        <ion-list no-lines no-border>
+            <ion-item class="font-md bold font-grey4 border-bottom">Ações a aguardar confirmação</ion-item>
+            <cardList></cardList>
+            <button ion-item mode="md" text-center class="border-top">
+                <p class="font-grey3 font-md">Ver tudo<ion-icon name="ios-arrow-forward" class="iconViewAll"></ion-icon></p>
+            </button>
+        </ion-list>
+    </div>
+    <!-- NEXT ACTIONS -->
+
+    <!-- MINE -->
+    <div *ngSwitchCase="'myActions'">
+        <ion-list no-lines no-border margin-top>
+            <ion-item class="font-md bold font-grey4 border-bottom">Ações ativas</ion-item>
+            <cardList></cardList>
+            <button ion-item mode="md" text-center class="border-top">
+                <p class="font-grey3 font-md">Ver tudo<ion-icon name="ios-arrow-forward" class="iconViewAll"></ion-icon></p>
+            </button>
+        </ion-list>
+
+        <ion-list no-lines no-border margin-top>
+            <ion-item class="font-md bold font-grey4 border-bottom">Ações passadas que criaste</ion-item>
+            <cardList></cardList>
+            <button ion-item mode="md" text-center class="border-top">
+                <p class="font-grey3 font-md">Ver tudo<ion-icon name="ios-arrow-forward" class="iconViewAll"></ion-icon></p>
+            </button>
+        </ion-list>
+
+        <ion-list no-lines no-border margin-top>
+            <ion-item class="font-md bold font-grey4 border-bottom">Ações passadas onde participaste</ion-item>
+            <cardList></cardList>
+            <button ion-item mode="md" text-center class="border-top">
+                <p class="font-grey3 font-md">Ver tudo<ion-icon name="ios-arrow-forward" class="iconViewAll"></ion-icon></p>
+            </button>
+        </ion-list>
+    </div>
+    <!-- MINE -->
+
+    <!-- INVITES -->
+    <div *ngSwitchCase="'invites'">
+        <invite></invite>
+    </div>
+    <!-- INVITES -->
+
+    <ion-fab right bottom>
+        <button ion-fab color="secondary" mode="ios" (tap)="newAction()"><ion-icon name="add"></ion-icon></button>
+    </ion-fab>
+
+</ion-content>
+

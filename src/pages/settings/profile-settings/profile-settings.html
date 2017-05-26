@@ -1,0 +1,110 @@
+<ion-header no-border>
+  <ion-navbar color="primary">
+    <ion-title>
+        {{headerTitle}}
+    </ion-title>
+    <!--
+    <ion-buttons start showWhen="android,windows">
+      <button ion-button (click)="dismiss()" disabled>
+         <ion-icon name="checkmark" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons end showWhen="ios">
+      <button ion-button (click)="dismiss()" disabled>
+        <span ion-text color="light" showWhen="ios">Guardar</span>
+      </button>
+    </ion-buttons>
+    -->
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="content-background">
+  
+        <!-- DADOS PESSOAIS -->
+        <ion-list no-lines no-border margin-top *ngIf="typeSettings == 2">
+            <ion-item>
+                <ion-label fixed color="grey3" class="font-md2">Nome</ion-label>
+                <ion-input type="text" class="font-grey4 bold font-md2" text-right value="Vasco"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label fixed color="grey3" class="font-md2">Apelido</ion-label>
+                <ion-input type="text" class="font-grey4 bold font-md2" text-right value="Silva"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label fixed color="grey3" class="font-md2 sizeLabel" text-wrap>Data de nascimento</ion-label>
+                <ion-input type="text" class="font-grey4 bold font-md2" text-right value="22"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label fixed color="grey3" class="font-md2">Email</ion-label>
+                <ion-input type="text" class="font-grey4 bold font-md2" text-right value="vascosilva@ua.pt" text-wrap></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label fixed color="grey3" class="font-md2">Vive em</ion-label>
+                <ion-input type="text" class="font-grey4 bold font-md2" text-right value="Vila Nova de Gaia, Avintes" text-wrap></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label fixed color="grey3" class="font-md2">Género</ion-label>
+                <ion-input type="text" class="font-grey4 bold font-md2" text-right value="Silva"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label fixed color="grey3" class="font-md2">Telemóvel</ion-label>
+                <ion-input type="text" class="font-grey4 bold font-md2" text-right value="919283843"></ion-input>
+            </ion-item>
+        </ion-list>
+        <!-- DADOS PESSOAIS -->
+
+        <!-- ACERCA DE MIM -->
+        <ion-list no-lines no-border margin-top *ngIf="typeSettings == 3">
+            <ion-item >
+                <div class="aboutMeHeader">
+                    <div><p class="font-grey4 bold">Sobre mim</p></div>
+                    <div class="aboutMeButton">
+                        <button ion-button icon-only clear color="grey3" align-right (click)="openPopOver($event, 0)">
+                            <ion-icon name="more"></ion-icon>
+                        </button>
+                    </div>
+                </div>
+                <p class="font-grey4" text-wrap>O projecto foi lançado em 2006 pela Entrajuda para agilizar "o contacto entre as necessidades e as vontades de voluntariado", reunindo numa plataforma online voluntários, instituições, empresas, escolas, universidades e outros grupos, permitindo assim o encontro entre as diferentes partes.</p>
+            </ion-item>
+            <ion-item>
+                <div class="aboutMeHeader">
+                    <div><p class="font-grey4 bold">Hobbies e interesses</p></div>
+                    <div class="aboutMeButton">
+                        <button ion-button icon-only clear color="grey3" align-right (click)="openPopOver($event, 1)">
+                            <ion-icon name="more"></ion-icon>
+                        </button>
+                    </div>
+                </div>
+                <p class="font-grey4" text-wrap>A Bolsa de Voluntariado é "uma porta de entrada para qualquer pessoa ou entidade que queira oferecer o seu tempo, trabalho, conhecimento e experiência", refere a Entrajuda, instituição criada pelo Banco Alimentar para apoiar outras "entidades não lucrativas" ao nível da organização e gestão.</p>
+            </ion-item>
+            <ion-item>
+                <div class="aboutMeHeader">
+                    <div><p class="font-grey4 bold">Tipos de voluntariado favoritos</p></div>
+                    <div class="aboutMeButton">
+                        <button ion-button icon-only clear color="grey3" align-right (click)="openPopOver($event, 2)">
+                            <ion-icon name="more"></ion-icon>
+                        </button>
+                    </div>
+                </div>
+                <p class="font-grey4" text-wrap>Segundo a coordenadora da plataforma, Marta Vinhas, a Bolsa do Voluntariado foi "o primeiro site português a promover o encontro entre pessoas que querem dar o seu tempo" e "as organizações que precisam deste voluntariado".</p>
+            </ion-item>
+            <button ion-item mode="md" text-center class="border-top">
+                <p class="font-grey3 font-md">Adicionar<ion-icon name="add" class="iconViewAll"></ion-icon></p>
+            </button>
+        </ion-list>
+        <!-- ACERCA DE MIM -->
+
+</ion-content>
+
+<ion-footer no-border>
+    <ion-toolbar no-padding mode="ios">
+        <button ion-button color="primary" no-margin full mode="ios">Guardar</button>
+    </ion-toolbar>
+</ion-footer>

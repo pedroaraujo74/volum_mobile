@@ -1,0 +1,18 @@
+.tabs-ios .tabbar {
+    border-top: 0.55px solid rgba(0, 0, 0, 0.07)!important;
+    background: #FFFFFF;
+}
+
+.tabs-md .tabbar {
+    background: #FFFFFF;
+}
+
+.tabs .tab-item .icon.volumLogo {
+  background-repeat: no-repeat;
+  background-position: 50%;
+  height: 100%;
+  background-image: url('./assets/imgs/volumlogo.svg');
+  background-size:contain;
+}
+
+@include makeIcon(icon-volum, '\e900')

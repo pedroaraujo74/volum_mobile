@@ -1,0 +1,23 @@
+<ion-header no-border>
+    <ion-navbar transparent color="primary">
+    </ion-navbar>
+
+</ion-header>
+
+<ion-content padding-top class="backgroundBlue">
+    <ion-list class="listRegister" no-lines>
+        <form [formGroup]="registo2" (ngSubmit)="onSubmit(registo2.value, registo2.valid)">
+            <ion-item>
+                <h1 class="textWhite" text-wrap *ngIf="type == 0">O seu email.</h1>
+                <h1 class="textWhite" text-wrap *ngIf="type == 1">O email da sua instituição.</h1>
+            </ion-item>
+            <ion-item padding-top padding-bottom>
+                <ion-label stacked mode="ios">EMAIL</ion-label>
+                <ion-input type="email" formControlName="email" (blur)="validate()"></ion-input>
+            </ion-item>
+            <ion-item padding-top>
+                <button ion-fab color="light" item-right no-margin [disabled]="!registo2.valid" disable mode="ios" type="submit"><ion-icon name="arrow-forward"></ion-icon></button>
+            </ion-item>
+        </form>
+    </ion-list>
+</ion-content>

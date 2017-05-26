@@ -1,0 +1,70 @@
+<ion-header no-border>
+  <ion-navbar color="primary">
+    <ion-title>
+        Definições
+    </ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only color="light" (click)="openMenusHeader($event)">
+            <ion-icon name="more"></ion-icon>
+        </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="content-background">
+
+    <ion-list no-lines no-border margin-top>
+        <ion-item class="font-md bold font-grey4 border-bottom">Definições de perfil</ion-item>
+        <button ion-item (tap)="goProfileSetting(0)">
+            <p text-wrap><span class="bold font-grey4">Alterar foto de perfil</span></p>
+        </button>
+        <button ion-item (tap)="goProfileSetting(1)">
+            <p text-wrap><span class="bold font-grey4">Alterar foto de capa</span></p>
+        </button>
+        <button ion-item (tap)="goProfileSetting(2)">
+            <p text-wrap><span class="bold font-grey4">Dados pessoais</span></p>
+        </button>
+        <button ion-item (tap)="goProfileSetting(3)">
+            <p text-wrap><span class="bold font-grey4">Acerca de mim</span></p>
+        </button>
+        <button ion-item (tap)="goProfileSetting(4)">
+            <p text-wrap><span class="bold font-grey4">Educação e formação</span></p>
+        </button>
+        <button ion-item (tap)="goProfileSetting(5)">
+            <p text-wrap><span class="bold font-grey4">Redes sociais</span></p>
+        </button>
+    </ion-list>
+
+    <ion-list no-lines no-border margin-top>
+        <ion-item class="font-md bold font-grey4 border-bottom">Definições de conta</ion-item>
+        <button ion-item (tap)="goProfileSetting(6)">
+            <p text-wrap><span class="bold font-grey4">Verificação de conta</span></p>
+            
+            <p class="font-md"><span color="grey3">Conta verificada</span></p>
+        </button>
+        <button ion-item (tap)="goProfileSetting(7)">
+            <p text-wrap><span class="bold font-grey4">Desativar conta</span></p>
+        </button>
+    </ion-list>
+
+    <ion-list no-lines no-border margin-top>
+        <ion-item class="font-md bold font-grey4 border-bottom">Segurança</ion-item>
+        <button ion-item (tap)="goProfileSetting(8)">
+            <p text-wrap><span class="bold font-grey4">Alterar senha</span></p>
+        </button>
+    </ion-list>
+
+    <ion-list no-lines no-border margin-top>
+        <ion-item class="font-md bold font-grey4 border-bottom">Privacidade</ion-item>
+        <button ion-item (tap)="openModalPrivacity(9)">
+            <p text-wrap><span class="bold font-grey4">Quem pode ver a minha actividade</span></p>
+            <p class="font-md"><span color="grey3">Apenas seguidores</span></p>
+        </button>
+        <button ion-item (tap)="openModalPrivacity(10)">
+            <p text-wrap><span class="bold font-grey4">Quem me pode contactar</span></p>
+            <p class="font-md"><span color="grey3">Apenas seguidores</span></p>
+        </button>
+    </ion-list>
+
+
+</ion-content>

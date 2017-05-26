@@ -1,0 +1,25 @@
+<ion-header no-border>
+  <ion-navbar transparent color="primary">
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding-top class="backgroundBlue">
+    <ion-list class="listRegister" no-lines>
+        <ion-item>
+           <h1 color="light">Entrar</h1>
+        </ion-item>
+        <form [formGroup]="login" (ngSubmit)="onSubmit(login.value, login.valid)">
+            <ion-item padding-top>
+                <ion-label stacked>EMAIL</ion-label>
+                <ion-input type="email" formControlName="email" (blur)="validate(0)"></ion-input>
+            </ion-item>
+            <ion-item padding-top padding-bottom>
+                <ion-label stacked>SENHA</ion-label>
+                <ion-input type="password" formControlName="password" (blur)="validate(1)"></ion-input>
+            </ion-item>
+            <ion-item padding-top>
+                <button ion-fab color="light" item-right no-margin type="submit" mode="ios" [disabled]="!login.valid"><ion-icon name="arrow-forward" color="primary"></ion-icon></button>
+            </ion-item>
+        </form>
+    </ion-list>
+</ion-content>  

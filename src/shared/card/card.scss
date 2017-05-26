@@ -1,0 +1,117 @@
+volum-card{
+   
+
+.cardHeader{
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+
+
+.item-ios h2 {
+    margin: 0 0 2px;
+    font-size: 1.5rem;
+    font-weight: normal;
+}
+
+.card-Time{
+    font-size: 1.3rem!important;
+    margin-top: -4px!important;
+}
+
+.row-resume{
+    display: flex;
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 12px;
+    padding-bottom: 10px;
+    font-size: 1.2rem!important;
+}
+
+.col-num-likes{
+    flex: 2;
+}
+
+.col-num-comments{
+    text-align: right;
+    margin-right: 15px;
+}
+.col-num-shares{
+    text-align: right
+}
+.col-card-last{
+    width: auto;
+    color: #919191;
+}
+.iconlike{
+    vertical-align: middle;
+    margin-right: 2px;
+}
+
+.row-card{
+    display: flex;
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-top: 0.55px solid rgba(0, 0, 0, 0.07)!important;
+}
+
+.col-card{
+    width: auto;
+    color: #919191;
+}
+
+.col-card-middle{
+    flex: 2;
+    text-align: center
+}
+
+.btnLike button{
+    margin-left: 0!important;
+}
+
+.btnShare button{
+    margin-right: 0!important;
+}
+
+.cardContent > img{
+    padding-bottom: 5px;
+}
+
+.slidecard {
+    margin-bottom: 5px;
+
+    .swiper-container-horizontal > .swiper-pagination-bullets {
+        bottom: 0!important;
+        background-color: #FFF!important;
+    }
+    .cardSlide img{
+        width: 100%!important;
+        height: 35vh;
+        object-fit: cover!important;;
+    }
+}
+
+.liked{
+    color: #F51111;
+}
+}
+
+.action-sheets-share {
+    .ion-md-share-alt {
+        color: #0F76F7;
+    }
+    .ion-logo-facebook{
+        color: #3B5998
+    }
+    .ion-logo-googleplus {
+        color: #EA4335;
+    }
+    .ion-md-close{
+        color: #4A4A4A;
+    }
+    .action-sheet-button-default-md{
+        color: #4A4A4A;
+    }
+}

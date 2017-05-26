@@ -1,0 +1,35 @@
+page-new-action {
+
+}
+
+.inputColor{
+    color: #4A4A4A!important;
+}
+.listLoadPicture{
+    margin-bottom: 0px
+}
+.newAction-Slide{
+    height: auto!important;
+}
+.newAction-Slide img{
+    width: 100%!important;
+    max-height: 30vh!important;
+    object-fit: cover!important;;
+}
+.marginList{
+    margin-top: 30px;
+}
+.newAction-Slide{
+     .swiper-pagination{
+        bottom:0!important;
+        padding-top:5px;
+        padding-bottom: 5px;
+    }
+    .swiper-pagination{
+        background-color: #FFF!important;
+    }
+}
+.btnNewAction{
+    border-radius: 3px;
+    color: #FFF;
+}

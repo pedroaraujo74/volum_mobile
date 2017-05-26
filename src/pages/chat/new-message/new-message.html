@@ -1,0 +1,20 @@
+<ion-header no-border>
+  <ion-navbar color="primary">
+    <ion-title>
+        Nova mensagem
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="content-background">
+     <ion-searchbar placeholder="Procurar"></ion-searchbar>
+     <ion-list no-lines no-border margin-top>
+        <button ion-item class="fixAvatar" (tap)="goMessage(1)" (press)="openSettings()">
+            <ion-avatar item-left>
+                <img src="./assets/imgs/vasco.png">
+            </ion-avatar>
+            <p text-wrap><span class="bold font-grey4">Vasco Silva</span></p>
+        </button>
+     </ion-list>
+</ion-content>

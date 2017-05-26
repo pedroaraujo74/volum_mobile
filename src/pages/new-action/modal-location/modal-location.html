@@ -1,0 +1,25 @@
+<ion-header no-border>
+  <ion-navbar color="primary">
+    <ion-title>
+        Localização
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <span ion-text color="light" showWhen="ios">Cancel</span>
+        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="content-background">
+    <ion-searchbar no-shadow></ion-searchbar>
+    <ion-list no-lines>
+        <button ion-item>
+            <span class="font-grey4">Aveiro, Portugal</span>
+        </button>
+        <button ion-item>
+            <span class="font-grey4">Universidade de Aveiro</span>
+        </button>
+    </ion-list>
+</ion-content>

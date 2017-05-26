@@ -1,0 +1,65 @@
+<ion-header no-border>
+    <ion-navbar color="primary">
+        <ion-title>
+            Vasco Silva
+        </ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only color="white" (click)="openMenusHeader($event)">
+                <ion-icon name="more"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content scrollDownOnLoad>
+    <ion-grid>
+        <ion-row>
+            <ion-col col-2>
+                <div class="chatAvatar">
+                    <img src="./assets/imgs/vasco.png">
+                </div>
+            </ion-col>
+            <ion-col col-10 class="colLeft">
+                <div class="chatMessageLeft">
+                    <div class="chatMessageTextLeft">
+                         Bom dia!
+                    </div>  
+                </div>
+                <div class="chatMessageLeft">
+                    <div class="chatMessageTextLeft">
+                        Gostaria de saber se ainda é possivel candidatar à ação do voluntariado?
+                    </div>  
+                </div>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-12>
+                <div class="chatMessageRight">
+                    <div class="chatMessageText">
+                        Bom dia!
+                    </div>  
+                </div>
+                <div class="chatMessageRight">
+                    <div class="chatMessageText">
+                        Sim ainda dá
+                    </div>  
+                </div>
+            </ion-col>
+        </ion-row>
+</ion-grid>
+</ion-content>
+<ion-footer>
+	<ion-toolbar color="light">
+
+		<textarea spellcheck="true" autoComplete="true" autocorrect="true" (ngModelChange)="textAreaChange()" rows="1" fz-elastic
+			class="chat-input" [(ngModel)]="message" placeholder="Escreva um mensagem..." (keyup.enter)="sendMessage()">
+		</textarea>
+
+		<ion-buttons right class="send-message">
+			 <button  class="send-message" ion-button icon-only color="primary">
+                <ion-icon name="md-send"></ion-icon>
+            </button>
+		</ion-buttons>
+
+	</ion-toolbar>
+</ion-footer>

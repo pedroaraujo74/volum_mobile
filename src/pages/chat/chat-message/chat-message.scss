@@ -1,0 +1,72 @@
+.chatAvatar img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.colLeft{
+    padding-left: 0!important;
+}
+.chatMessageLeft{
+    margin-bottom: 2px;
+}
+
+.chatMessageRight{
+    margin-bottom: 2px;
+    text-align: right;
+}
+
+.chatMessageText{
+    background-color: #0F76F7;
+    color: #FFF;
+    padding-left: 0.8em;
+    padding-right: 0.8em;
+    padding-bottom: 0.8em;
+    padding-top: 0.8em;
+    min-height: 24px;
+    font-size: 1.4rem;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+.chatMessageTextLeft{
+    background-color: #F7F8FA;
+    color: #4A4A4A;
+    padding-left: 0.8em;
+    padding-right: 0.8em;
+    padding-bottom: 0.8em;
+    padding-top: 0.8em;
+    min-height: 24px;
+    font-size: 1.4rem;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+textarea {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border: 1px solid;
+    margin-left: 10px;
+    border-color: lightgrey;
+    margin-right: 10px;
+    margin-top: 5px;
+    background-color: #F7F8FA;
+    margin-bottom: 5px;
+    width: 93%;
+    border-radius: 15px;
+    padding: 8px;
+}   
+
+.send-message{
+    margin-right: 5px!important;
+     margin-top: 5px;
+      margin-bottom: 6px;
+}
+
+.toolbar-background {
+    border-width: 0px !important;
+}

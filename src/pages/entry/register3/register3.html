@@ -1,0 +1,27 @@
+<ion-header no-border>
+    <ion-navbar transparent color="primary">
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding-top class="backgroundBlue">
+
+    <ion-list class="listRegister" no-lines>
+        <form [formGroup]="registo3" (ngSubmit)="onSubmit(registo3.value, registo3.valid)">
+            <ion-item>
+                <h1 class="textWhite" text-wrap>Criar uma senha.</h1>
+                <h2 text-wrap class="textWhite" padding-top><span class="textWhite">A sua senha deve ter 8 ou mais caracteres.</span></h2>
+            </ion-item>
+            <ion-item padding-top>
+                <ion-label stacked mode="ios">SENHA</ion-label>
+                <ion-input type="password" formControlName="password" (blur)="validate(0)"></ion-input>
+            </ion-item>
+            <ion-item padding-top padding-bottom>
+                <ion-label stacked mode="ios">CONFIRMAR SENHA</ion-label>
+                <ion-input type="password" formControlName="confirmPassword" (blur)="validate(1)" [disabled]="disabledConfirmPassword"></ion-input>
+            </ion-item>
+            <ion-item padding-top>
+                <button ion-fab color="light" item-right no-margin mode="ios" [disabled]="!registo3.valid" type="submit"><ion-icon name="arrow-forward" color="primary"></ion-icon></button>
+            </ion-item>
+        </form>
+    </ion-list>
+</ion-content>

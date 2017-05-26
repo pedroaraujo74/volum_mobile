@@ -1,0 +1,12 @@
+.aboutMeHeader{
+    display: flex;
+    justify-content: space-between;
+    -webkit-align-items: center!important;
+    align-items: center!important;
+}
+
+.aboutMeHeader > .aboutMeButton > button{
+    margin-top: -8px;
+    margin-bottom: 0px;
+    margin-right: 0;
+}

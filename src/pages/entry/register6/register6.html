@@ -1,0 +1,25 @@
+<ion-header no-border>
+    <ion-navbar transparent color="primary">
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding-top class="backgroundBlue">
+
+    <ion-list class="listRegister" no-lines radio-group>
+        <ion-item>
+            <h1 class="textWhite" text-wrap>Quais as suas áreas de interesse?</h1>
+        </ion-item>
+        <span *ngFor="let category of categories">
+            <ion-item>
+                <ion-label>{{category.name}}</ion-label>
+                <ion-checkbox class="checkboxColor" color="secondary" [(ngModel)]='category.checked' (ionChange)="checked()"></ion-checkbox>
+            </ion-item>
+        </span>
+        <ion-item padding-top>
+            <button ion-fab color="light" item-right no-margin (tap)="onSubmit()" [disabled]="disableButton" mode="ios"><ion-icon name="arrow-forward"></ion-icon></button>
+        </ion-item>
+
+    </ion-list>
+
+</ion-content>

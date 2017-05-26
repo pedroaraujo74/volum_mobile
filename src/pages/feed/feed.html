@@ -1,0 +1,16 @@
+<ion-header no-border>
+  <ion-toolbar color="primary">
+    <ion-title class="header-feed-title">
+         BEVOLUN
+    </ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only color="white" (click)="openMenus($event)">
+            <ion-icon name="more"></ion-icon>
+        </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="content-background">
+    <volum-card *ngFor="let vol of vols" [idVol]="vol.vol.id_vol" [username]="vol.user.name" [userCreator]="vol.user.id_user" [dateCreation]="vol.vol.date_begin" [avatar]="vol.user.photo_url" [name]="vol.vol.name" [description]="vol.vol.description" [photos]="vol.vol.photos" [verified]="true"></volum-card>
+</ion-content> 

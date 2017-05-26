@@ -1,0 +1,42 @@
+<ion-content class="backgroundBlue" padding-left padding-right>
+    <ion-grid class="contentEntry">
+        <ion-row>
+            <ion-col col-12 text-right no-padding margin-bottom>
+                <button ion-button clear color="light" class="btnEntryTop" (tap)="goLogin()">
+                    Entrar
+                </button>
+            </ion-col>
+
+            <ion-col col-12 class="textEntry logoVolum">
+                <img src="./assets/imgs/logoVolum.png"/>
+            </ion-col>
+
+            <ion-col col-12 class="font-light textEntry" padding-bottom>
+                <h1 class="textWhite">Bem-vindo(a) ao <br>Volum.</h1>
+            </ion-col>
+
+            <ion-col col-12>
+                <button ion-button color="light" round class="btnEntry btnEntryColor" icon-left mode="ios">
+                    <ion-icon name="logo-facebook" class="iconFacebookEntry"></ion-icon>
+                    Continuar com Facebook
+                </button>
+            </ion-col>
+
+            <ion-col col-12>
+                <button ion-button color="light" round class="btnEntry btnEntryColor" icon-left mode="ios">
+                    <ion-icon name="logo-google" class="iconFacebookEntry"></ion-icon>
+                    Continuar com Google
+                </button>
+            </ion-col>
+
+            <ion-col col-12 padding-bottom>
+                <button ion-button color="light" round outline class="btnEntry" (tap)="goRegister()" mode="ios">Criar uma conta</button>
+            </ion-col>
+
+            <ion-col col-12 color="white" padding-top>
+                <span color="white" class="font-sm font-light textEntryInfo">Ao tocar em Continuar, Criar Conta, eu concordo com os Termos de Serviço, a Política de Privacidade e a Política de Não Discriminação do Volum.</span>
+            </ion-col>
+
+        </ion-row>
+    </ion-grid>
+</ion-content> 

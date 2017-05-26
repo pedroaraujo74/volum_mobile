@@ -1,0 +1,77 @@
+<ion-card class="cardVolum" no-margin margin-bottom margin-top>
+
+    <!-- CARD HEADER -->
+    <ion-item class="cardHeader">
+        <ion-avatar item-left>
+            <img src="{{avatar}}">
+        </ion-avatar>
+        <p class="font-md bold font-primary">{{username}}</p>
+        <p ion-text color="grey3" class="marginTopNeg font-sm">{{dateCreation | amTimeAgo:true}}</p>
+        <button ion-button clear item-right icon-only color="grey3" (click)="openMenus($event, userCreator, idVol)">
+            <ion-icon name="more"></ion-icon>
+        </button>
+    </ion-item>
+
+    <!-- CARD CONTENT -->
+    <ion-card-content class="cardContent" (tap)="goDetails(idVol, name)" no-padding>
+
+
+       
+        <img [src]="photos[0]" *ngIf="photos.length == 1"/>
+
+
+        <!-- MAIS QUE UM IMAGEM -->
+        <ion-slides pager color="blue" class="slidecard" *ngIf="photos.length > 1">
+            <ion-slide class="cardSlide" *ngFor="let photo of photos">
+                <img [src]="photo"/>
+            </ion-slide>
+
+        </ion-slides>
+
+        <h2 padding-left padding-right ion-text color="grey4" class="font-md2 bold">{{name}}</h2>
+        <div class="descriptioCard" style="display: block!important;display: -webkit-box!important;-webkit-line-clamp: 2!important;-webkit-box-orient: vertical!important;overflow: hidden!important;text-overflow: ellipsis;">
+            <p padding-left padding-right ion-text color="grey4">{{description}}</p>
+        </div>
+    </ion-card-content>
+
+    <!-- CARD RESUME -->
+    <div class="row-resume">
+        <div class="col-card col-num-likes" color="red">
+            <ion-icon name="heart" class="iconlike" color="danger"></ion-icon>20
+        </div>
+        <!--
+        <div class="col-card col-num-comments">
+            10 comentários
+        </div>
+        -->
+        <div class="col-card-last col-num-shares">
+            2 partilhas
+        </div>
+    </div>
+
+    <!-- CARD ACTIONS -->
+    <div class="row-card">
+        <div class="col-card btnLike">
+            <button ion-button icon-left clear small no-padding color="grey3" [class.liked]="liked == true" (tap)="like()">
+                <ion-icon name="heart"></ion-icon>
+                <div>Gosto</div>
+            </button>
+        </div>
+    
+        <div class="col-card-middle">
+            <button ion-button icon-left clear small no-padding color="grey3" (tap)="openComments(1)">
+                <ion-icon name="bookmark"></ion-icon>
+                <div>Marcar</div>
+            </button>
+        </div>
+
+        <div class="col-card btnShare">
+            <button ion-button icon-left clear small no-padding color="grey3" (tap)="openShare()">
+                <ion-icon name="share-alt" class="colorShare"></ion-icon>
+                <div>Partilhar</div>
+            </button>
+        </div>
+    </div>
+
+</ion-card>
+

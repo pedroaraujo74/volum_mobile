@@ -1,0 +1,100 @@
+page-card-details {
+    .listDescription{
+        font-size: 1.4rem;
+        background-color: #FFF;
+    }
+
+    .descriptionTitle{
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #4A4A4A;
+        margin-bottom: 2px;
+    }
+
+    .description{
+        font-size:1.4rem;
+        color: #4A4A4A;
+    }
+
+    .volun{
+        background-color: #FFF;
+        display: block;
+        padding-left: 26px;
+        height: 180px;
+        padding-top: 12px;
+        padding-right: 10px;
+        margin-bottom: 16px;
+    }
+
+    .v-imgs-confirm{
+        width: 100%;
+    }
+
+    .v-imgs-confirm div{
+        width: 35px;
+        height: 35px;
+        float: left;
+        margin-left: -11px;
+    }
+    .v-imgs-confirm div img{
+        width: 35px;
+        height: 35px;
+        border-radius: 35px;
+        object-fit: cover;
+        border: 2px solid #FFF;
+    }
+
+    .lastCount{
+        width: 35px!important;
+        height: 35px!important;
+        border-radius: 35px;
+        background-color: #0F76F7;
+        color: #FFF;
+        text-align: center;
+        font-weight: 600;
+        line-height: 31px;
+        vertical-align: middle;
+        font-size: 1.4rem;
+        border: 2px solid #FFF;
+        clear: right
+    }
+
+    .v-text{
+        margin-left: -8px;
+        margin-bottom: 2px;
+    }
+
+    .v-number{
+        font-size: 2rem!important;
+        font-weight: 600;
+        margin-right: 2px;
+    }
+
+    .v-confirm{
+        height:70px;
+    }
+
+    .v-offer{
+        margin-top: 20px;
+        height: 100px;
+    }
+    .v-button{
+        width: 100%;
+        text-align: right;
+    }
+
+    .v-button button{
+        padding-right: 2px;
+    }
+
+    .btnOffer{
+        border-radius: 3px;
+        color: #FFF;
+    }
+
+    .listTimeLocation ion-item ion-icon {
+        min-height: 2rem;
+        font-size: 2rem;
+    }
+
+}

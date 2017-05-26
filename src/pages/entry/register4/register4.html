@@ -1,0 +1,21 @@
+<ion-header no-border>
+    <ion-navbar transparent color="primary">
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding-top class="backgroundBlue">
+    <ion-list class="listRegister" no-lines>
+        <ion-item>
+            <h1 class="textWhite" text-wrap>Quando é o seu aniversário?</h1>
+        </ion-item>
+        <form [formGroup]="registo4" (ngSubmit)="onSubmit(registo4.value, registo4.valid)">
+            <ion-item padding-top padding-bottom>
+                <ion-label stacked mode="ios">DATA DE NASCIMENTO</ion-label>
+                <ion-datetime formControlName="birthday" displayFormat="MM DD YYYY"></ion-datetime>
+            </ion-item>
+            <ion-item padding-top>
+                <button ion-fab color="light" item-right no-margin mode="ios" [disabled]="!registo4.valid" type="submit"><ion-icon name="arrow-forward"></ion-icon></button>
+            </ion-item>
+        </form>
+    </ion-list>
+</ion-content>

@@ -1,0 +1,156 @@
+<ion-header no-border>
+  <ion-navbar color="primary">
+    <ion-title>
+        Perfil
+    </ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only color="light" (click)="openMenusHeader($event)">
+            <ion-icon name="more"></ion-icon>
+        </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="content-background" [ngSwitch]="tabsProfile">
+    <div class="headerCover">
+        <img src="./assets/imgs/vascoCover.png" />
+    </div>
+    <div style="background-color:#FFF">
+        <div class="headerPrifilePicture">
+            <img src="./assets/imgs/vasco.png" />
+        </div>
+        <div class="headerName">
+            <span class="font-lg bold font-grey4">Vasco Silva</span>
+        </div>
+        <div class="headerLocation">
+            <span class="font-sm font-grey3">Vila Nova de Gaia, Avintes</span>
+        </div>
+        <div class="headerScore"> 
+            <ion-icon name="star" class="font-md2" color="secondary"></ion-icon>
+            <ion-icon name="star" class="font-md2" color="secondary"></ion-icon>
+            <ion-icon name="star" class="font-md2" color="secondary"></ion-icon>
+            <ion-icon name="star" class="font-md2" color="secondary"></ion-icon>
+            <ion-icon name="star" class="font-md2" color="secondary"></ion-icon>
+        </div>
+        <ion-grid no-padding class="margin-item">
+            <ion-segment [(ngModel)]="tabsProfile" color="primary" mode="md">
+                <ion-segment-button value="actions">
+                    Ações
+                </ion-segment-button>
+                <ion-segment-button value="about">
+                    Sobre
+                </ion-segment-button>
+                <ion-segment-button value="follows">
+                    Seguidores
+                </ion-segment-button>
+            </ion-segment>
+        </ion-grid>
+    </div>
+    <div *ngSwitchCase="'actions'">
+       <ion-list no-lines no-border margin-top>
+            <ion-item class="font-md bold font-grey4 border-bottom">Ações criadas</ion-item>
+            <cardList></cardList>
+        </ion-list>
+
+        <ion-list no-lines no-border margin-top>
+            <ion-item class="font-md bold font-grey4 border-bottom">Ações onde que vai</ion-item>
+            <cardList></cardList>
+        </ion-list>
+
+        <ion-list no-lines no-border margin-top>
+            <ion-item class="font-md bold font-grey4 border-bottom">Ações próximas</ion-item>
+            <cardList></cardList>
+        </ion-list>
+    </div>
+    <div *ngSwitchCase="'about'">
+        <ion-list no-lines no-border margin-top>
+            <ion-item class="font-md bold font-grey4 border-bottom">Dados pessoais</ion-item>
+            <ion-item>
+                <p class="font-grey3">Email</p>
+                <ion-note item-right>
+                    <p class="font-grey4 bold">vascosilva@ua.pt</p>
+                </ion-note>
+            </ion-item>
+            <ion-item>
+                <p class="font-grey3">Género</p>
+                <ion-note item-right>
+                    <p class="font-grey4 bold">Masculino</p>
+                </ion-note>
+            </ion-item>
+            <ion-item>
+                <p class="font-grey3">Telemóvel</p>
+                <ion-note item-right>
+                    <p class="font-grey4 bold">915682568</p>
+                </ion-note>
+            </ion-item>
+        </ion-list>
+
+        <ion-list no-lines no-border margin-top>
+            <ion-item class="font-md bold font-grey4 border-bottom">Acerca de mim</ion-item>
+            <ion-item>
+                <p class="font-grey4 bold">Sobre mim</p>
+                <p class="font-grey4" text-wrap>O projecto foi lançado em 2006 pela Entrajuda para agilizar "o contacto entre as necessidades e as vontades de voluntariado", reunindo numa plataforma online voluntários, instituições, empresas, escolas, universidades e outros grupos, permitindo assim o encontro entre as diferentes partes.</p>
+            </ion-item>
+            <ion-item>
+                <p class="font-grey4 bold">Hobbies e interesses</p>
+                <p class="font-grey4" text-wrap>A Bolsa de Voluntariado é "uma porta de entrada para qualquer pessoa ou entidade que queira oferecer o seu tempo, trabalho, conhecimento e experiência", refere a Entrajuda, instituição criada pelo Banco Alimentar para apoiar outras "entidades não lucrativas" ao nível da organização e gestão.</p>
+            </ion-item>
+            <ion-item>
+                <p class="font-grey4 bold">Tipos de voluntariado favoritos</p>
+                <p class="font-grey4" text-wrap>Segundo a coordenadora da plataforma, Marta Vinhas, a Bolsa do Voluntariado foi "o primeiro site português a promover o encontro entre pessoas que querem dar o seu tempo" e "as organizações que precisam deste voluntariado".</p>
+            </ion-item>
+            <button ion-item mode="md" text-center class="border-top">
+                <p class="font-grey3 font-md">Ver mais<ion-icon name="ios-arrow-forward" class="iconViewAll"></ion-icon></p>
+            </button>
+        </ion-list>
+
+        <ion-list no-lines no-border margin-top>
+            <ion-item class="font-md bold font-grey4 border-bottom">Educação e Formação</ion-item>
+            <ion-item>
+                <p class="font-grey4 bold">Licenciatura em Medicina</p>
+                <p class="font-grey4" text-wrap>Instituições, empresas, escolas, universidades e outros grupos, permitindo assim o encontro entre as diferentes partes.</p>
+            </ion-item>
+            <ion-item>
+                <p class="font-grey4 bold">Mestrado em apoio auxiliar</p>
+                <p class="font-grey4" text-wrap>Instituição criada pelo Banco Alimentar para apoiar outras "entidades não lucrativas" ao nível da organização e gestão.</p>
+            </ion-item>
+            <ion-item>
+                <p class="font-grey4 bold">Formação em Voluntariado</p>
+                <p class="font-grey4" text-wrap>Primeiro site português a promover o encontro entre pessoas que querem dar o seu tempo" e "as organizações que precisam deste voluntariado".</p>
+            </ion-item>
+            <button ion-item mode="md" text-center class="border-top">
+                <p class="font-grey3 font-md">Ver mais<ion-icon name="ios-arrow-forward" class="iconViewAll"></ion-icon></p>
+            </button>
+        </ion-list>
+
+        <ion-list no-lines no-border margin-top>
+            <ion-item class="font-md bold font-grey4 border-bottom">Redes Sociais</ion-item>
+            <button ion-item>
+                <ion-icon name="logo-facebook" color="facebook" item-left></ion-icon>
+                <span class="font-grey4 font-md">Facebook</span>
+            </button>
+            <button ion-item>
+                <ion-icon name="logo-google" color="google" item-left></ion-icon>
+                <span class="font-grey4 font-md">Google+</span>
+            </button>
+        </ion-list>
+
+    </div>
+    <div *ngSwitchCase="'follows'">
+        <ion-list no-lines no-border margin-top>
+            <ion-item class="font-md bold font-grey4 border-bottom">Instituições</ion-item>
+                <users [typeUser]="0"></users>     
+            <button ion-item mode="md" text-center class="border-top">
+                <p class="font-grey3 font-md">Ver mais<ion-icon name="ios-arrow-forward" class="iconViewAll"></ion-icon></p>
+            </button>
+        </ion-list>
+        <ion-list no-lines no-border margin-top>
+            <ion-item class="font-md bold font-grey4 border-bottom">Voluntários</ion-item>
+                <users [typeUser]="1"></users>     
+            <button ion-item mode="md" text-center class="border-top">
+                <p class="font-grey3 font-md">Ver mais<ion-icon name="ios-arrow-forward" class="iconViewAll"></ion-icon></p>
+            </button>
+        </ion-list>
+    </div>
+</ion-content> 
