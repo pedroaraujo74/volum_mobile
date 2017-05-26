@@ -1,5 +1,6 @@
+import { AuthenticationService } from './../../shared/auth/authentication.service';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, PopoverController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
 
 /**
  * Generated class for the Profile page.
@@ -9,27 +10,32 @@ import { IonicPage, NavController, NavParams, PopoverController} from 'ionic-ang
  */
 @IonicPage()
 @Component({
-  selector: 'page-profile',
-  templateUrl: 'profile.html',
+    selector: 'page-profile',
+    templateUrl: 'profile.html',
 })
 export class Profile {
     public popover = null;
     public tabsProfile;
+    public user = {};
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController) {
-      this.tabsProfile = "actions";
-  }
+    constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController, public auth: AuthenticationService) {
+        this.tabsProfile = "actions";
+    }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad Profile');
-  }
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad Profile');
+        this.auth.userPromise.then(res => {
+            this.user = res.user;
+            console.log(this.user);
+        });
+    }
 
-  //POPOVER HEADER
-  openMenusHeader(ev){
-      let popover = this.popoverCtrl.create("Popover", { typePopOver: '1', userId: '1'});
-      popover.present({
-          ev: ev
-      });
-  }
+    //POPOVER HEADER
+    openMenusHeader(ev) {
+        let popover = this.popoverCtrl.create("Popover", { typePopOver: '1', userId: '1' });
+        popover.present({
+            ev: ev
+        });
+    }
 
 }

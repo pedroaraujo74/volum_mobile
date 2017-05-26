@@ -30,28 +30,28 @@ export class Popover {
         this.typePopOver = navParams.get('typePopOver');
 
         this.typeSettings = navParams.get('typeSettings');
-        
+
 
         // CARD 
-        if(this.auth.isAuthenticated()){
+        if (this.auth.isAuthenticated()) {
 
-
-        this.auth.userPromise.then(res => {
-            console.log("res", res);
-            if(res.success){
-             
-            this.loggedUserId = res.user.id_user;
-            if (this.creatorId == this.loggedUserId) {
-                this.cardUser = 0;
-            }
-            else {
-                this.cardUser = 1
-            }
-               
-            }
-        });
+    
+            this.auth.userPromise.then(res => {
+                console.log("res", res);
+                if (res.success) {
+                console.log(res);
+                    this.loggedUserId = res.user.id_user;
+                    if (this.creatorId == this.loggedUserId) {
+                        this.cardUser = 0;
+                    }
+                    else {
+                        this.cardUser = 1
+                    }
 
                 }
+            });
+
+        }
     }
 
 

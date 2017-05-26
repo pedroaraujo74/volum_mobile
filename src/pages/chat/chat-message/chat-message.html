@@ -1,7 +1,7 @@
 <ion-header no-border>
     <ion-navbar color="primary">
         <ion-title>
-            Vasco Silva
+            {{name}}
         </ion-title>
         <ion-buttons end>
             <button ion-button icon-only color="white" (click)="openMenusHeader($event)">
@@ -13,53 +13,37 @@
 
 <ion-content scrollDownOnLoad>
     <ion-grid>
-        <ion-row>
-            <ion-col col-2>
+        <ion-row *ngFor="let message of messages">
+            <!--   <ion-col col-2>
                 <div class="chatAvatar">
-                    <img src="./assets/imgs/vasco.png">
+                    <ion-img [src]="photo"></ion-img>
+                </div>
+            </ion-col> -->
+
+            <ion-col col-10 [class.colLeft]="message.from_id != id_user">
+                <div [class.chatMessageLeft]="message.from_id != id_user" [class.chatMessageRight]="message.from_id == id_user">
+                    <div [class.chatMessageTextLeft]="message.from_id != id_user" [class.chatMessageText]="message.from_id == id_user">
+                        {{message.message}}
+                    </div>
                 </div>
             </ion-col>
-            <ion-col col-10 class="colLeft">
-                <div class="chatMessageLeft">
-                    <div class="chatMessageTextLeft">
-                         Bom dia!
-                    </div>  
-                </div>
-                <div class="chatMessageLeft">
-                    <div class="chatMessageTextLeft">
-                        Gostaria de saber se ainda é possivel candidatar à ação do voluntariado?
-                    </div>  
-                </div>
-            </ion-col>
+
         </ion-row>
-        <ion-row>
-            <ion-col col-12>
-                <div class="chatMessageRight">
-                    <div class="chatMessageText">
-                        Bom dia!
-                    </div>  
-                </div>
-                <div class="chatMessageRight">
-                    <div class="chatMessageText">
-                        Sim ainda dá
-                    </div>  
-                </div>
-            </ion-col>
-        </ion-row>
-</ion-grid>
+
+    </ion-grid>
 </ion-content>
 <ion-footer>
-	<ion-toolbar color="light">
+    <ion-toolbar color="light">
 
-		<textarea spellcheck="true" autoComplete="true" autocorrect="true" (ngModelChange)="textAreaChange()" rows="1" fz-elastic
-			class="chat-input" [(ngModel)]="message" placeholder="Escreva um mensagem..." (keyup.enter)="sendMessage()">
+        <textarea spellcheck="true" autoComplete="true" autocorrect="true" rows="1" fz-elastic
+            class="chat-input" [(ngModel)]="message" placeholder="Escreva um mensagem..." >
 		</textarea>
 
-		<ion-buttons right class="send-message">
-			 <button  class="send-message" ion-button icon-only color="primary">
+        <ion-buttons right class="send-message">
+            <button class="send-message" ion-button icon-only color="primary" (click)="sendMessage(message)">
                 <ion-icon name="md-send"></ion-icon>
             </button>
-		</ion-buttons>
+        </ion-buttons>
 
-	</ion-toolbar>
+    </ion-toolbar>
 </ion-footer>

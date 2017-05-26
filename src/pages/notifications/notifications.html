@@ -1,30 +1,31 @@
 <ion-header no-border>
-  <ion-navbar color="primary">
-    <ion-title>
-        Notificações
-    </ion-title>
-    <ion-buttons end>
-        <button ion-button icon-only color="light" (click)="openMenusHeader($event)">
+    <ion-navbar color="primary">
+        <ion-title>
+            Notificações
+        </ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only color="light" (click)="openMenusHeader($event)">
             <ion-icon name="more"></ion-icon>
         </button>
-    </ion-buttons>
-  </ion-navbar>
+        </ion-buttons>
+    </ion-navbar>
 </ion-header>
 
 <ion-content class="content-background" padding-top>
     <ion-list no-lines no-border>
 
         <!-- SEGUIDORES -->
-            <button ion-item class="fixAvatar">
+        <button ion-item class="fixAvatar" *ngFor="let notification of notifications">
                 <ion-avatar item-left>
-                    <img src="./assets/imgs/pedro.png">
+                    <img [src]="notification.photo_url">
                 </ion-avatar>
-                <p text-wrap class="font-grey4"><span class="bold font-grey4">Pedro Araújo</span> pediu para te seguir</p>
-                <p class="font-sm"><ion-icon name="logo-rss" color="four" class="iconList"></ion-icon><span class="font-grey3">Há 20 minutos</span></p>
-            </button>
+                <p text-wrap class="font-grey4" *ngIf="notification.type == 2"><span class="bold font-grey4">{{notification.user_name}}</span> começou a seguir-te</p>
+                <p class="font-sm"><ion-icon name="logo-rss" color="four" class="iconList"></ion-icon><span class="font-grey3">{{notification.date | date}}</span></p>
+        </button>
         <!-- SEGUIDORES -->
 
         <!-- CONVITES -->
+        <!--
         <button ion-item class="fixAvatar">
                 <ion-avatar item-left>
                     <img src="./assets/imgs/caritas.png">
@@ -32,10 +33,10 @@
                 <p text-wrap class="font-grey4"><span class="bold font-grey4">Cáritas Aveiro</span> convidou-te para a sua ação</p>
                 <p class="font-sm"><ion-icon name="calendar" color="primary" class="iconList"></ion-icon><span class="font-grey3">Há 30 minutos</span></p>
         </button>
-            
-        <!-- CONVITES --> 
 
-       <button ion-item class="fixAvatar">
+        <!-- CONVITES -->
+        <!--
+        <button ion-item class="fixAvatar">
                 <ion-avatar item-left>
                     <img src="./assets/imgs/pedro.png">
                 </ion-avatar>
@@ -51,7 +52,7 @@
                 <p class="font-sm"><ion-icon name="chatbubbles" color="secondary" class="iconList"></ion-icon><span class="font-grey3">Há 2 dias</span></p>
         </button>
 
-       <button ion-item class="fixAvatar">
+        <button ion-item class="fixAvatar">
                 <ion-avatar item-left>
                     <img src="./assets/imgs/avatar.png">
                 </ion-avatar>
@@ -66,6 +67,7 @@
                 <p text-wrap class="font-grey4"><span class="bold font-grey4">André Martins</span> gosta da tua ação <span class="bold font-third">Mundo verde</span></p>
                 <p class="font-sm"><ion-icon name="heart" color="danger" class="iconList"></ion-icon><span class="font-grey3">Há 5 dias</span></p>
         </button>
+        -->
     </ion-list>
 
 </ion-content>

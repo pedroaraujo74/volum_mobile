@@ -14,35 +14,16 @@
 <!-- UTILIZAR COMPONENT USER!!!! -->
 <ion-content class="content-background">
     <ion-list no-lines no-border margin-top>
-        <button ion-item class="fixAvatar" mode="md" (tap)="goMessage(1)" (press)="openSettings()">
+        <button ion-item class="fixAvatar" mode="md" (tap)="goMessage(conversation.id_conversation, conversation.name, conversation.photo_url)" (press)="openSettings(conversation.id_conversation)" *ngFor="let conversation of conversations">
             <ion-avatar item-left>
-                <img src="./assets/imgs/vasco.png">
+                <img [src]="conversation?.photo_url">
             </ion-avatar>
-            <p text-wrap><span class="bold font-grey4">Vasco Silva</span></p>
-            <p class="font-sm font-grey4 bold"><span>Olá sou o Vasco Silva Olá sou o Vasco Silva Olá sou o Vasco Silva</span></p>
+            <p text-wrap><span class="bold font-grey4">{{conversation?.name}}</span></p>
+            <p class="font-sm font-grey4 bold"><span>{{conversation?.message}}</span></p>
             <ion-note item-right>
-                <p class="font-grey4 font-sm bold">20:22</p>
+                <p class="font-grey4 font-sm bold">{{conversation?.date | date}} </p>
             </ion-note>
         </button>
-        <button ion-item class="fixAvatar" mode="md">
-            <ion-avatar item-left>
-                <img src="./assets/imgs/caritas.png">
-            </ion-avatar>
-            <p text-wrap><span class="bold font-grey4">Cáritas Aveiro</span></p>
-            <p class="font-sm"><span color="grey3">Olá somo a Cáritas Aveiro e gostavas de te convidar para a nossa ação de</span></p>
-            <ion-note item-right>
-                <p class="font-grey3 font-sm">22:00</p>
-            </ion-note>
-        </button>
-        <button ion-item class="fixAvatar" mode="md">
-            <ion-avatar item-left>
-                <img src="./assets/imgs/pedro.png">
-            </ion-avatar>
-            <p text-wrap><span class="bold font-grey4">Pedro Araújo</span></p>
-            <p class="font-sm"><span color="grey3">Olá sou o Pedro Araújo</span></p>
-            <ion-note item-right>
-                <p class="font-grey3 font-sm">18:55</p>
-            </ion-note>
-        </button>
-    </ion-list>   
+
+    </ion-list>
 </ion-content>
