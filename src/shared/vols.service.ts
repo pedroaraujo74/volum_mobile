@@ -67,4 +67,11 @@ export class VolsService {
         .catch(error => console.log(error));
     }
 
+    // APPLY TO VOL
+    apply(id_user, id_vol) {
+        return this.http.post(`${GlobalConstants.API_ENDPOINT}/vols/` + id_vol + '/apply', { id_user: id_user }).toPromise()
+        .then(res => { return res.json() })
+        .catch(error => console.log(error));
+    }
+
 }
