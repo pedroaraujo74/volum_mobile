@@ -35,11 +35,11 @@ export class Popover {
         // CARD 
         if (this.auth.isAuthenticated()) {
 
-    
+
             this.auth.userPromise.then(res => {
                 console.log("res", res);
                 if (res.success) {
-                console.log(res);
+                    console.log(res);
                     this.loggedUserId = res.user.id_user;
                     if (this.creatorId == this.loggedUserId) {
                         this.cardUser = 0;
@@ -52,6 +52,11 @@ export class Popover {
             });
 
         }
+    }
+
+    logout() {
+        this.app.getRootNav().push("Entry");
+        this.auth.logout();
     }
 
 

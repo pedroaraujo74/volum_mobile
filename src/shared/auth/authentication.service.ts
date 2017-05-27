@@ -11,13 +11,15 @@ import { GlobalConstants } from '../global-constants';
 export class AuthenticationService {
 
 
-    userPromise: any;
+    userPromise: Promise<any>
     constructor(private http: HttpClient) {
         this.loadUserCredentials();
+        console.log("TOKEN", localStorage.getItem(this.LOCAL_TOKEN_KEY))
+        console.log("ID", localStorage.getItem("USER_ID"))
+
     }
 
     private errorHandler = error => console.log('AuthenticationService error', error);
-
     //TODO load information about the roles
     private LOCAL_TOKEN_KEY = 'yourTokenKey';
     private authenticated = false;

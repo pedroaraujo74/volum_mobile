@@ -15,7 +15,7 @@
     <ion-list no-lines no-border>
 
         <!-- SEGUIDORES -->
-        <button ion-item class="fixAvatar" *ngFor="let notification of notifications">
+        <button ion-item class="fixAvatar" *ngFor="let notification of notifications" (tap)="visit(notification.id_user)">
                 <ion-avatar item-left>
                     <img [src]="notification.photo_url">
                 </ion-avatar>
