@@ -1,11 +1,11 @@
 <button ion-item>
                 <ion-thumbnail item-left>
-                    <img src="./assets/imgs/BancoAlimentar.png">
-                    <span class="searchDay"><div class="searchDaySize">14</div><div class="searchMounthSize">maio</div></span>
+                    <img [src]="photo">
+                    <span class="searchDay"><div class="searchDaySize"></div>  {{date | date:"d"}}<div class="searchMounthSize">{{date | date:"MMM"}}</div></span>
                 </ion-thumbnail>
                 <div style="margin-top:-2px; overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
-                    <p><span class="bold font-grey4">Recolha de Alimentos</span></p>
+                    <p><span class="bold font-grey4">{{name}}</span></p>
                     <p class="font-sm"><span class="font-grey4">Criado por <span class="bold font-third">Banco Alimentar</span></span></p>
-                    <p class="font-sm"><span class="font-grey3">14 de maio às 17 horas</span></p>
+                    <p class="font-sm"><span class="font-grey3">{{date}} </span></p>
                 </div>
             </button>

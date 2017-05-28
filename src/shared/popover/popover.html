@@ -3,15 +3,15 @@
     <button ion-item (tap)="profile()">
         <ion-icon name="person" item-left color="grey3"></ion-icon>
         <span class="font-md2 font-grey4">Perfil</span>
-    </button> 
+    </button>
     <button ion-item (tap)="settings()">
         <ion-icon name="settings" item-left color="grey3"></ion-icon>
         <span class="font-md2 font-grey4">Definições</span>
     </button>
-    <button ion-item>
+    <button ion-item (tap)="logout()">
         <ion-icon name="exit" item-left color="grey3"></ion-icon>
-        <span class="font-md2 font-grey4">Sair</span>
-    </button>  
+        <span class="font-md2 font-grey4" >Sair</span>
+    </button>
 </ion-list>
 
 <!-- POP HEADER PERFIL -->
@@ -23,7 +23,7 @@
     <button ion-item>
         <ion-icon name="exit" item-left color="grey3"></ion-icon>
         <span class="font-md2 font-grey4">Sair</span> 
-    </button>  
+    </button>
 </ion-list>
 
 
@@ -32,18 +32,18 @@
     <button ion-item>
         <ion-icon name="create" item-left color="four"></ion-icon>
         <span class="font-md2 font-grey4">Editar</span>
-    </button> 
+    </button>
     <button ion-item>
         <ion-icon name="trash" item-left color="danger"></ion-icon>
         <span class="font-md2 font-grey4">Eliminar</span>
-    </button> 
+    </button>
 </ion-list>
 
 <ion-list *ngIf="cardUser == 1 && popOver == 0" no-lines no-margin>
     <button ion-item>
         <ion-icon name="alert" item-left color="secondary"></ion-icon>
         <span class="font-md2 font-grey4">Denunciar</span>
-    </button> 
+    </button>
 </ion-list>
 
 
@@ -51,16 +51,16 @@
     <button ion-item>
         <ion-icon name="exit" item-left color="grey3"></ion-icon>
         <span class="font-md2 font-grey4">Sair</span> 
-    </button>  
+    </button>
 </ion-list>
 
 <ion-list *ngIf="typePopOver == 5" no-lines no-margin>
     <button ion-item (tap)="openModal()">
         <ion-icon name="create" item-left color="four"></ion-icon>
         <span class="font-md2 font-grey4">Editar</span>
-    </button> 
+    </button>
     <button ion-item>
         <ion-icon name="trash" item-left color="danger"></ion-icon>
         <span class="font-md2 font-grey4">Eliminar</span>
-    </button> 
+    </button>
 </ion-list>

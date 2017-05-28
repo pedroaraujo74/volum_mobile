@@ -1,3 +1,4 @@
+import { Profile } from './../profile/profile';
 import { NotificationsService } from './../../services/notifications.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
@@ -25,7 +26,7 @@ export class Notifications {
     console.log('ionViewDidLoad Notifications');
     this.notificationService.getNotifications().then(res => {
       console.log("res1", res);
-   //   this.notifications = res.notifications;
+      //   this.notifications = res.notifications;
       console.log(this.notifications);
 
     });
@@ -37,6 +38,10 @@ export class Notifications {
     })
 
 
+  }
+
+  visit(id) {
+    this.navCtrl.push("Profile", { id_user: id });
   }
 
   //POPOVER HEADER

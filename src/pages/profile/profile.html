@@ -50,15 +50,15 @@
     <div *ngSwitchCase="'actions'">
         <ion-list no-lines no-border margin-top>
             <ion-item class="font-md bold font-grey4 border-bottom">Ações criadas</ion-item>
-            <cardList></cardList>
+            <cardList *ngFor="let vol of my_vols" [name]="vol.name"  [photo]="vol.photos[0]" [date]="vol.date_begin"></cardList>
         </ion-list>
 
-        <ion-list no-lines no-border margin-top>
+        <ion-list no-lines no-border margin-top *ngIf="user.type != 1">
             <ion-item class="font-md bold font-grey4 border-bottom">Ações onde que vai</ion-item>
             <cardList></cardList>
         </ion-list>
 
-        <ion-list no-lines no-border margin-top>
+        <ion-list no-lines no-border margin-top *ngIf="user.type != 1">
             <ion-item class="font-md bold font-grey4 border-bottom">Ações próximas</ion-item>
             <cardList></cardList>
         </ion-list>
@@ -90,9 +90,7 @@
             <ion-item class="font-md bold font-grey4 border-bottom">Acerca de mim</ion-item>
             <ion-item>
                 <p class="font-grey4 bold">Sobre mim</p>
-                <p class="font-grey4" text-wrap>O projecto foi lançado em 2006 pela Entrajuda para agilizar "o contacto entre as necessidades e as vontades
-                    de voluntariado", reunindo numa plataforma online voluntários, instituições, empresas, escolas, universidades
-                    e outros grupos, permitindo assim o encontro entre as diferentes partes.</p>
+                <p class="font-grey4" text-wrap>{{user.about}}</p>
             </ion-item>
             <ion-item>
                 <p class="font-grey4 bold">Hobbies e interesses</p>

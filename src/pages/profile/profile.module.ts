@@ -1,3 +1,4 @@
+import { MomentModule } from 'angular2-moment';
 import { UsersModule } from './../../components/users/users.module';
 import { CardListModule } from './../../components/card-list/card-list.module';
 import { NgModule } from '@angular/core';
@@ -12,6 +13,7 @@ import { Profile } from './profile';
   imports: [
     CardListModule,
     UsersModule,
+    MomentModule,
     IonicPageModule.forChild(Profile),
   ],
   exports: [
@@ -19,5 +21,5 @@ import { Profile } from './profile';
   ]
 })
 export class ProfileModule {
-  
+
 }
