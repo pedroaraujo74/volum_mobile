@@ -17,8 +17,20 @@ export class Feed {
             content: 'Loading...'
         });
         loading.present();
+
+        // GET FEED
         this.feedService.getVols().then(res => {
             this.vols = res.vols;
+            for (let i = 0; i < this.vols.length; i++) {
+                this.feedService.countLikes(this.vols[i].vol.id_vol)
+                    .then(res => {
+                    this.vols[i].vol.likes = res.likes;
+                })
+                this.feedService.checkLike(this.vols[i].vol.id_vol)
+                    .then(res => {
+                    this.vols[i].vol.likeState = parseInt(res.state);
+                })
+            }
             loading.dismiss()
         })
         .catch(err => console.log(err));

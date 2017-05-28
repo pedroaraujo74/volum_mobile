@@ -1,75 +1,80 @@
 {
-  "name": "Volum",
-  "version": "0.0.0",
-  "author": "Volum",
-  "homepage": "http://ionicframework.com/",
-  "private": true,
-  "scripts": {
-    "clean": "ionic-app-scripts clean",
-    "build": "ionic-app-scripts build",
-    "ionic:build": "ionic-app-scripts build",
-    "ionic:serve": "ionic-app-scripts serve"
-  },
-  "dependencies": {
-    "@angular/common": "4.0.2",
-    "@angular/compiler": "4.0.2",
-    "@angular/compiler-cli": "4.0.2",
-    "@angular/core": "4.0.2",
-    "@angular/forms": "4.0.2",
-    "@angular/http": "4.0.2",
-    "@angular/platform-browser": "4.0.2",
-    "@angular/platform-browser-dynamic": "4.0.2",
-    "@ionic-native/core": "^3.10.3",
-    "@ionic-native/keyboard": "^3.10.3",
-    "@ionic-native/splash-screen": "3.4.2",
-    "@ionic-native/status-bar": "3.4.2",
-    "@ionic/storage": "2.0.1",
-    "angular2-moment": "^1.3.3",
-    "cordova-plugin-console": "1.0.5",
-    "cordova-plugin-device": "1.1.4",
-    "cordova-plugin-splashscreen": "~4.0.1",
-    "cordova-plugin-statusbar": "2.2.1",
-    "cordova-plugin-whitelist": "1.3.1",
-    "ionic-angular": "3.1.1",
-    "ionic-plugin-keyboard": "~2.2.1",
-    "ionic2-super-tabs": "^2.5.2",
-    "ionicons": "3.0.0",
-    "ng2-validation": "^4.2.0",
-    "rxjs": "5.1.1",
-    "socket.io-client": "^2.0.1",
-    "sw-toolbox": "3.4.0",
-    "zone.js": "^0.8.5"
-  },
-  "devDependencies": {
-    "@ionic/app-scripts": "1.3.6",
-    "@ionic/cli-plugin-ionic-angular": "1.2.0",
-    "typescript": "~2.2.1"
-  },
-  "cordovaPlugins": [
-    "cordova-plugin-whitelist",
-    "cordova-plugin-console",
-    "cordova-plugin-statusbar",
-    "cordova-plugin-device",
-    "cordova-plugin-splashscreen",
-    "ionic-plugin-keyboard"
-  ],
-  "cordovaPlatforms": [
-    "ios",
-    {
-      "platform": "ios",
-      "version": "",
-      "locator": "ios"
+    "name": "Volum",
+    "version": "0.0.0",
+    "author": "Volum",
+    "homepage": "http://ionicframework.com/",
+    "private": true,
+    "scripts": {
+        "clean": "ionic-app-scripts clean",
+        "build": "ionic-app-scripts build",
+        "ionic:build": "ionic-app-scripts build",
+        "ionic:serve": "ionic-app-scripts serve"
+    },
+    "dependencies": {
+        "@angular/common": "4.0.2",
+        "@angular/compiler": "4.0.2",
+        "@angular/compiler-cli": "4.0.2",
+        "@angular/core": "4.0.2",
+        "@angular/forms": "4.0.2",
+        "@angular/http": "4.0.2",
+        "@angular/platform-browser": "4.0.2",
+        "@angular/platform-browser-dynamic": "4.0.2",
+        "@ionic-native/core": "^3.10.3",
+        "@ionic-native/keyboard": "^3.10.3",
+        "@ionic-native/splash-screen": "3.4.2",
+        "@ionic-native/status-bar": "3.4.2",
+        "@ionic/storage": "2.0.1",
+        "angular2-moment": "^1.3.3",
+        "cordova-ios": "^4.4.0",
+        "cordova-plugin-console": "1.0.5",
+        "cordova-plugin-device": "1.1.4",
+        "cordova-plugin-splashscreen": "~4.0.1",
+        "cordova-plugin-statusbar": "2.2.1",
+        "cordova-plugin-whitelist": "1.3.1",
+        "ionic-angular": "3.1.1",
+        "ionic-plugin-keyboard": "~2.2.1",
+        "ionic2-super-tabs": "^2.5.2",
+        "ionicons": "3.0.0",
+        "ios-deploy": "^1.9.1",
+        "ng2-validation": "^4.2.0",
+        "rxjs": "5.1.1",
+        "socket.io-client": "^2.0.1",
+        "sw-toolbox": "3.4.0",
+        "zone.js": "^0.8.5"
+    },
+    "devDependencies": {
+        "@ionic/app-scripts": "1.3.6",
+        "@ionic/cli-plugin-ionic-angular": "1.2.0",
+        "typescript": "~2.2.1"
+    },
+    "cordovaPlugins": [
+        "cordova-plugin-whitelist",
+        "cordova-plugin-console",
+        "cordova-plugin-statusbar",
+        "cordova-plugin-device",
+        "cordova-plugin-splashscreen",
+        "ionic-plugin-keyboard"
+    ],
+    "cordovaPlatforms": [
+        "ios",
+        {
+            "platform": "ios",
+            "version": "",
+            "locator": "ios"
+        }
+    ],
+    "description": "Volum",
+    "cordova": {
+        "plugins": {
+            "cordova-plugin-console": {},
+            "cordova-plugin-device": {},
+            "cordova-plugin-splashscreen": {},
+            "cordova-plugin-statusbar": {},
+            "cordova-plugin-whitelist": {},
+            "ionic-plugin-keyboard": {}
+        },
+        "platforms": [
+            "ios"
+        ]
     }
-  ],
-  "description": "Volum",
-  "cordova": {
-    "plugins": {
-      "cordova-plugin-console": {},
-      "cordova-plugin-device": {},
-      "cordova-plugin-splashscreen": {},
-      "cordova-plugin-statusbar": {},
-      "cordova-plugin-whitelist": {},
-      "ionic-plugin-keyboard": {}
-    }
-  }
 }

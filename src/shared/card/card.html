@@ -7,13 +7,13 @@
         </ion-avatar>
         <p class="font-md bold font-primary">{{username}}</p>
         <p ion-text color="grey3" class="marginTopNeg font-sm">{{dateCreation | amTimeAgo:true}}</p>
-        <button ion-button clear item-right icon-only color="grey3" (click)="openMenus($event, userCreator, idVol)">
+        <button ion-button clear item-right icon-only color="grey3" (click)="openMenus($event, userCreator, id_vol)">
             <ion-icon name="more"></ion-icon>
         </button>
     </ion-item>
 
     <!-- CARD CONTENT -->
-    <ion-card-content class="cardContent" (tap)="goDetails(idVol, name)" no-padding>
+    <ion-card-content class="cardContent" (tap)="goDetails(id_vol, name)" no-padding>
 
 
        
@@ -25,7 +25,6 @@
             <ion-slide class="cardSlide" *ngFor="let photo of photos">
                 <img [src]="photo"/>
             </ion-slide>
-
         </ion-slides>
 
         <h2 padding-left padding-right ion-text color="grey4" class="font-md2 bold">{{name}}</h2>
@@ -37,7 +36,14 @@
     <!-- CARD RESUME -->
     <div class="row-resume">
         <div class="col-card col-num-likes" color="red">
-            <ion-icon name="heart" class="iconlike" color="danger"></ion-icon>20
+            <ion-icon name="heart" class="iconlike" color="danger"></ion-icon>
+            <span *ngIf="likeState==1" class="font-primary">Tu</span>
+            <span *ngIf="likeState==1 && likes<2">gostas disto.</span>
+            <span *ngIf="likeState==1 && likes>=2">e mais</span>
+            <span *ngIf="likeState==1 && likes>=2">{{likes-1}} pessoa<span *ngIf="likes>2">s</span> gostam disto.</span>
+            <span *ngIf="likeState==0 && likes>=1">{{likes}} pessoa<span *ngIf="likes>=2">s</span>
+            <span *ngIf="likes>=2">gostam</span> disto. </span>
+            <span *ngIf="likeState==0 && !likes">Sê o primeiro a gostar disto!</span>
         </div>
         <!--
         <div class="col-card col-num-comments">
@@ -45,14 +51,18 @@
         </div>
         -->
         <div class="col-card-last col-num-shares">
-            2 partilhas
+            2 partilha
         </div>
     </div>
 
     <!-- CARD ACTIONS -->
     <div class="row-card">
         <div class="col-card btnLike">
-            <button ion-button icon-left clear small no-padding color="grey3" [class.liked]="liked == true" (tap)="like()">
+            <button *ngIf="likeState==0" ion-button icon-left clear small no-padding color="grey3" (tap)="like(id_vol)">
+                <ion-icon name="heart"></ion-icon>
+                <div>Gosto</div>
+            </button>
+             <button *ngIf="likeState==1" ion-button icon-left clear small no-padding color="grey3" class="liked" (tap)="dislike(id_vol)">
                 <ion-icon name="heart"></ion-icon>
                 <div>Gosto</div>
             </button>

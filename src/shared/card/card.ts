@@ -1,3 +1,4 @@
+import { VolsService } from './../vols.service';
 import { AuthenticationService } from './../auth/authentication.service';
 import { Component, Input } from '@angular/core';
 import { IonicPage, NavController, NavParams, ActionSheetController, Platform, PopoverController} from 'ionic-angular';
@@ -7,9 +8,11 @@ import * as moment from 'moment';
 @Component({
     selector: 'volum-card',
     templateUrl: 'card.html',
+    providers: [VolsService]
 })
 export class Card {
 
+    public teste;
     @Input() type;
     @Input() userCreator;
     @Input() dateCreation;
@@ -17,38 +20,40 @@ export class Card {
     @Input() description;
     @Input() avatar;
     @Input() username;
-    @Input() verified;
+    @Input() verified; 
     @Input() map;
     @Input() likes;
-    @Input() idVol;
+    @Input() id_vol;
     @Input() photos;
-
-
-    //LIKE
-    public liked : boolean = false
+    @Input() likeState;
 
     //DETAILS
     public details
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, public actionsheetCtrl: ActionSheetController, public platform: Platform, public popoverCtrl: PopoverController, public auth: AuthenticationService) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, public actionsheetCtrl: ActionSheetController, public platform: Platform, public popoverCtrl: PopoverController, public auth: AuthenticationService, public volsService: VolsService) {
         moment.locale('pt-pt');
     }
 
     goDetails(id, name){
-        this.navCtrl.push("CardDetails", { volId: id, volName: name });
-    }   
-
-    like(){
-        if(this.liked == false){
-            this.liked = true;
-        }
-        else{
-            this.liked = false;
-        }    
+        this.navCtrl.push("CardDetails", { volId: id, volName: name});
     }
+
+    like(id_vol) {
+        this.likeState = 1;
+        this.likes++;
+        this.volsService.like(id_vol).then(res => {});
+    }
+
+    dislike(id_vol) {
+        this.likeState = 0;
+        this.likes--;
+        this.volsService.dislike(id_vol).then(res => {});
+    }
+    
 
     openMenus(ev, creatorId, volId){
         let popover = this.popoverCtrl.create("Popover", {creatorId: creatorId, volId: volId, popOver: 0});
+        console.log("POP",volId);
         popover.present({
             ev: ev
         });
@@ -84,6 +89,7 @@ export class Card {
             icon: !this.platform.is('ios') ? 'logo-googleplus' : null,
             cssClass: 'textColor',
             handler: () => {
+
                 console.log('Play clicked');
             }
             },

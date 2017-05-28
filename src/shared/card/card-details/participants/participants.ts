@@ -1,3 +1,4 @@
+import { Users } from './../../../../components/users/users';
 import { VolsService } from './../../../vols.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
@@ -32,7 +33,7 @@ export class Participants {
         }
         else if(this.tabs == "confirmed"){
             this.getConfirmed(this.volId, 10);
-             this.getCandidates(this.volId, 10);
+            this.getCandidates(this.volId, 10);
             loading.dismiss();
         }
         
@@ -43,6 +44,7 @@ export class Participants {
         this.volsService.getConfirmed(volId, amount)
         .then(res => {
             this.confirmeds = res.users;
+            console.log(res.users);
         })
         .catch(err => console.log(err));
     }
@@ -54,5 +56,8 @@ export class Participants {
         })
         .catch(err => console.log(err));
     }
+
+    
+
 
 }

@@ -67,6 +67,40 @@ export class VolsService {
         .catch(error => console.log(error));
     }
 
+    // GET COMMENTS
+    getComments(id) {
+        return this.httpClient.get(`${GlobalConstants.API_ENDPOINT}/vols/` + id + `/comments`).toPromise()
+        .then(res => { return res.json()})
+        .catch(error => console.log(error));
+    }
+
+    // SEND COMMENT
+    sendComment(message, id_vol) {
+        return this.httpClient.post(`${GlobalConstants.API_ENDPOINT}/vols/` + id_vol + `/comment`, {  message: message}).toPromise()
+        .then(res => { return res.json() })
+        .catch(error => console.log(error));
+    }
+
+    // LIKE
+    like(id_vol) {
+        return this.httpClient.post(`${GlobalConstants.API_ENDPOINT}/vols/`+ id_vol + `/like`,null).toPromise()
+            .then(res => { return res.json(); })
+            .catch(error => console.log(error));
+    }
+
+    // DISLIKE
+    dislike(id_vol) {
+        return this.httpClient.post(`${GlobalConstants.API_ENDPOINT}/vols/`+ id_vol + `/dislike`,null).toPromise()
+            .then(res => { return res.json() })
+            .catch(error => console.log(error));
+    }
+
+
+
+
+
+
+
     // APPLY TO VOL
     apply(id_user, id_vol) {
         return this.http.post(`${GlobalConstants.API_ENDPOINT}/vols/` + id_vol + '/apply', { id_user: id_user }).toPromise()

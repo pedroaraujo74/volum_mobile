@@ -1,3 +1,4 @@
+import { AuthenticationService } from './../../auth/authentication.service';
 import { VolsService } from './../../vols.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, PopoverController, LoadingController } from 'ionic-angular';
@@ -15,11 +16,16 @@ export class CardDetails {
     public getVolId: any;
     public volDetails = {};
     public volName: string;
-    
+
+    //LOGGED USER
+    public user = {}
+    public name: any;
+    public photo: any;
+
     // ADDRESS
     public addressData: any;
     public address: any;
-    public addressSub : any;
+    public addressSub: any;
     public lat: any;
     public lng: any;
 
@@ -41,27 +47,41 @@ export class CardDetails {
     public numberCandidates: any;
     public candidates: any;
 
+    // COMMENTS
+    public comments: any;
+
     // APPLY TO VOL
 
+    constructor(public navCtrl: NavController, public navParams: NavParams, public modalController: ModalController, public popoverCtrl: PopoverController, public volsService: VolsService, public loadingCtrl: LoadingController, public auth: AuthenticationService) {}
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, public modalController: ModalController, public popoverCtrl: PopoverController, public volsService: VolsService, public loadingCtrl: LoadingController) {
+    ionViewDidLoad(){
         moment.locale('pt-pt');
-        this.tabs = 'about';
-        this.getVolId = navParams.get('volId');
-        this.volName = navParams.get('volName');
-
+        
         let loading = this.loadingCtrl.create({
             content: 'Loading...'
         });
         loading.present();
 
+        // SET TABS
+        this.tabs = 'about';
+
+        // GET DATA PARAMS
+        this.getVolId = this.navParams.get('volId');
+        this.volName = this.navParams.get('volName');
+
+        // GET ID LOGGED USER
+        this.auth.userPromise.then(res => {
+            this.user = res.user;
+        });
+
+        // GET VOL DETAILS DATA
         this.volsService.getVolDetails(this.getVolId).then(res => {
             this.volDetails = res.vol;
-    
+
             // ADDRESS
             this.lat = res.vol.lat;
             this.lng = res.vol.lng;
-            if(this.lat != 0 && this.lng != 0){
+            if (this.lat != 0 && this.lng != 0) {
                 this.getAddress(res.vol.lat, res.vol.lng);
             }
 
@@ -69,7 +89,7 @@ export class CardDetails {
             this.start_time = res.vol.start_time;
             this.end_time = res.vol.end_time;
 
-            if((this.start_time != null && this.end_time != null) || (this.start_time != null && this.end_time == null)){
+            if ((this.start_time != null && this.end_time != null) || (this.start_time != null && this.end_time == null)) {
                 this.getTime(res.vol.start_time, res.vol.end_time)
             }
 
@@ -81,13 +101,17 @@ export class CardDetails {
             this.getCandidates(res.vol.id_vol, 10);
             this.countCandidates(res.vol.id_vol);
 
+            // GET COMMENTS
+            this.getComments()
+
+            // HIDE LOADING
             loading.dismiss()
         });
     }
 
-    getAddress(lat, lng){
-        if(this.lat && this.lng){
-            this.volsService.getAddress(lat, lng).then(res=>{
+    getAddress(lat, lng) {
+        if (this.lat && this.lng) {
+            this.volsService.getAddress(lat, lng).then(res => {
                 this.addressData = res.results;
                 this.address = this.addressData[0].formatted_address;
                 this.addressSub = this.addressData[0].formatted_address;
@@ -96,13 +120,13 @@ export class CardDetails {
     }
 
     getTime(start, end) {
-        if(start != null && end != null){
+        if (start != null && end != null) {
             this.hora_inicio = start.slice(0, 2);
             this.minutos_inicio = start.slice(3, 5);
             this.hora_fim = end.slice(0, 2);
             this.minutos_fim = end.slice(3, 5);
         }
-        else{
+        else {
             this.hora_inicio = start.slice(0, 2);
             this.minutos_inicio = start.slice(3, 5);
         }
@@ -111,37 +135,47 @@ export class CardDetails {
     // GET CONFIRMED 
     getConfirmed(volId, amount) {
         this.volsService.getConfirmed(volId, amount)
-        .then(res => {
-            this.confirmeds = res.users;
-        })
-        .catch(err => console.log(err));
+            .then(res => {
+                this.confirmeds = res.users;
+            })
+            .catch(err => console.log(err));
     }
 
     // COUNT CONFIRMED
     countConfirmeds(volId) {
         this.volsService.countConfirmeds(volId)
-        .then(res => {
-            this.numberConfirmeds = res.count;
-        })
-        .catch(err => console.log(err));
+            .then(res => {
+                this.numberConfirmeds = res.count;
+            })
+            .catch(err => console.log(err));
     }
 
     // GET CANDIDATES
     getCandidates(volId, amount) {
         this.volsService.getCandidates(volId, amount)
-        .then(res => {
-            this.candidates = res.users;
-        })
-        .catch(err => console.log(err));
+            .then(res => {
+                this.candidates = res.users;
+            })
+            .catch(err => console.log(err));
     }
 
     // COUNT CANDIDATES
     countCandidates(volId) {
         this.volsService.countCandidates(volId)
-        .then(res => {
-            this.numberCandidates = res.count;
-        })
-        .catch(err => console.log(err));
+            .then(res => {
+                this.numberCandidates = res.count;
+            })
+            .catch(err => console.log(err));
+    }
+
+    // GET COMMENTS
+    getComments() {
+        this.volsService.getComments(this.getVolId)
+            .then(res => {
+                this.comments = res.comments;
+                console.log("CENas", res)
+            })
+            .catch(err => console.log(err));
     }
 
     // APPLY TO VOL
@@ -160,7 +194,10 @@ export class CardDetails {
     }
 
     openModalNewDiscussion() {
-        const modal = this.modalController.create("ModalDiscussion");
+        let modal = this.modalController.create("ModalDiscussion", { user: this.user, volId: this.getVolId });
+        modal.onDidDismiss(data => {
+            this.getComments();
+        });
         modal.present();
     }
 
@@ -171,14 +208,14 @@ export class CardDetails {
         });
     }
 
-    openMenus(ev, creatorId, volId){
-        let popover = this.popoverCtrl.create("Popover", {creatorId: creatorId, volId: volId, popOver: 0});
+    openMenus(ev, creatorId, volId) {
+        let popover = this.popoverCtrl.create("Popover", { creatorId: creatorId, volId: volId, popOver: 0 });
         popover.present({
             ev: ev
         });
     }
 
-    
+
 
 
 
