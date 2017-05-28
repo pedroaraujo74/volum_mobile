@@ -1,3 +1,5 @@
+import { VolsService } from './../../shared/vols.service';
+import { UsersService } from './../../services/users.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
 
@@ -5,30 +7,50 @@ import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-an
 @Component({
   selector: 'page-actions',
   templateUrl: 'actions.html',
+  providers: [VolsService]
 })
 export class Actions {
 
-  public tabsActions : any;
+  public tabsActions: any;
+  public my_applies = [];
+  public my_confirmeds = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController) {
-      this.tabsActions = "nextActions";
+  constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController, public volsService: VolsService) {
+    this.tabsActions = "nextActions";
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad Actions');
+    this.getMyApplies();
+    this.getMyConfirmed();
   }
 
   //POPOVER HEADER
-  openMenusHeader(ev){
-      let popover = this.popoverCtrl.create("Popover", { typePopOver: '0', userId: '1'});
-      popover.present({
-          ev: ev
-      });
+  openMenusHeader(ev) {
+    let popover = this.popoverCtrl.create("Popover", { typePopOver: '0', userId: '1' });
+    popover.present({
+      ev: ev
+    });
   }
 
   //NEWACTION
-  newAction(){
+  newAction() {
     this.navCtrl.push("NewAction");
+  }
+
+  getMyApplies() {
+    this.volsService.getMyApplies().then(res => {
+      console.log("a", res)
+      this.my_applies = res.vols;
+      console.log("applies", this.my_applies)
+    })
+  }
+
+  getMyConfirmed() {
+    this.volsService.getMyConfirms().then(res => {
+      console.log("a", res)
+      this.my_confirmeds = res.vols;
+    })
   }
 
 }

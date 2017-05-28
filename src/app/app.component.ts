@@ -1,3 +1,4 @@
+import { Storage } from '@ionic/storage';
 import { AuthenticationService } from './../shared/auth/authentication.service';
 import { Component } from '@angular/core';
 import { Platform, NavController } from 'ionic-angular';
@@ -12,7 +13,7 @@ export class MyApp {
 
   rootPage: any = "Entry";
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private auth: AuthenticationService) {
+  constructor(platform: Platform, statusBar: StatusBar, public storage: Storage, splashScreen: SplashScreen, private auth: AuthenticationService) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -22,8 +23,16 @@ export class MyApp {
 
 
     });
-    if (this.auth.isAuthenticated()) {
-      this.rootPage = 'Tabs'
-    }
+    this.storage.get('USER_ID').then(res => {
+      console.log("res", res);
+      if (res) {
+
+        this.rootPage = 'Tabs'
+
+      } else {
+
+      }
+    })
+
   }
 }

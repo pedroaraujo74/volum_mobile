@@ -21,7 +21,7 @@ export class Profile {
     public tabsProfile;
     public user: any = {};
 
-
+    public my_applies = [];
     public my_vols = [];
     public all_vols = [];
 
@@ -63,6 +63,8 @@ export class Profile {
         });
 
     }
+
+
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad Profile');

@@ -23,8 +23,8 @@ export class Login {
         });
     }
 
-    validate(value){
-        if(value == 0){
+    validate(value) {
+        if (value == 0) {
             if (this.login.controls.email.errors) {
                 if (this.login.controls.email.value != "") {
                     if (this.login.controls.email.invalid == true) {
@@ -38,46 +38,51 @@ export class Login {
                 }
             }
         }
-        else{
-            if(this.login.controls.password.errors){
+        else {
+            if (this.login.controls.password.errors) {
                 if (this.login.controls.password.value != "") {
-                    if(this.login.controls.password.errors.minlength){
+                    if (this.login.controls.password.errors.minlength) {
                         let toast = this.toastCtrl.create({
                             message: 'O campo password está mal preenchido!',
                             duration: 3000,
                             cssClass: "toast-error"
                         });
-                            toast.present();   
+                        toast.present();
                     }
                 }
             }
-        }       
+        }
     }
 
-    onSubmit(value, valid){
+    onSubmit(value, valid) {
         this.login.controls.email.markAsTouched();
         this.login.controls.password.markAsTouched();
         console.log("wtf")
-        if (valid = true){
+        if (valid = true) {
             this.authenticationService.login(value).then(res => {
                 if (res.success) {
                     this.navCtrl.push("Tabs");
                 }
-                else{
+                else {
                     let toast = this.toastCtrl.create({
-                            message: res.message,
-                            duration: 3000,
-                            cssClass: "toast-error"
-                        });
-                        toast.present();  
+                        message: res.message,
+                        duration: 3000,
+                        cssClass: "toast-error"
+                    });
+                    toast.present();
                 }
             })
-            .catch(err => {
-                 
-            }); 
+                .catch(err => {
+                    let toast = this.toastCtrl.create({
+                        message: err,
+                        duration: 3000,
+                        cssClass: "toast-error"
+                    });
+                    toast.present();
+                });
         }
     }
 
-   
+
 
 }

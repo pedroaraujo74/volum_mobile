@@ -12,7 +12,7 @@ export class VolsService {
     }
 
     getVols() {
-        return this.httpClient.get(`${GlobalConstants.API_ENDPOINT}/vols`).toPromise()
+        return this.httpClient.get(`${GlobalConstants.API_ENDPOINT}/vols`, { amount: 100, startAt: 0}).toPromise()
             .then(res => {
                 return res.json();
             })
@@ -29,6 +29,18 @@ export class VolsService {
     }
     getMyVols(id) {
         return this.httpClient.get(`${GlobalConstants.API_ENDPOINT}/users/` + id + `/my-vols`).toPromise()
+            .then(res => { return res.json() })
+            .catch(error => console.log(error));
+    }
+
+    getMyApplies() {
+        return this.httpClient.get(`${GlobalConstants.API_ENDPOINT}/users/vols/my-applies`).toPromise()
+            .then(res => { return res.json() })
+            .catch(error => console.log(error));
+    }
+
+    getMyConfirms() {
+        return this.httpClient.get(`${GlobalConstants.API_ENDPOINT}/users/vols/confirmed`).toPromise()
             .then(res => { return res.json() })
             .catch(error => console.log(error));
     }

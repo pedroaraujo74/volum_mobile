@@ -66,6 +66,8 @@ export class UsersService {
             .catch(error => console.log(error));
     }
 
+  
+
     engageConversation(id_user) {
         return this.http.post(`${GlobalConstants.API_ENDPOINT}/chat/`, { id_user: id_user }).toPromise()
             .then(res => { return res.json() })

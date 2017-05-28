@@ -46,30 +46,38 @@ export class ChatMessage {
 
   ionViewDidLoad() {
 
-    this.id_user = parseInt(localStorage.getItem("USER_ID"));
-
-    this.socket.joinRoom(this.id_conversation);
+    this.auth.userPromise.then(res => {
 
 
-    this.chatService.getMessages(this.id_conversation).then(res => {
+      this.id_user = res.user.id_user;
 
-      this.messages = res.messages;
-      console.log(this.messages);
-    })
-
-    this.socket.onMessage().subscribe((res: any) => {
-      console.log("rees", res);
-      if (res.from_id == this.id_user) {
+      this.socket.joinRoom(this.id_conversation);
 
 
-      } else {
-        this.messages.push({
-          from_id: res.from_id,
-          message: res.message
-        })
-      }
+      this.chatService.getMessages(this.id_conversation).then(res => {
 
-    });
+        this.messages = res.messages;
+        console.log(this.messages);
+      })
+
+      this.socket.onMessage().subscribe((res: any) => {
+        console.log("rees", res);
+        if (res.from_id == this.id_user) {
+
+
+        } else {
+          this.messages.push({
+            from_id: res.from_id,
+            message: res.message
+          })
+        }
+
+      });
+
+    }
+    )
+
+
 
   }
 
