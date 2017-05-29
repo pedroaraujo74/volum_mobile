@@ -2,7 +2,7 @@ import { HttpClient } from './../../shared/http-client';
 import { GlobalConstants } from './../../shared/global-constants';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-HttpClient
+
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()

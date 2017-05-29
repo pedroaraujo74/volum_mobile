@@ -41,15 +41,11 @@
             <span *ngIf="likeState==1 && likes<2">gostas disto.</span>
             <span *ngIf="likeState==1 && likes>=2">e mais</span>
             <span *ngIf="likeState==1 && likes>=2">{{likes-1}} pessoa<span *ngIf="likes>2">s</span> gostam disto.</span>
-            <span *ngIf="likeState==0 && likes>=1">{{likes}} pessoa<span *ngIf="likes>=2">s</span>
-            <span *ngIf="likes>=2">gostam</span> disto. </span>
+            <span *ngIf="likeState==0 && likes>=1">{{likes}} pessoa<span *ngIf="likes>=2">s</span> gosta
+            <span *ngIf="likes>=2">m</span> disto. 
+            </span>
             <span *ngIf="likeState==0 && !likes">Sê o primeiro a gostar disto!</span>
         </div>
-        <!--
-        <div class="col-card col-num-comments">
-            10 comentários
-        </div>
-        -->
         <div class="col-card-last col-num-shares">
             2 partilha
         </div>

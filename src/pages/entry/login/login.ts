@@ -14,7 +14,7 @@ import { CustomValidators } from "ng2-validation/dist";
 export class Login {
 
     //FORM 
-    public login: FormGroup;
+    public login: FormGroup; 
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public _fb: FormBuilder, public toastCtrl: ToastController, public authenticationService: AuthenticationService) {
         this.login = this._fb.group({
