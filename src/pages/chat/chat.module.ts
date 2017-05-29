@@ -1,3 +1,4 @@
+import { IonicStorageModule } from '@ionic/storage';
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { Chat } from './chat';
@@ -8,6 +9,7 @@ import { Chat } from './chat';
   ],
   imports: [
     IonicPageModule.forChild(Chat),
+    IonicStorageModule
   ],
   exports: [
     Chat

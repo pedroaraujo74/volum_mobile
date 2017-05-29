@@ -13,6 +13,7 @@
 
 
 <ion-content class="content-background" padding-top>
+    <form [formGroup]="newAction" (ngSubmit)="onSubmit(newAction.value, newAction.valid)">
     <ion-list no-lines no-border>
         <ion-item>
             <ion-label fixed color="grey3" class="font-md2">Titulo</ion-label>
@@ -88,7 +89,7 @@
             <ion-datetime displayFormat="H:mm" pickerFormat="H mm" class="inputColor"></ion-datetime>
         </ion-item>
     </ion-list>  
-
+    </form>
 </ion-content>
 
 <!--

@@ -1,5 +1,5 @@
 import { HttpClient } from './../http-client';
-
+import { Storage } from '@ionic/storage';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 
@@ -12,11 +12,12 @@ export class AuthenticationService {
 
 
     userPromise: Promise<any>
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient, private storage: Storage) {
         this.loadUserCredentials();
-        console.log("TOKEN", localStorage.getItem(this.LOCAL_TOKEN_KEY))
-        console.log("ID", localStorage.getItem("USER_ID"))
 
+        this.storage.get(this.LOCAL_TOKEN_KEY).then(result => {
+            console.log("RESULT", result)
+        });
     }
 
     private errorHandler = error => console.log('AuthenticationService error', error);
@@ -46,8 +47,8 @@ export class AuthenticationService {
         return this.http.post(`${GlobalConstants.API_ENDPOINT}/auth/login`, loginInfo).toPromise()
             .then(res => {
                 this.storeUserCredentials(res.json().id_token);
-                localStorage.setItem("USER_ID", res.json().id_user);
-
+                this.storage.set("USER_ID", res.json().id_user);
+                this.loadUserCredentials();
                 return res.json();
             })
             .catch(err => {
@@ -74,17 +75,28 @@ export class AuthenticationService {
     }
 
     private loadUserCredentials() {
-        let token = localStorage.getItem(this.LOCAL_TOKEN_KEY);
-        let id = localStorage.getItem("USER_ID");
-        if (token && id != 'undefined') {
-            console.log(id);
-            this.useCredentials(token);
-            this.reloadUser(id, true);
-        }
+        let token;
+        let id;
+
+        this.storage.get('USER_ID').then(res => {
+            id = res;
+            this.storage.get(this.LOCAL_TOKEN_KEY).then(result => {
+
+                token = result;
+
+                if (token && id != 'undefined') {
+                    console.log(id);
+                    this.useCredentials(token);
+                    this.reloadUser(id, true);
+                }
+
+            });
+        });
+
     }
 
     public storeUserCredentials(token: string) {
-        localStorage.setItem(this.LOCAL_TOKEN_KEY, token);
+        this.storage.set(this.LOCAL_TOKEN_KEY, token);
         this.useCredentials(token);
     }
 
@@ -99,6 +111,6 @@ export class AuthenticationService {
         this.authToken = undefined;
         this.authenticated = false;
         this.http.removeAuthHeader();
-        localStorage.removeItem(this.LOCAL_TOKEN_KEY);
+        this.storage.clear();
     }
 }

@@ -48,7 +48,7 @@
         </ion-grid>
     </div>
     <div *ngSwitchCase="'actions'">
-        <ion-list no-lines no-border margin-top>
+        <ion-list no-lines no-border margin-top >
             <ion-item class="font-md bold font-grey4 border-bottom">Ações criadas</ion-item>
             <cardList *ngFor="let vol of my_vols" [name]="vol.name"  [photo]="vol.photos[0]" [date]="vol.date_begin"></cardList>
         </ion-list>

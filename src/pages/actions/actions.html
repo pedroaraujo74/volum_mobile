@@ -1,20 +1,20 @@
 <ion-header no-border>
-  <ion-navbar color="primary">
-    <ion-title>
-        Ações
-    </ion-title>
-    <ion-buttons end>
-        <button ion-button icon-only color="light" (click)="openMenusHeader($event)">
+    <ion-navbar color="primary">
+        <ion-title>
+            Ações
+        </ion-title>
+        <ion-buttons end>
+            <button ion-button icon-only color="light" (click)="openMenusHeader($event)">
             <ion-icon name="more"></ion-icon>
         </button>
-    </ion-buttons>
-  </ion-navbar>
-  <ion-segment [(ngModel)]="tabsActions" class="segmentColor" mode="md" color="white">
+        </ion-buttons>
+    </ion-navbar>
+    <ion-segment [(ngModel)]="tabsActions" class="segmentColor" mode="md" color="white">
         <ion-segment-button value="nextActions">
             Explorar
         </ion-segment-button>
         <ion-segment-button value="myActions" color="white">
-            Minhas ações 
+            Minhas ações
         </ion-segment-button>
         <ion-segment-button value="invites" color="white">
             Convites
@@ -29,12 +29,12 @@
     <div *ngSwitchCase="'nextActions'">
         <ion-list no-lines no-border margin-top>
             <ion-item class="font-md bold font-grey4 border-bottom">Ações próximas</ion-item>
-            <cardList></cardList>
+            <cardList *ngFor="let vol of my_confirmeds" [name]="vol.name" [photo]="vol.photos[0]" [date]="vol.date_begin"></cardList>
         </ion-list>
 
         <ion-list no-lines no-border>
             <ion-item class="font-md bold font-grey4 border-bottom">Ações a aguardar confirmação</ion-item>
-            <cardList></cardList>
+            <cardList *ngFor="let vol of my_applies" [name]="vol.name" [photo]="vol.photos[0]" [date]="vol.date_begin"></cardList>
             <button ion-item mode="md" text-center class="border-top">
                 <p class="font-grey3 font-md">Ver tudo<ion-icon name="ios-arrow-forward" class="iconViewAll"></ion-icon></p>
             </button>
@@ -81,4 +81,3 @@
     </ion-fab>
 
 </ion-content>
-
