@@ -14,7 +14,7 @@ import { CustomValidators } from "ng2-validation/dist";
 export class Login {
 
     //FORM 
-    public login: FormGroup; 
+    public login: FormGroup;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public _fb: FormBuilder, public toastCtrl: ToastController, public authenticationService: AuthenticationService) {
         this.login = this._fb.group({
@@ -60,8 +60,17 @@ export class Login {
         console.log("wtf")
         if (valid = true) {
             this.authenticationService.login(value).then(res => {
+                console.log("res", res)
                 if (res.success) {
-                    this.navCtrl.push("Tabs");
+                    this.authenticationService.reloadUser(res.id_user, true).then(result => {
+                        if (this.authenticationService.isAuthenticated()) {
+
+                            this.navCtrl.push("Tabs");
+                            location.reload();
+
+                        }
+                    })
+
                 }
                 else {
                     let toast = this.toastCtrl.create({

@@ -32,6 +32,7 @@ export class AuthenticationService {
             .then(res => {
                 let response = res.json();
                 this.dataAvailable = true;
+
                 return response;
             })
             .catch(err => {
@@ -48,7 +49,6 @@ export class AuthenticationService {
             .then(res => {
                 this.storeUserCredentials(res.json().id_token);
                 this.storage.set("USER_ID", res.json().id_user);
-                this.loadUserCredentials();
                 return res.json();
             })
             .catch(err => {
@@ -74,11 +74,11 @@ export class AuthenticationService {
         return this.authenticated;
     }
 
-    private loadUserCredentials() {
+    public loadUserCredentials(): Promise<any> {
         let token;
         let id;
 
-        this.storage.get('USER_ID').then(res => {
+        return this.storage.get('USER_ID').then(res => {
             id = res;
             this.storage.get(this.LOCAL_TOKEN_KEY).then(result => {
 
@@ -88,8 +88,8 @@ export class AuthenticationService {
                     console.log(id);
                     this.useCredentials(token);
                     this.reloadUser(id, true);
+                    return result;
                 }
-
             });
         });
 
