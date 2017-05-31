@@ -225,7 +225,12 @@ export class CardDetails {
                     text: 'Confirmar',
                     cssClass: 'confirmAlert',
                     handler: () => {
-                        this.applyCancel(id_vol);
+                        if(this.state == 1){
+                            this.applyCancel(id_vol);
+                        }
+                        else if(this.state == 2){
+                            this.applyCancelConfirm(id_vol);
+                        }
                     }
                 }
             ]
@@ -248,8 +253,7 @@ export class CardDetails {
             this.getCandidates(id_vol, 10);
         })
             .catch(err => {
-
-            });
+        });
     }
 
     // APPLY CANCEL
@@ -267,11 +271,25 @@ export class CardDetails {
         });
     }
 
+    applyCancelConfirm(id_vol) {
+        this.volsService.cancelApply(this.userId, id_vol).then(res => {
+            let toast = this.toastCtrl.create({
+                message: 'Candidatura cancelada com sucesso!',
+                duration: 3000,
+                cssClass: "toast-success",
+            });
+            toast.present();
+            this.state = 0;
+            this.countConfirmeds(id_vol);
+            this.getConfirmed(id_vol, 10);
+        });
+    }
+
     // CHECK STATE VOL
     checkState(id_vol) {
         this.volsService.checkState(this.userId, id_vol).then(res => {
             this.state = res.state;
-            console.log(res);
+            console.log(this.state)
         });
     }
 

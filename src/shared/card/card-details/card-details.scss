@@ -108,15 +108,20 @@ page-card-details {
         bottom: 50px;
     }
 
+    .btnFooterNoFixed{
+        width: 100%;
+        padding: 16px;
+        background-color: #FFFFFF;
+    }
+
     .actionEnd{
         width: 100%;
         text-align: center;
-        background-color: #32db64;
+        background-color: #FF8A65;
         color: #FFF;
-        padding: 10px;
+        padding: 12px;
         border-radius: 2px;
         font-size:1.5rem;
-        font-weight: 600;
     }
 
 }

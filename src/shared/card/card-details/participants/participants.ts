@@ -15,6 +15,8 @@ export class Participants {
     public volId : any;
     public confirmeds : any;
     public candidates : any;
+    public disabledCandidates : boolean = false;
+    public disabledConfirmeds : boolean = false;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public volsService : VolsService,  public loadingCtrl: LoadingController) {
         let loading = this.loadingCtrl.create({
@@ -43,18 +45,34 @@ export class Participants {
     getConfirmed(volId, amount) {
         this.volsService.getConfirmed(volId, amount)
         .then(res => {
-            this.confirmeds = res.users;
-            console.log(res.users);
+            if(res.users.length == 0){
+                this.disabledConfirmeds = true;
+            }
+            else{
+                this.confirmeds = res.users;
+            }
         })
         .catch(err => console.log(err));
     }
 
+    // GET CANDIDATES
     getCandidates(volId, amount) {
         this.volsService.getCandidates(volId, amount)
         .then(res => {
-            this.candidates = res.users;
+            console.log()
+            if(res.users.length == 0){
+                this.disabledCandidates = true;
+            }
+            else{
+                this.candidates = res.users;
+            }
         })
         .catch(err => console.log(err));
+    }
+
+    //GO PROFILE
+    goProfile(id_user){
+         this.navCtrl.push("Profile", {id_user: id_user});
     }
 
     

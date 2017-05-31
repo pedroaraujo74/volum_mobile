@@ -59,6 +59,11 @@ export class Card {
         });
     }
 
+    // GO PROFILE
+    goProfile(id_user){
+         this.navCtrl.push("Profile", {id_user: id_user});
+    }
+
     openComments(value){
         this.navCtrl.push("Comments", {postId:value});
     }

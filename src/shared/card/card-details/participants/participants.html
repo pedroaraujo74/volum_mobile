@@ -11,10 +11,10 @@
     </ion-navbar>
 
     <ion-segment [(ngModel)]="tabs" class="segmentDetails" color="light" mode="md">
-        <ion-segment-button value="confirmed" [disabled]="!confirmeds">
+        <ion-segment-button value="confirmed" [disabled]="disabledConfirmed">
             Confirmados
         </ion-segment-button>
-        <ion-segment-button value="candidates" [disabled]="!candidates">
+        <ion-segment-button value="candidates" [disabled]="disabledCandidates">
             Candidatos
         </ion-segment-button>
     </ion-segment>
@@ -25,7 +25,7 @@
      <!-- CONFIRMADOS -->
     <div *ngSwitchCase="'confirmed'">
         <ion-list no-border no-lines mode="md">
-            <button ion-item *ngFor="let confirmed of confirmeds">
+            <button ion-item *ngFor="let confirmed of confirmeds" (tap)="goProfile(confirmed.id_user)">
                 <ion-avatar item-left>
                     <img [src]="confirmed?.photo_url">
                 </ion-avatar>
@@ -47,7 +47,7 @@
 
     <div *ngSwitchCase="'candidates'">
        <ion-list no-border no-lines mode="md">
-            <button ion-item *ngFor="let candidate of candidates">
+            <button ion-item *ngFor="let candidate of candidates" (tap)="goProfile(candidate.id_user)">
                 <ion-avatar item-left>
                     <img [src]="candidate?.photo_url">
                 </ion-avatar>

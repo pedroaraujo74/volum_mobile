@@ -5,7 +5,7 @@
         <ion-avatar item-left>
             <img src="{{avatar}}">
         </ion-avatar>
-        <p class="font-md bold font-primary">{{username}}</p>
+        <p class="font-md bold font-primary" (tap)="goProfile(userCreator)">{{username}}</p>
         <p ion-text color="grey3" class="marginTopNeg font-sm">{{dateCreation | amTimeAgo:true}}</p>
         <button ion-button clear item-right icon-only color="grey3" (click)="openMenus($event, userCreator, id_vol)">
             <ion-icon name="more"></ion-icon>
