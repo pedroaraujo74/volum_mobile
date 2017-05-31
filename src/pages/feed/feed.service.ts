@@ -1,19 +1,18 @@
 import { HttpClient } from './../../shared/http-client';
 import { GlobalConstants } from './../../shared/global-constants';
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class FeedService {
 
-    constructor(private http: Http, public httpClient : HttpClient) {
+    constructor(public httpClient : HttpClient) {
 
     }
 
     getVols() {
-          return this.http.get(`${GlobalConstants.API_ENDPOINT}/vols`).toPromise()
+        return this.httpClient.get(`${GlobalConstants.API_ENDPOINT}/vols`, { amount: 100, startAt: 0}).toPromise()
             .then(res => {
                 return res.json();
             })

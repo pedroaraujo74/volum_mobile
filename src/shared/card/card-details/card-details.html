@@ -38,7 +38,7 @@
                     <span class="bold font-third">ação</span>
                 </p>
                 <p class="font-sm">{{volDetails?.date_creation | date:"d/M"}} às {{volDetails?.date_creation | amDateFormat: 'HH:mm'}}</p>
-                <button ion-button clear item-right icon-only color="grey3" (click)="openMenus($event, volDetails.user.id_user, volDetails.idVol)">
+                <button ion-button clear item-right icon-only color="grey3" (click)="openMenus($event, volDetails.user.id_user, volDetails.id_vol)">
                     <ion-icon name="more"></ion-icon>
                 </button>
             </ion-item> 
@@ -80,7 +80,7 @@
         </ion-list>
 
         <!-- VOLUMS -->
-        <div class="volun">
+        <div class="volun" [ngClass]="{'marginBottomVol': volDetails.active != 0 }">
             <div class="v-confirm">
                 <div class="v-text">
                     <span class="v-number font-primary">{{numberConfirmeds}}</span><span class="font-md font-grey4"> <span *ngIf="numberConfirmeds == 1">confirmado</span><span *ngIf="numberConfirmeds > 1 || numberConfirmeds == 0">confirmados</span></span>
@@ -118,6 +118,12 @@
                 </div>
             </div>
         </div>
+
+        <div class="btnFooter" *ngIf="volDetails.active != 0">
+            <button class="btnOffer" ion-button color="secondary" no-margin full mode="ios" (tap)="applyConfirmAlert(volDetails.id_vol)" *ngIf="volDetails.active == 1 && state == 0">Candidatar</button>
+            <button class="btnOffer" ion-button color="grey3" no-margin full mode="ios" (tap)="applyCancelarAlert(volDetails.id_vol)" *ngIf="volDetails.active== 1 && state == 1">Cancelar candidatura</button>
+        </div>
+
     </div>
 
     <div *ngSwitchCase="'discussion'">
@@ -137,7 +143,7 @@
                      <img [src]="comment?.photo_url">
                 </ion-avatar>
                 <p ion-text color="primary" class="font-md bold">{{comment?.name}}</p>
-                <p ion-text color="grey3" class="marginTopNeg font-sm">1 horas</p>
+                <p ion-text color="grey3" class="marginTopNeg font-sm">{{comment?.date | amTimeAgo:true}}</p>
                 <button ion-button clear item-right icon-only color="grey3" (click)="openMenusCard($event)">
                     <ion-icon name="more"></ion-icon>
                 </button>
@@ -150,8 +156,11 @@
     </div>
 </ion-content>
 
+
+
+
 <!--
-<ion-footer no-border *ngIf="tabs == 'about'">
+<ion-footer no-border *hidden="tabs == 'about'">
     <ion-toolbar color="light" padding *ngIf="tabs == 'about'">
         <button class="btnOffer" ion-button color="secondary" no-margin full mode="ios">Candidatar</button>
     </ion-toolbar>

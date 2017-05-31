@@ -10,7 +10,7 @@
       </button>
     </ion-buttons>
     <ion-buttons start showWhen="android,windows">
-      <button ion-button (click)="dismiss()" disabled>
+      <button ion-button (click)="onSubmit()" [disabled]="disableButton">
          <ion-icon name="checkmark" showWhen="android,windows"></ion-icon>
       </button>
     </ion-buttons>
@@ -20,30 +20,19 @@
       </button>
     </ion-buttons>
     <ion-buttons end showWhen="ios">
-      <button ion-button (click)="dismiss()" disabled>
+      <button ion-button (click)="onSubmit()" [disabled]="disableButton">
         <span ion-text color="light" showWhen="ios">Guardar</span>
       </button>
     </ion-buttons>
   </ion-navbar>
 </ion-header>
+ 
 
-
-<ion-content class="content-background">
-    <ion-searchbar no-shadow></ion-searchbar>
+<ion-content class="content-background" padding-top>
     <ion-list radio-group no-lines>
-        <ion-item>
-            <ion-label color="grey4">Saúde</ion-label>
-            <ion-radio checked="true" value="go"></ion-radio>
-        </ion-item>
-
-        <ion-item>
-            <ion-label color="grey4">Educação</ion-label>
-            <ion-radio value="rust"></ion-radio>
-        </ion-item>
-
-        <ion-item>
-            <ion-label color="grey4">Desporto</ion-label>
-            <ion-radio value="rust"></ion-radio>
+        <ion-item *ngFor="let category of categories; let i = index">
+            <ion-label color="grey4">{{category.name}}</ion-label>
+            <ion-radio value="{{category.id_category}}" [checked]="categorySelectedCheckedId == category.id_category" (ionSelect)="categoryChecked(category.id_category,category.name)"></ion-radio>
         </ion-item>
     </ion-list>
 </ion-content>

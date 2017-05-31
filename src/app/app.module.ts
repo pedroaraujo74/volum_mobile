@@ -1,3 +1,7 @@
+import { NotificationsModule } from './../pages/notifications/notifications.module';
+import { ChatModule } from './../pages/chat/chat.module';
+import { SearchModule } from './../pages/search/search.module';
+import { FeedModule } from './../pages/feed/feed.module';
 import { getDayPipe } from './../pipes/get-day.pipe';
 import { HttpClient } from './../shared/http-client';
 import { AuthenticationService } from './../shared/auth/authentication.service';
@@ -14,7 +18,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 @NgModule({
   declarations: [
     MyApp,
-
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
       tabSubPages: false,
       tabsHideOnSubPages: false,
     }),
-    HttpModule
+    HttpModule,
+     FeedModule,
+    SearchModule,
+    ChatModule,
+    NotificationsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

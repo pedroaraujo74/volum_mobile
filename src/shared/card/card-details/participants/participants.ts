@@ -1,5 +1,5 @@
+import { VolsService } from './../../../../services/vols.service';
 import { Users } from './../../../../components/users/users';
-import { VolsService } from './../../../vols.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 

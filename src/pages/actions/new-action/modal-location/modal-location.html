@@ -13,13 +13,13 @@
 </ion-header>
 
 <ion-content class="content-background">
-    <ion-searchbar no-shadow></ion-searchbar>
+    <ion-searchbar no-shadow [formControl]="searchInput" placeholder="Procurar"></ion-searchbar>
+    <div padding text-center class="stauts-spinner" *ngIf="showSpinner">
+      <ion-spinner color="primary"></ion-spinner>
+    </div>
     <ion-list no-lines>
-        <button ion-item>
-            <span class="font-grey4">Aveiro, Portugal</span>
-        </button>
-        <button ion-item>
-            <span class="font-grey4">Universidade de Aveiro</span>
+        <button ion-item *ngFor="let search of searching; let i = index" (tap)="setAddress(searching[i])">
+            <span class="font-grey4">{{search.formatted_address}}</span>
         </button>
     </ion-list>
 </ion-content>

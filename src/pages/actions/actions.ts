@@ -1,4 +1,4 @@
-import { VolsService } from './../../shared/vols.service';
+import { VolsService } from './../../services/vols.service';
 import { UsersService } from './../../services/users.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, PopoverController } from 'ionic-angular';
@@ -40,16 +40,26 @@ export class Actions {
 
   getMyApplies() {
     this.volsService.getMyApplies().then(res => {
-      console.log("a", res)
-      this.my_applies = res.vols;
-      console.log("applies", this.my_applies)
+      
+      if(res){
+        this.my_applies = res.vols;
+      }
+      else{
+        console.log("LEL", res)
+      }
     })
   }
 
   getMyConfirmed() {
     this.volsService.getMyConfirms().then(res => {
       console.log("a", res)
-      this.my_confirmeds = res.vols;
+       if(res){
+         this.my_confirmeds = res.vols;
+      }
+      else{
+         console.log("LUL", res)
+      }
+     
     })
   }
 

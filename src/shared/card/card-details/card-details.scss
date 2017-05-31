@@ -23,7 +23,10 @@ page-card-details {
         height: 180px;
         padding-top: 12px;
         padding-right: 10px;
-        margin-bottom: 16px;
+    }
+
+    .marginBottomVol{
+        margin-bottom: 95px;
     }
 
     .v-imgs-confirm{
@@ -95,6 +98,25 @@ page-card-details {
     .listTimeLocation ion-item ion-icon {
         min-height: 2rem;
         font-size: 2rem;
+    }
+
+    .btnFooter{
+        width: 100%;
+        padding: 16px;
+        background-color: #FFFFFF;
+        position: fixed;
+        bottom: 50px;
+    }
+
+    .actionEnd{
+        width: 100%;
+        text-align: center;
+        background-color: #32db64;
+        color: #FFF;
+        padding: 10px;
+        border-radius: 2px;
+        font-size:1.5rem;
+        font-weight: 600;
     }
 
 }

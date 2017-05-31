@@ -1,4 +1,4 @@
-import { VolsService } from './../vols.service';
+import { VolsService } from './../../services/vols.service';
 import { Component } from '@angular/core';
 import { IonicPage, NavParams, ViewController } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
@@ -25,10 +25,6 @@ export class ModalDiscussion {
         this.discussion = this._fb.group({
             comment: ['', [Validators.required, Validators.minLength(3)]],
         });
-  }
-
-  ionViewDidLoad() {
-     
   }
 
   onSubmit(){

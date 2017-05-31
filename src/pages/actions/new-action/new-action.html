@@ -13,41 +13,47 @@
 
 
 <ion-content class="content-background" padding-top>
-    <form [formGroup]="newAction" (ngSubmit)="onSubmit(newAction.value, newAction.valid)">
-    <ion-list no-lines no-border>
-        <ion-item>
-            <ion-label fixed color="grey3" class="font-md2">Titulo</ion-label>
-            <ion-input type="text" class="inputColor font-md2"></ion-input>
-        </ion-item>
+    <form [formGroup]="newAction">
+        <ion-list no-lines no-border>
+            <ion-item>
+                <ion-label fixed color="grey3" class="font-md2">Titulo</ion-label>
+                <ion-input formControlName="name" type="text" class="inputColor font-md2"></ion-input>
+            </ion-item>
 
-        <ion-item>
-            <ion-label fixed color="grey3" class="font-md2">Descrição</ion-label>
-            <ion-textarea type="text" class="inputColor font-md2"></ion-textarea>
-        </ion-item>
-    </ion-list>
+            <ion-item>
+                <ion-label fixed color="grey3" class="font-md2">Descrição</ion-label>
+                <ion-textarea formControlName="description" type="text" class="inputColor font-md2"></ion-textarea>
+            </ion-item>
+        </ion-list>
 
-    <ion-list no-lines>
-         <button ion-item (tap)="openModalLocation()">
-            <span class="font-grey3">Localização</span>
-        </button>
-        <button ion-item (tap)="openModalCategory()">
-            <span class="font-grey3">Categoria</span>
-        </button>
-        <ion-item>
-            <ion-label color="grey3">Seguro</ion-label>
-            <ion-toggle checked="false"></ion-toggle>
-        </ion-item>
-        <ion-item>
-            <ion-label color="grey3">Os convidados podem convidar</ion-label>
-            <ion-toggle checked="false"></ion-toggle>
-        </ion-item>
-    </ion-list>
+        <ion-list no-lines>
+            <button ion-item (tap)="openModalLocation()">
+                <p class="font-grey3 font-md2">Localização</p>
+                 <ion-note item-end class="font-md font-primary">
+                    {{address}}
+                </ion-note>
+            </button>
+            <button ion-item (tap)="openModalCategory()">
+                <p class="font-grey3 font-md2">Categoria</p>
+                <ion-note item-end class="font-md font-primary">
+                    {{categoryCheckedName}}
+                </ion-note>
+            </button>
+            <ion-item>
+                <ion-label color="grey3" class="font-md2">Seguro</ion-label>
+                <ion-toggle checked="false"></ion-toggle>
+            </ion-item>
+            <ion-item>
+                <ion-label color="grey3" class="font-md2">Os convidados podem convidar</ion-label>
+                <ion-toggle checked="false"></ion-toggle>
+            </ion-item>
+        </ion-list>
 
-    <ion-list no-lines class="listLoadPicture">
-         <button ion-item>
-            <span class="font-grey3">Carregar foto(s)</span>
-        </button>
-    </ion-list>
+        <ion-list no-lines class="listLoadPicture">
+            <button ion-item (tap)="chooseImages()">
+                <span class="font-grey3 font-md2">Carregar foto(s)</span>
+            </button>
+        </ion-list>
     <!--
     <ion-slides pager color="blue" class="newAction-Slide">
         <ion-slide>
@@ -64,31 +70,31 @@
     </ion-slides>       
     -->
 
-    <ion-list no-lines class="marginList">
-        <ion-item>
-            <ion-label color="grey3">Data de início</ion-label>
-            <ion-datetime displayFormat="MMM DD YYYY" class="inputColor"></ion-datetime>
-        </ion-item>
-        <ion-item>
-            <ion-label color="grey3">Data de fim</ion-label>
-            <ion-datetime displayFormat="MMM DD YYYY" class="inputColor"></ion-datetime>
-        </ion-item>
-    </ion-list>
+        <ion-list no-lines class="marginList">
+            <ion-item>
+                <ion-label color="grey3">Data de início</ion-label>
+                <ion-datetime displayFormat="MMM DD YYYY" class="inputColor"></ion-datetime>
+            </ion-item>
+            <ion-item>
+                <ion-label color="grey3">Data de fim</ion-label>
+                <ion-datetime displayFormat="MMM DD YYYY" class="inputColor"></ion-datetime>
+            </ion-item>
+        </ion-list>
 
-    <ion-list no-lines>
-        <ion-item>
-            <ion-label color="grey3">Hora de início</ion-label>
-            <ion-datetime displayFormat="H:mm" pickerFormat="H mm" class="inputColor"></ion-datetime>
-        </ion-item>
-        <ion-item>
-            <ion-label color="grey3">Hora de fim</ion-label>
-            <ion-datetime displayFormat="H:mm" pickerFormat="H mm" class="inputColor"></ion-datetime>
-        </ion-item>
-        <ion-item>
-            <ion-label color="grey3">Horas diárias</ion-label>
-            <ion-datetime displayFormat="H:mm" pickerFormat="H mm" class="inputColor"></ion-datetime>
-        </ion-item>
-    </ion-list>  
+        <ion-list no-lines>
+            <ion-item>
+                <ion-label color="grey3">Hora de início</ion-label>
+                <ion-datetime displayFormat="H:mm" pickerFormat="H mm" class="inputColor"></ion-datetime>
+            </ion-item>
+            <ion-item>
+                <ion-label color="grey3">Hora de fim</ion-label>
+                <ion-datetime displayFormat="H:mm" pickerFormat="H mm" class="inputColor"></ion-datetime>
+            </ion-item>
+            <ion-item>
+                <ion-label color="grey3">Horas diárias</ion-label>
+                <ion-datetime displayFormat="H:mm" pickerFormat="H mm" class="inputColor"></ion-datetime>
+            </ion-item>
+        </ion-list>  
     </form>
 </ion-content>
 

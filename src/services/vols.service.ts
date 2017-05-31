@@ -1,7 +1,7 @@
-import { GlobalConstants } from './global-constants';
+import { GlobalConstants } from './../shared/global-constants';
+import { HttpClient } from './../shared/http-client';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { HttpClient } from './http-client';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
@@ -23,7 +23,7 @@ export class VolsService {
 
 
     getVolHistory(id) {
-        return this.http.get(`${GlobalConstants.API_ENDPOINT}/users/` + id + '/vols').toPromise()
+        return this.httpClient.get(`${GlobalConstants.API_ENDPOINT}/users/` + id + '/vols').toPromise()
             .then(res => { return res.json() })
             .catch(error => console.log(error));
     }
@@ -119,17 +119,25 @@ export class VolsService {
             .catch(error => console.log(error));
     }
 
-
-
-
-
-
-
     // APPLY TO VOL
     apply(id_user, id_vol) {
         return this.httpClient.post(`${GlobalConstants.API_ENDPOINT}/vols/` + id_vol + '/apply', { id_user: id_user }).toPromise()
             .then(res => { return res.json() })
             .catch(error => console.log(error));
     }
+
+    // APPLY CANCEL
+    cancelApply(id_user, id_vol) {
+       return this.httpClient.post(`${GlobalConstants.API_ENDPOINT}/vols/`+id_vol+`/applies/cancel`, {id_user: id_user}).toPromise()
+            .then(res => { return res.json() })
+            .catch(error => console.log(error));
+    }
+
+    // CHECK STATE
+    checkState(id_user, id_vol) {
+        return this.httpClient.post(`${GlobalConstants.API_ENDPOINT}/vols/` + id_vol + '/checkState', { id_user: id_user }).toPromise()
+            .then(res => { return res.json() })
+            .catch(error => console.log(error));
+    };
 
 }

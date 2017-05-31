@@ -260,3 +260,31 @@
         border-radius: 3px;
     }
 }
+
+.toast-success{
+    .toast-container{
+        background: #32db64;
+        border-radius: 3px;
+    }
+}
+
+
+// ALERTS
+.alert-ios .alert-wrapper {
+    border-radius: 8px;
+}
+.alert-title{
+    color: #4A4A4A;
+}
+.alert-message{
+    color: #4A4A4A!important;
+}
+.closeAlert{
+    color:#f53d3d!important;
+}
+
+
+// FIX AVATAR
+ion-avatar img{
+    object-fit: cover!important;
+}

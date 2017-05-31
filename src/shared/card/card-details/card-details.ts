@@ -1,7 +1,7 @@
+import { VolsService } from './../../../services/vols.service';
 import { AuthenticationService } from './../../auth/authentication.service';
-import { VolsService } from './../../vols.service';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController, PopoverController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, PopoverController, LoadingController, ToastController, AlertController } from 'ionic-angular';
 import * as moment from 'moment';
 
 @IonicPage()
@@ -19,6 +19,7 @@ export class CardDetails {
 
     //LOGGED USER
     public user = {}
+    public userId: any;
     public name: any;
     public photo: any;
 
@@ -51,12 +52,13 @@ export class CardDetails {
     public comments: any;
 
     // APPLY TO VOL
+    public state: Number;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, public modalController: ModalController, public popoverCtrl: PopoverController, public volsService: VolsService, public loadingCtrl: LoadingController, public auth: AuthenticationService) {}
+    constructor(public navCtrl: NavController, public navParams: NavParams, public modalController: ModalController, public popoverCtrl: PopoverController, public volsService: VolsService, public loadingCtrl: LoadingController, public auth: AuthenticationService, public toastCtrl: ToastController, public alertCtrl: AlertController) { }
 
-    ionViewDidLoad(){
+    ionViewDidLoad() {
         moment.locale('pt-pt');
-        
+
         let loading = this.loadingCtrl.create({
             content: 'Loading...'
         });
@@ -72,12 +74,14 @@ export class CardDetails {
         // GET ID LOGGED USER
         this.auth.userPromise.then(res => {
             this.user = res.user;
+            this.userId = res.user.id_user;
+            console.log("USER", this.user);
         });
 
         // GET VOL DETAILS DATA
         this.volsService.getVolDetails(this.getVolId).then(res => {
             this.volDetails = res.vol;
-
+            console.log("VOLs", res.vol);
             // ADDRESS
             this.lat = res.vol.lat;
             this.lng = res.vol.lng;
@@ -103,6 +107,9 @@ export class CardDetails {
 
             // GET COMMENTS
             this.getComments()
+
+            // APPLY
+            this.checkState(res.vol.id_vol);
 
             // HIDE LOADING
             loading.dismiss()
@@ -173,10 +180,102 @@ export class CardDetails {
         this.volsService.getComments(this.getVolId)
             .then(res => {
                 this.comments = res.comments;
-                console.log("CENas", res)
+                console.log(res.comments)
             })
             .catch(err => console.log(err));
     }
+
+    applyConfirmAlert(id_vol) {
+        let confirm = this.alertCtrl.create({
+            title: 'Confirmar candidatura',
+            message: 'Ao confirmar, compromete-se a participar na ação de voluntariado.',
+            buttons: [
+                {
+                    text: 'Fechar',
+                    cssClass: 'closeAlert',
+                    
+                    handler: () => {
+                        console.log('Disagree clicked');
+                    }
+                },
+                {
+                    text: 'Confirmar',
+                    cssClass: 'confirmAlert',
+                    handler: () => {
+                        this.applyConfirm(id_vol);
+                    }
+                }
+            ]
+        });
+        confirm.present();
+    }
+
+    applyCancelarAlert(id_vol) {
+        let confirm = this.alertCtrl.create({
+            title: 'Cancelar candidatura',
+            message: 'Tem mesmo a certeza que deseja cancelar a sua candidatura?',
+            buttons: [
+                {
+                    text: 'Fechar',
+                    cssClass: 'closeAlert',
+                    handler: () => {
+                    }
+                },
+                {
+                    text: 'Confirmar',
+                    cssClass: 'confirmAlert',
+                    handler: () => {
+                        this.applyCancel(id_vol);
+                    }
+                }
+            ]
+        });
+        confirm.present();
+    }
+
+
+    // APPLY CONFIRM
+    applyConfirm(id_vol) {
+        this.volsService.apply(this.userId, id_vol).then(res => {
+            let toast = this.toastCtrl.create({
+                message: 'Candidatura enviada com sucesso!',
+                duration: 3000,
+                cssClass: "toast-success",
+            });
+            toast.present();
+            this.state = 1;
+            this.countCandidates(id_vol);
+            this.getCandidates(id_vol, 10);
+        })
+            .catch(err => {
+
+            });
+    }
+
+    // APPLY CANCEL
+    applyCancel(id_vol) {
+        this.volsService.cancelApply(this.userId, id_vol).then(res => {
+            let toast = this.toastCtrl.create({
+                message: 'Candidatura cancelada com sucesso!',
+                duration: 3000,
+                cssClass: "toast-success",
+            });
+            toast.present();
+            this.state = 0;
+            this.countCandidates(id_vol);
+            this.getCandidates(id_vol, 10);
+        });
+    }
+
+    // CHECK STATE VOL
+    checkState(id_vol) {
+        this.volsService.checkState(this.userId, id_vol).then(res => {
+            this.state = res.state;
+            console.log(res);
+        });
+    }
+
+
 
     // APPLY TO VOL
     /*

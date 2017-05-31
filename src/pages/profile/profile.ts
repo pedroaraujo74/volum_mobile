@@ -1,4 +1,4 @@
-import { VolsService } from './../../shared/vols.service';
+import { VolsService } from './../../services/vols.service';
 import { UsersService } from './../../services/users.service';
 import { AuthenticationService } from './../../shared/auth/authentication.service';
 import { Component } from '@angular/core';

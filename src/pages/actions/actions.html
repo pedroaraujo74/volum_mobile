@@ -27,12 +27,12 @@
 
     <!-- NEXT ACTIONS -->
     <div *ngSwitchCase="'nextActions'">
-        <ion-list no-lines no-border margin-top>
+        <ion-list no-lines no-border margin-top *ngIf="my_confirmeds">
             <ion-item class="font-md bold font-grey4 border-bottom">Ações próximas</ion-item>
             <cardList *ngFor="let vol of my_confirmeds" [name]="vol.name" [photo]="vol.photos[0]" [date]="vol.date_begin"></cardList>
         </ion-list>
 
-        <ion-list no-lines no-border>
+        <ion-list no-lines no-border *ngIf="my_applies">
             <ion-item class="font-md bold font-grey4 border-bottom">Ações a aguardar confirmação</ion-item>
             <cardList *ngFor="let vol of my_applies" [name]="vol.name" [photo]="vol.photos[0]" [date]="vol.date_begin"></cardList>
             <button ion-item mode="md" text-center class="border-top">

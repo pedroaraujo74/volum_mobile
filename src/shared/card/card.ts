@@ -1,4 +1,4 @@
-import { VolsService } from './../vols.service';
+import { VolsService } from './../../services/vols.service';
 import { AuthenticationService } from './../auth/authentication.service';
 import { Component, Input } from '@angular/core';
 import { IonicPage, NavController, NavParams, ActionSheetController, Platform, PopoverController} from 'ionic-angular';
