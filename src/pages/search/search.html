@@ -6,17 +6,33 @@
             </button>
         </ion-buttons>
         <ion-toolbar color="primary">
-            <ion-searchbar placeholder="Procurar"></ion-searchbar>
+            <ion-searchbar [formControl]="searchInput" placeholder="Procurar"></ion-searchbar>
         </ion-toolbar>
     </ion-navbar>
 </ion-header>
 
 <ion-content class="content-background" padding-top>
-    <ion-list no-lines no-border no-shadow>
-        <ion-item class="font-md bold font-grey4 border-bottom">Instituições</ion-item>
-        <users [typeUser]="0"></users>     
-    </ion-list>
 
+    <!-- INSTITUIÇÕES 
+    <span *ngIf="elements!=0">
+        <ion-list no-lines no-border no-shadow *ngIf="elements.type==2">
+            <ion-item class="font-md bold font-grey4 border-bottom">Instituições</ion-item>
+            <users *ngFor="let element of elements" [typeUser]="0" [user_id]="element.id" [name]="element.name" [photo]="element.photo_url"></users>
+
+            <button *ngIf="typeUser == 0" ion-item class="fixAvatar">
+                <ion-avatar item-left>
+                    <img [src]="photo">
+                </ion-avatar>
+                <p text-wrap><span class="bold font-grey4">{{name}}</span></p>
+                <p class="font-sm"><span color="grey3">233 ações criadas</span></p>
+            </button>     
+
+        </ion-list>
+    </span>
+    -->
+
+
+    <!--
     <ion-list no-lines no-border no-shadow>
         <ion-item class="font-md bold font-grey4 border-bottom">Voluntários</ion-item>
         <users [typeUser]="1"></users>     
@@ -29,5 +45,5 @@
         <ion-item class="font-md bold font-grey4 border-bottom">Ações</ion-item>
         <cardList></cardList>
     </ion-list>
-
+    -->
 </ion-content>

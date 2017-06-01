@@ -7,6 +7,9 @@ import { Component, Input } from '@angular/core';
 export class Users {
 
   @Input() typeUser;
+  @Input() user_id;
+  @Input() name;
+  @Input() photo;
 
   constructor() {
    

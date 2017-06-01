@@ -41,16 +41,25 @@
             </button>
             <ion-item>
                 <ion-label color="grey3" class="font-md2">Seguro</ion-label>
-                <ion-toggle checked="false"></ion-toggle>
+                <ion-toggle [checked]="insurance" formControlName="insurance" color="four"></ion-toggle>
             </ion-item>
             <ion-item>
-                <ion-label color="grey3" class="font-md2">Os convidados podem convidar</ion-label>
-                <ion-toggle checked="false"></ion-toggle>
+                <ion-label color="grey3" class="font-md2">Ação pública</ion-label>
+                <ion-toggle checked="publicAction" formControlName="publicAction" color="four"></ion-toggle>
+            </ion-item>
+            <ion-item>
+                <ion-label color="grey3" class="font-md2">Aceitar candidatos diretamente</ion-label>
+                <ion-toggle checked="true" formControlName="acceptCandidates" color="four"></ion-toggle>
+            </ion-item>
+            <ion-item>
+                <ion-label color="grey3" class="font-md2">Comentários públicos</ion-label>
+                <ion-toggle checked="true" formControlName="publicComments" color="four"></ion-toggle>
             </ion-item>
         </ion-list>
 
         <ion-list no-lines class="listLoadPicture">
-            <button ion-item (tap)="chooseImages()">
+            <input type="file">
+            <button ion-item type="file">
                 <span class="font-grey3 font-md2">Carregar foto(s)</span>
             </button>
         </ion-list>
@@ -72,36 +81,35 @@
 
         <ion-list no-lines class="marginList">
             <ion-item>
-                <ion-label color="grey3">Data de início</ion-label>
-                <ion-datetime displayFormat="MMM DD YYYY" class="inputColor"></ion-datetime>
+                <ion-label color="grey3" class="font-md2">Data de início</ion-label>
+                <ion-datetime displayFormat="MMM DD YYYY" class="inputColor font-md2" formControlName="dateBegin"></ion-datetime>
             </ion-item>
             <ion-item>
-                <ion-label color="grey3">Data de fim</ion-label>
-                <ion-datetime displayFormat="MMM DD YYYY" class="inputColor"></ion-datetime>
+                <ion-label color="grey3" class="font-md2">Data de fim</ion-label>
+                <ion-datetime displayFormat="MMM DD YYYY" class="inputColor font-md2" formControlName="dateEnd"></ion-datetime>
             </ion-item>
         </ion-list>
 
         <ion-list no-lines>
             <ion-item>
-                <ion-label color="grey3">Hora de início</ion-label>
-                <ion-datetime displayFormat="H:mm" pickerFormat="H mm" class="inputColor"></ion-datetime>
+                <ion-label color="grey3" class="font-md2">Hora de início</ion-label>
+                <ion-datetime displayFormat="H:mm" pickerFormat="H mm" class="inputColor font-md2" formControlName="timeBegin"></ion-datetime>
             </ion-item>
             <ion-item>
-                <ion-label color="grey3">Hora de fim</ion-label>
-                <ion-datetime displayFormat="H:mm" pickerFormat="H mm" class="inputColor"></ion-datetime>
+                <ion-label color="grey3" class="font-md2">Hora de fim</ion-label>
+                <ion-datetime displayFormat="H:mm" pickerFormat="H mm" class="inputColor font-md2" formControlName="timeEnd"></ion-datetime>
             </ion-item>
             <ion-item>
-                <ion-label color="grey3">Horas diárias</ion-label>
-                <ion-datetime displayFormat="H:mm" pickerFormat="H mm" class="inputColor"></ion-datetime>
+                <ion-label color="grey3" class="font-md2">Horas diárias</ion-label>
+                <ion-datetime displayFormat="H:mm" pickerFormat="H mm" class="inputColor font-md2" formControlName="dailyHours"></ion-datetime>
             </ion-item>
         </ion-list>  
     </form>
 </ion-content>
 
-<!--
+
 <ion-footer no-border>
     <ion-toolbar color="light" padding>
-        <button class="btnNewAction" ion-button color="secondary"  no-margin full mode="ios" disabled>Criar ação</button>
+        <button class="btnNewAction" ion-button color="secondary"  no-margin full mode="ios" (tap)="teste()">Criar ação</button>
     </ion-toolbar>
 </ion-footer>
--->

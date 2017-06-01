@@ -14,7 +14,8 @@ export class MyApp {
 
   constructor(platform: Platform, statusBar: StatusBar, public storage: Storage, splashScreen: SplashScreen, private auth: AuthenticationService) {
     platform.ready().then(() => {
-      statusBar.styleDefault();
+      statusBar.backgroundColorByHexString('#ffffff');
+      statusBar.overlaysWebView(true);
       splashScreen.hide();
     });
 

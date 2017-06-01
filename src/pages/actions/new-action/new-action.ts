@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, PopoverController, ModalController } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { CustomValidators } from "ng2-validation/dist";
+import { Camera } from "ionic-native";
 
 @IonicPage()
 @Component({
@@ -25,14 +26,24 @@ export class NewAction {
     public locationLng: any;
     public locationName = {};
     public address: any;
-
+    
     // GALLERY
     public base64Image : any;
 
     constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController, public modalController: ModalController, public _fb: FormBuilder, public newActionsService: NewActionsService) {
+    
         this.newAction = this._fb.group({
             name: ['', [Validators.required, Validators.minLength(3)]],
             description: ['', [Validators.required, Validators.minLength(3)]],
+            insurance:[true],
+            publicAction:[true],
+            acceptCandidates:[true],
+            publicComments:[true],
+            dateBegin:['',[Validators.required]],
+            dateEnd:[],
+            timeBegin:['',[Validators.required]],
+            timeEnd:[],  
+            dailyHours:[]
         });
 
     }
@@ -77,6 +88,7 @@ export class NewAction {
         }
     }
 
+    // MODAL LOCATION
     openModalLocation() {
         const modal = this.modalController.create("ModalLocation");
         modal.onDidDismiss(data => {
@@ -90,6 +102,12 @@ export class NewAction {
         });
         modal.present();
     }
+
+    // CHOOSE PHOTOS
+
+
+
+
 
     /*
     chooseImages(){

@@ -11,9 +11,10 @@ import { IonicPage, NavParams, PopoverController, LoadingController } from 'ioni
 export class Feed {
 
     public vols = [];
+    public showFeed: boolean = false;
 
     constructor(public navParams: NavParams,  public popoverCtrl: PopoverController, private feedService: FeedService, public loadingCtrl: LoadingController) {
-         let loading = this.loadingCtrl.create({
+        let loading = this.loadingCtrl.create({
             content: 'Loading...'
         });
         loading.present();
@@ -29,9 +30,13 @@ export class Feed {
                 this.feedService.checkLike(this.vols[i].vol.id_vol)
                     .then(res => {
                     this.vols[i].vol.likeState = parseInt(res.state);
-                })
-            }
-            loading.dismiss()
+                    if(i == (this.vols.length-1)){
+                        loading.dismiss();
+                    }
+                }).catch(err =>{
+                    console.log("ERRRO CHECK",err);
+                });
+            }        
         })
         .catch(err => console.log(err));
     }
