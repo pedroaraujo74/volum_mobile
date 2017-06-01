@@ -119,12 +119,15 @@
             </div>
         </div>
 
-        <div class="btnFooter" *ngIf="state == 0 && volDetails.active == 1">
-            <button class="btnOffer" ion-button color="secondary" no-margin full mode="ios" (tap)="applyConfirmAlert(volDetails.id_vol)" *ngIf="volDetails.active == 1 && state == 0">Candidatar</button>
-           
+        <div class="btnFooter" *ngIf="volCreator == userId">
+            <button class="btnOffer" ion-button color="secondary" no-margin full mode="ios">Área de gestão</button>
         </div>
 
-        <div class="btnFooterNoFixed" *ngIf="state == 1 || state == 2 || state == 4" margin-top>
+        <div class="btnFooter" *ngIf="state == 0 && volDetails.active == 1 && volCreator != userId">
+            <button class="btnOffer" ion-button color="secondary" no-margin full mode="ios" (tap)="applyConfirmAlert(volDetails.id_vol)" *ngIf="volDetails.active == 1 && state == 0">Candidatar</button>
+        </div>
+
+        <div class="btnFooterNoFixed" *ngIf="(state == 1 || state == 2 || state == 4) && (volCreator != userId)" margin-top>
             <button class="btnOffer" ion-button color="grey3" no-margin full mode="ios" (tap)="applyCancelarAlert(volDetails.id_vol)" *ngIf="volDetails.active== 1 && state == 1">Cancelar candidatura</button>
             <button class="btnOffer" ion-button color="grey3" no-margin full mode="ios" (tap)="applyCancelarAlert(volDetails.id_vol)" *ngIf="volDetails.active== 1 && state == 2">Cancelar candidatura</button>
             <div class="actionEnd" *ngIf="volDetails.active== 1 && state == 4">Candidatura regeitada</div>

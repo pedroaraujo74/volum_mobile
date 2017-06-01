@@ -35,6 +35,7 @@ export class Feed {
                     }
                 }).catch(err =>{
                     console.log("ERRRO CHECK",err);
+                    loading.dismiss();
                 });
             }        
         })

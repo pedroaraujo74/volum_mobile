@@ -23,6 +23,9 @@ export class CardDetails {
     public name: any;
     public photo: any;
 
+    // VOL CREATER
+    public volCreator : any;
+
     // ADDRESS
     public addressData: any;
     public address: any;
@@ -81,7 +84,10 @@ export class CardDetails {
         // GET VOL DETAILS DATA
         this.volsService.getVolDetails(this.getVolId).then(res => {
             this.volDetails = res.vol;
+
+            this.volCreator = res.vol.user.id_user;
             console.log("VOLs", res.vol);
+
             // ADDRESS
             this.lat = res.vol.lat;
             this.lng = res.vol.lng;
@@ -292,16 +298,6 @@ export class CardDetails {
             console.log(this.state)
         });
     }
-
-
-
-    // APPLY TO VOL
-    /*
-    apply(id_vol) {
-        this.volsService.apply(this.context.id_user, id_vol).then(res => {
-        });
-    }
-    */
 
     goParticipants(value) {
         this.navCtrl.push("Participants", {

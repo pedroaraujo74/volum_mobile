@@ -3,13 +3,12 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, PopoverController, ModalController } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { CustomValidators } from "ng2-validation/dist";
-import { Camera } from "ionic-native";
+import { Camera, CameraOptions } from "@ionic-native/camera";
 
 @IonicPage()
 @Component({
     selector: 'page-new-action',
     templateUrl: 'new-action.html',
-    providers: [NewActionsService]
 })
 export class NewAction {
 
@@ -29,9 +28,12 @@ export class NewAction {
     
     // GALLERY
     public base64Image : any;
+    public imageSrc: string;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController, public modalController: ModalController, public _fb: FormBuilder, public newActionsService: NewActionsService) {
-    
+    constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController, public modalController: ModalController, public _fb: FormBuilder, public newActionsService: NewActionsService, public camera : Camera) {
+        if (Camera['installed']()) {
+            console.log("CENAS")
+        }
         this.newAction = this._fb.group({
             name: ['', [Validators.required, Validators.minLength(3)]],
             description: ['', [Validators.required, Validators.minLength(3)]],
@@ -104,7 +106,20 @@ export class NewAction {
     }
 
     // CHOOSE PHOTOS
+    choosePhotos(){
+        let cameraOptions: CameraOptions = {
+            sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+            quality: 100,
+            destinationType: this.camera.DestinationType.DATA_URL,
+            encodingType: this.camera.EncodingType.JPEG,
+        }
 
+        this.camera.getPicture(cameraOptions)
+            .then(file_uri => {
+                this.imageSrc = 'data:image/jpeg;base64,' + file_uri;
+                console.log("FOTO",  this.imageSrc);
+            }); 
+    }
 
 
 

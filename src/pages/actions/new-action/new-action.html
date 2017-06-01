@@ -58,26 +58,19 @@
         </ion-list>
 
         <ion-list no-lines class="listLoadPicture">
+            <!--
             <input type="file">
-            <button ion-item type="file">
+            -->
+            <button ion-item (tap)="choosePhotos()">
                 <span class="font-grey3 font-md2">Carregar foto(s)</span>
             </button>
         </ion-list>
-    <!--
-    <ion-slides pager color="blue" class="newAction-Slide">
-        <ion-slide>
-            <img src="./assets/imgs/lel.png" />
-        </ion-slide>
-
-        <ion-slide>
-            <img src="./assets/imgs/lelel.jpg" />
-        </ion-slide>
-
-        <ion-slide>
-            <img src="./assets/imgs/lel.png" />
-        </ion-slide>
-    </ion-slides>       
-    -->
+   
+        <ion-slides pager color="blue" class="newAction-Slide" *ngIf="imageSrc">
+            <ion-slide>
+                <img [src]="imageSrc"/>
+            </ion-slide>
+        </ion-slides> 
 
         <ion-list no-lines class="marginList">
             <ion-item>
