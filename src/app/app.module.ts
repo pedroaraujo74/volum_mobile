@@ -32,7 +32,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
       tabsHideOnSubPages: false,
     }),
     HttpModule,
-     FeedModule,
+    FeedModule,
     SearchModule,
     ChatModule,
     NotificationsModule

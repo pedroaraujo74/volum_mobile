@@ -1,9 +1,10 @@
 import { NewActionsService } from './../../../services/newActions.service';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, PopoverController, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, PopoverController, ModalController, Platform } from 'ionic-angular';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { CustomValidators } from "ng2-validation/dist";
 import { Camera, CameraOptions } from "@ionic-native/camera";
+
 
 @IonicPage()
 @Component({
@@ -30,10 +31,15 @@ export class NewAction {
     public base64Image : any;
     public imageSrc: string;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController, public modalController: ModalController, public _fb: FormBuilder, public newActionsService: NewActionsService, public camera : Camera) {
-        if (Camera['installed']()) {
-            console.log("CENAS")
+    //DISABLE GALLERY
+    public disableGallery : boolean = true;
+
+    constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController, public modalController: ModalController, public _fb: FormBuilder, public newActionsService: NewActionsService, public camera : Camera, public platform : Platform) {
+        
+        if (this.platform.is('ios')  || this.platform.is('android') || this.platform.is('windows')) {
+            this.disableGallery = false;
         }
+
         this.newAction = this._fb.group({
             name: ['', [Validators.required, Validators.minLength(3)]],
             description: ['', [Validators.required, Validators.minLength(3)]],

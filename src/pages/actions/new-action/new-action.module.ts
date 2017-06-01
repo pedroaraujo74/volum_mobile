@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { NewAction } from './new-action';
 import { Camera } from "@ionic-native/camera";
-import { ImagePicker } from '@ionic-native/image-picker';
+
 @NgModule({
   declarations: [
     NewAction,
@@ -14,6 +14,6 @@ import { ImagePicker } from '@ionic-native/image-picker';
   exports: [
     NewAction
   ],
-   providers: [NewActionsService, Camera, ImagePicker]
+   providers: [NewActionsService, Camera]
 })
 export class NewActionModule {}

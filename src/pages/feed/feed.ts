@@ -14,12 +14,22 @@ export class Feed {
     public showFeed: boolean = false;
 
     constructor(public navParams: NavParams,  public popoverCtrl: PopoverController, private feedService: FeedService, public loadingCtrl: LoadingController) {
+       
+        
+        // GET FEED
+       
+    }
+
+    ionViewDidLoad() {
+        this.showFeed = false;
+        this.loadFeed();      
+    }
+
+    loadFeed(){
         let loading = this.loadingCtrl.create({
             content: 'Loading...'
         });
         loading.present();
-
-        // GET FEED
         this.feedService.getVols().then(res => {
             this.vols = res.vols;
             for (let i = 0; i < this.vols.length; i++) {
@@ -32,6 +42,7 @@ export class Feed {
                     this.vols[i].vol.likeState = parseInt(res.state);
                     if(i == (this.vols.length-1)){
                         loading.dismiss();
+                        this.showFeed = true;
                     }
                 }).catch(err =>{
                     console.log("ERRRO CHECK",err);
