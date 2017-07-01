@@ -29,7 +29,7 @@ export class Register2 {
             email: ['', [Validators.required, Validators.minLength(3), CustomValidators.email]],
         });
 
-    }
+    } 
 
     validate() {
         if (this.registo2.controls.email.errors) {
