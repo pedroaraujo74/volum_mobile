@@ -65,7 +65,7 @@ export class Notifications {
       this.navCtrl.push("Profile", { id_user: id_user });
 
     } else if (type == 6) {
-      this.navCtrl.push("Finish", { user_name: user_name, id_vol: id_vol, name: name, photo_url: photo_url });
+      this.navCtrl.push("Finish", { id_user: id_user, user_name: user_name, id_vol: id_vol, name: name, photo_url: photo_url });
 
     } else {
       this.navCtrl.push("CardDetails", { volId: id_vol, volName: name });

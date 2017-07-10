@@ -30,7 +30,7 @@ export class Finish {
 
         this.auth.userPromise.then(res => {
             console.error(res);
-            this.vol['id_user'] = res.user.id_user;
+            this.vol['id_user'] = this.navParams.get('id_user')
             this.vol['id_vol'] = this.navParams.get('id_vol')
             this.vol['name'] = this.navParams.get('name')
             this.vol['user_name'] = this.navParams.get('user_name')
