@@ -1,3 +1,4 @@
+import { MomentModule } from 'angular2-moment';
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { Notifications } from './notifications';
@@ -8,6 +9,7 @@ import { Notifications } from './notifications';
   ],
   imports: [
     IonicPageModule.forChild(Notifications),
+    MomentModule  
   ],
   exports: [
     Notifications

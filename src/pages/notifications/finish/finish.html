@@ -1,0 +1,60 @@
+<ion-header no-border>
+    <ion-navbar color="primary">
+        <ion-title>
+            {{vol.name}}
+        </ion-title>
+        <ion-buttons end>
+            <ion-icon name="more"></ion-icon>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="content-background finish" padding-top>
+    <div class="listDescription" padding margin-top>
+        <div class="descriptionTitle bold font-primary">Parabéns!</div>
+        <div class="description">{{vol?.user_name}} deu como terminada a ação de voluntariado "{{vol?.name}}" e deixou como sumário da ação a seguinte
+            descrição:
+        </div>
+    </div>
+
+    <div class="listDescription" padding margin-top>
+        <ion-avatar item-left>
+            <img [src]="vol.photo_url">
+            <p class="font-md bold font-primary username">{{vol?.user_name}}</p>
+            <p class="message"> {{last_message}} </p>
+        </ion-avatar>
+
+    </div>
+
+    <div class="listDescription" padding margin-top *ngIf="scoreStatus">
+        <div class="descriptionTitle bold font-primary ">
+            <p>Já avaliaste esta ação com:</p>
+        </div>
+        <div>
+            {{scoreStatus}} estrelas!
+        </div>
+    </div>
+
+    <div class="listDescription" padding margin-top *ngIf="scoreStatus == null">
+
+        <div class="descriptionTitle bold font-primary ">
+            <p>Avaliar a ação e deixar um testemunho</p>
+        </div>
+        <div>
+            Avalia {{vol?.user_name}} como instituição de voluntariado e deixa um testemunho no seu perfil!
+        </div>
+        <div class="font-primary" style="padding-top: 15px; text-align:center ">
+            <ion-icon class="stars" *ngFor="let num of getNumber(5); let star = index " name='star' [class.yellow]="star <= all_classification"
+                [class.grey]="!all_classification || star >= all_classification" (tap)="setScore(star)"></ion-icon>
+        </div>
+
+
+        <div class="col-12">
+            <textarea rows="4" class="modal-textarea" placeholder="Escrever testemunho..." [(ngModel)]="message"></textarea>
+        </div>
+    </div>
+    <div class="btnFooter" *ngIf="scoreStatus == null">
+        <button class="btnOffer" ion-button color="secondary" no-margin full mode="ios" (tap)="submitTestimony()">
+            Enviar</button>
+    </div>
+</ion-content>

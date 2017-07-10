@@ -26,14 +26,14 @@
 
         <ion-list no-lines no-margin>
             <ion-item>
-                <ion-avatar item-left>
+                <ion-avatar item-left (tap)="visit(volDetails.user.id_user)">
                     <img [src]="volDetails.user?.photo_url">
                 </ion-avatar>
                 <p text-wrap>
-                    <span class="font-primary bold font-md2">
+                    <span class="font-primary bold font-md2" (tap)="visit(volDetails.user.id_user)">
                          {{volDetails.user?.name}}
                     </span>
-                    <ion-icon *ngIf="volDetails.user?.certification == 1" name="checkmark-circle" color="primary" class="font-md font-md2"></ion-icon> 
+                    <ion-icon *ngIf="volDetails.user?.certification == 1" name="checkmark-circle" color="primary" class="font-md font-md2"></ion-icon>
                     <span class="font-grey4">criou a</span>
                     <span class="bold font-third">ação</span>
                 </p>
@@ -41,7 +41,7 @@
                 <button ion-button clear item-right icon-only color="grey3" (click)="openMenus($event, volDetails.user.id_user, volDetails.id_vol)">
                     <ion-icon name="more"></ion-icon>
                 </button>
-            </ion-item> 
+            </ion-item>
         </ion-list>
 
         <!-- DESCRIPTION -->
@@ -55,7 +55,8 @@
             <ion-item>
                 <ion-icon name="time" item-left color="grey3"></ion-icon>
                 <h2 class="font-grey4 font-md bold" *ngIf="!volDetails?.date_end">Início a {{volDetails?.date_begin | date:"d"}} de {{volDetails?.date_begin | date:"MMMM"}}</h2>
-                <h2 class="font-grey4 font-md bold" *ngIf="volDetails?.date_end">De {{volDetails?.date_begin | date:"d"}} de {{volDetails?.date_begin | date:"MMMM"}} até {{volDetails?.date_end | date:"d"}} de {{volDetails?.date_end | date:"MMMM"}}</h2>
+                <h2 class="font-grey4 font-md bold" *ngIf="volDetails?.date_end">De {{volDetails?.date_begin | date:"d"}} de {{volDetails?.date_begin | date:"MMMM"}} até {{volDetails?.date_end
+                    | date:"d"}} de {{volDetails?.date_end | date:"MMMM"}}</h2>
                 <p color="grey3" class="font-md">
                     <span *ngIf="volDetails?.start_time && volDetails?.end_time">{{hora_inicio}}:{{minutos_inicio}}h até às {{hora_fim}}:{{minutos_fim}}h</span>
                     <span *ngIf="volDetails?.start_time && !volDetails?.end_time">{{hora_inicio}}:{{minutos_inicio}}h</span>
@@ -72,10 +73,12 @@
         <!-- LIST TIME LOCATIONS -->
         <ion-list no-border no-lines no-margin margin-bottom margin-top>
             <ion-item>
-                <h2 class="font-md2 font-grey4">Categoria</h2><ion-badge item-right color="third">Defesa do Consumidor</ion-badge>
+                <h2 class="font-md2 font-grey4">Categoria</h2>
+                <ion-badge item-right color="third">Defesa do Consumidor</ion-badge>
             </ion-item>
             <ion-item *ngIf="volDetails?.insurance == 1">
-                <h2 class="font-md2 font-grey4">Seguro</h2><ion-badge item-right color="four">Sim</ion-badge>
+                <h2 class="font-md2 font-grey4">Seguro</h2>
+                <ion-badge item-right color="four">Sim</ion-badge>
             </ion-item>
         </ion-list>
 
@@ -83,13 +86,15 @@
         <div class="volun" [ngClass]="{'marginBottomVol': state == 0}">
             <div class="v-confirm">
                 <div class="v-text">
-                    <span class="v-number font-primary">{{numberConfirmeds}}</span><span class="font-md font-grey4"> <span *ngIf="numberConfirmeds == 1">confirmado</span><span *ngIf="numberConfirmeds > 1 || numberConfirmeds == 0">confirmados</span></span>
+                    <span class="v-number font-primary">{{numberConfirmeds}}</span><span class="font-md font-grey4"> <span *ngIf="numberConfirmeds == 1">confirmado</span>
+                    <span *ngIf="numberConfirmeds > 1 || numberConfirmeds == 0">confirmados</span>
+                    </span>
                 </div>
                 <div class="v-imgs-confirm">
                     <div *ngFor="let confirmed of confirmeds">
                         <img [src]="confirmed?.photo_url">
                     </div>
-                   
+
                     <div class="lastCount" *ngIf="numberConfirmeds>10">
                         +{{numberConfirmeds-10}}
                     </div>
@@ -102,7 +107,9 @@
 
             <div class="v-offer">
                 <div class="v-text">
-                    <span class="v-number font-second">{{numberCandidates}}</span><span class="font-md font-grey4"> <span *ngIf="numberCandidates == 1">candidato</span><span *ngIf="numberCandidates > 1 || numberCandidates == 0">candidatos</span></span>
+                    <span class="v-number font-second">{{numberCandidates}}</span><span class="font-md font-grey4"> <span *ngIf="numberCandidates == 1">candidato</span>
+                    <span *ngIf="numberCandidates > 1 || numberCandidates == 0">candidatos</span>
+                    </span>
                 </div>
                 <div class="v-imgs-confirm">
                     <div *ngFor="let candidate of candidates">
@@ -124,12 +131,15 @@
         </div>
 
         <div class="btnFooter" *ngIf="state == 0 && volDetails.active == 1 && volCreator != userId">
-            <button class="btnOffer" ion-button color="secondary" no-margin full mode="ios" (tap)="applyConfirmAlert(volDetails.id_vol)" *ngIf="volDetails.active == 1 && state == 0">Candidatar</button>
+            <button class="btnOffer" ion-button color="secondary" no-margin full mode="ios" (tap)="applyConfirmAlert(volDetails.id_vol)"
+                *ngIf="volDetails.active == 1 && state == 0">Candidatar</button>
         </div>
 
         <div class="btnFooterNoFixed" *ngIf="(state == 1 || state == 2 || state == 4) && (volCreator != userId)" margin-top>
-            <button class="btnOffer" ion-button color="grey3" no-margin full mode="ios" (tap)="applyCancelarAlert(volDetails.id_vol)" *ngIf="volDetails.active== 1 && state == 1">Cancelar candidatura</button>
-            <button class="btnOffer" ion-button color="grey3" no-margin full mode="ios" (tap)="applyCancelarAlert(volDetails.id_vol)" *ngIf="volDetails.active== 1 && state == 2">Cancelar candidatura</button>
+            <button class="btnOffer" ion-button color="grey3" no-margin full mode="ios" (tap)="applyCancelarAlert(volDetails.id_vol)"
+                *ngIf="volDetails.active== 1 && state == 1">Cancelar candidatura</button>
+            <button class="btnOffer" ion-button color="grey3" no-margin full mode="ios" (tap)="applyCancelarAlert(volDetails.id_vol)"
+                *ngIf="volDetails.active== 1 && state == 2">Cancelar candidatura</button>
             <div class="actionEnd" *ngIf="volDetails.active== 1 && state == 4">Candidatura regeitada</div>
         </div>
 
@@ -141,7 +151,7 @@
         <ion-list no-lines no-margin margin-bottom>
             <ion-item (tap)="openModalNewDiscussion()">
                 <ion-avatar item-left>
-                    <img src="./assets/imgs/avatar5.png">
+                    <img [src]="user?.photo">
                 </ion-avatar>
                 <h2 ion-text color="grey4" class="font-md2">Escreva algo...</h2>
             </ion-item>
@@ -150,7 +160,7 @@
         <ion-card class="cardVolum fixCard" no-margin margin-bottom *ngFor="let comment of comments">
             <ion-item>
                 <ion-avatar item-left>
-                     <img [src]="comment?.photo_url">
+                    <img [src]="comment?.photo_url">
                 </ion-avatar>
                 <p ion-text color="primary" class="font-md bold">{{comment?.name}}</p>
                 <p ion-text color="grey3" class="marginTopNeg font-sm">{{comment?.date | amTimeAgo:true}}</p>

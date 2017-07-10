@@ -11,7 +11,7 @@
     </ion-navbar>
 </ion-header>
 
-<ion-content scrollDownOnLoad>
+<ion-content>
     <ion-grid>
         <ion-row *ngFor="let message of messages">
             <!--   <ion-col col-2>
@@ -20,11 +20,13 @@
                 </div>
             </ion-col> -->
 
-            <ion-col col-10 [class.colLeft]="message.from_id != id_user">
+            <ion-col col-12 [class.colLeft]="message.from_id != id_user" (tap)="message.toggle = !message.toggle">
                 <div [class.chatMessageLeft]="message.from_id != id_user" [class.chatMessageRight]="message.from_id == id_user">
                     <div [class.chatMessageTextLeft]="message.from_id != id_user" [class.chatMessageText]="message.from_id == id_user">
-                        {{message.message}}
+                        <span>    {{message.message}}</span>
+
                     </div>
+                    <span class="date-message" *ngIf="message.toggle"> {{message.date | amTimeAgo:'true'}}</span>
                 </div>
             </ion-col>
 
@@ -35,8 +37,8 @@
 <ion-footer>
     <ion-toolbar color="light">
 
-        <textarea spellcheck="true" autoComplete="true" autocorrect="true" rows="1" fz-elastic
-            class="chat-input" [(ngModel)]="message" placeholder="Escreva um mensagem..." >
+        <textarea spellcheck="true" autoComplete="true" autocorrect="true" rows="1" fz-elastic class="chat-input" [(ngModel)]="message"
+            placeholder="Escreva um mensagem...">
 		</textarea>
 
         <ion-buttons right class="send-message">

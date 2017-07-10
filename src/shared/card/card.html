@@ -1,11 +1,11 @@
 <ion-card class="cardVolum" no-margin margin-bottom margin-top>
 
     <!-- CARD HEADER -->
-    <ion-item class="cardHeader">
+    <ion-item class="cardHeader" (tap)="goProfile(userCreator)">
         <ion-avatar item-left>
             <img src="{{avatar}}">
         </ion-avatar>
-        <p class="font-md bold font-primary" (tap)="goProfile(userCreator)">{{username}}</p>
+        <p class="font-md bold font-primary">{{username}}</p>
         <p ion-text color="grey3" class="marginTopNeg font-sm">{{dateCreation | amTimeAgo:'true'}}</p>
         <button ion-button clear item-right icon-only color="grey3" (click)="openMenus($event, userCreator, id_vol)">
             <ion-icon name="more"></ion-icon>
@@ -16,14 +16,13 @@
     <ion-card-content class="cardContent" (tap)="goDetails(id_vol, name)" no-padding>
 
 
-       
-        <img [src]="photos[0]" *ngIf="photos.length == 1"/>
+        <img [src]="photos[0]" *ngIf="photos.length == 1" />
 
 
         <!-- MAIS QUE UM IMAGEM -->
         <ion-slides pager color="blue" class="slidecard" *ngIf="photos.length > 1">
             <ion-slide class="cardSlide" *ngFor="let photo of photos">
-                <img [src]="photo"/>
+                <img [src]="photo" />
             </ion-slide>
         </ion-slides>
 
@@ -41,42 +40,41 @@
             <span *ngIf="likeState==1 && likes<2">gostas disto.</span>
             <span *ngIf="likeState==1 && likes>=2">e mais</span>
             <span *ngIf="likeState==1 && likes>=2">{{likes-1}} pessoa<span *ngIf="likes>2">s</span> gostam disto.</span>
-            <span *ngIf="likeState==0 && likes>=1">{{likes}} pessoa<span *ngIf="likes>=2">s</span> gosta<span *ngIf="likes>=2">m</span> disto. 
+            <span *ngIf="likeState==0 && likes>=1">{{likes}} pessoa<span *ngIf="likes>=2">s</span> gosta<span *ngIf="likes>=2">m</span>            disto.
             </span>
             <span *ngIf="likeState==0 && !likes">Sê o primeiro a gostar disto!</span>
         </div>
         <div class="col-card-last col-num-shares">
-            2 partilhas
         </div>
     </div>
 
     <!-- CARD ACTIONS -->
     <div class="row-card">
         <div class="col-card btnLike">
-            <button *ngIf="likeState==0" ion-button icon-left clear small no-padding color="grey3" (tap)="like(id_vol)">
-                <ion-icon name="heart"></ion-icon>
+            <button *ngIf="likeState==0" ion-button icon-left clear small no-padding color="grey3" (tap)="like(id_vol)" mode="ios">
+                <ion-icon name="heart"  mode="ios"></ion-icon>
                 <div>Gosto</div>
             </button>
-             <button *ngIf="likeState==1" ion-button icon-left clear small no-padding color="grey3" class="liked" (tap)="dislike(id_vol)">
-                <ion-icon name="heart"></ion-icon>
+            <button *ngIf="likeState==1" ion-button icon-left clear small no-padding color="grey3" class="liked" (tap)="dislike(id_vol)"
+                mode="ios">
+                <ion-icon name="heart"  mode="ios"></ion-icon>
                 <div>Gosto</div>
             </button>
         </div>
-    
+
         <div class="col-card-middle">
-            <button ion-button icon-left clear small no-padding color="grey3" (tap)="openComments(1)">
-                <ion-icon name="bookmark"></ion-icon>
-                <div>Marcar</div>
+            <button ion-button icon-left clear small no-padding color="grey3" (tap)="openComments(id_vol)" mode="ios">
+                <ion-icon name="text"  mode="ios"></ion-icon>
+                <div>Comentar</div>
             </button>
         </div>
 
         <div class="col-card btnShare">
-            <button ion-button icon-left clear small no-padding color="grey3" (tap)="openShare()">
-                <ion-icon name="share-alt" class="colorShare"></ion-icon>
+            <button ion-button icon-left clear small no-padding color="grey3" (tap)="share()" mode="ios"> 
+                <ion-icon name="share-alt" class="colorShare"  mode="ios"></ion-icon>
                 <div>Partilhar</div>
             </button>
         </div>
     </div>
 
 </ion-card>
-

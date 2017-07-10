@@ -5,20 +5,20 @@
 
 <ion-content padding-top class="backgroundBlue">
     <ion-list class="listRegister" no-lines>
-        <ion-item *ngIf="type == 0">
+        <ion-item *ngIf="type == 1">
             <h1 text-wrap>Qual é o seu nome?</h1>
         </ion-item>
-        <ion-item *ngIf="type == 1">
+        <ion-item *ngIf="type == 2">
             <h1 text-wrap>Qual é o nome da instituição?</h1>
         </ion-item>
         <form [formGroup]="registo1" (ngSubmit)="onSubmit(registo1.value, registo1.valid)">
             <ion-item padding-top>
-                <ion-label stacked mode="ios"><span *ngIf="type == 1">NOME DA INSTITUIÇÃO</span><span *ngIf="type == 0">NOME</span></ion-label>
-                <ion-input maxlength="50" type="text" formControlName="name" (blur)="validate(0)"></ion-input>
+                <ion-label stacked mode="ios"><span *ngIf="type == 2">NOME DA INSTITUIÇÃO</span><span *ngIf="type == 1">NOME</span></ion-label>
+                <ion-input maxlength="50" type="text" formControlName="name" (blur)="validate(1)"></ion-input>
             </ion-item>
-            <ion-item padding-top padding-bottom *ngIf="type == 0">
+            <ion-item padding-top padding-bottom *ngIf="type == 1">
                 <ion-label stacked mode="ios">SOBRENOME</ion-label>
-                <ion-input maxlength="50" type="text" formControlName="surname" (blur)="validate(1)"></ion-input>
+                <ion-input maxlength="50" type="text" formControlName="surname" (blur)="validate(2)"></ion-input>
             </ion-item>
             <ion-item padding-top>
                 <button ion-fab color="light" item-right no-margin [disabled]="!registo1.valid" mode="ios" type="submit"><ion-icon name="arrow-forward"></ion-icon></button>

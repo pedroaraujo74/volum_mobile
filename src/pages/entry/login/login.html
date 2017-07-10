@@ -1,12 +1,12 @@
 <ion-header no-border>
-  <ion-navbar transparent color="primary">
-  </ion-navbar>
+    <ion-navbar transparent color="primary">
+    </ion-navbar>
 </ion-header>
 
 <ion-content padding-top class="backgroundBlue">
     <ion-list class="listRegister" no-lines>
         <ion-item>
-           <h1 color="light">Entrar</h1>
+            <h1 color="light">Entrar</h1>
         </ion-item>
         <form [formGroup]="login" (ngSubmit)="onSubmit(login.value, login.valid)">
             <ion-item padding-top>
@@ -22,4 +22,4 @@
             </ion-item>
         </form>
     </ion-list>
-</ion-content>   
+</ion-content>

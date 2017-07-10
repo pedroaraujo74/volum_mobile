@@ -6,60 +6,94 @@ import { IonicPage, NavParams, PopoverController, LoadingController } from 'ioni
 @Component({
     selector: 'page-feed',
     templateUrl: 'feed.html',
-    providers: [FeedService]
 })
+
 export class Feed {
 
+    public sum: number = 0;
     public vols = [];
     public showFeed: boolean = false;
 
-    constructor(public navParams: NavParams,  public popoverCtrl: PopoverController, private feedService: FeedService, public loadingCtrl: LoadingController) {
-       
-        
+    constructor(public navParams: NavParams, public popoverCtrl: PopoverController, private feedService: FeedService, public loadingCtrl: LoadingController) {
         // GET FEED
-       
     }
+
 
     ionViewDidLoad() {
         this.showFeed = false;
-        this.loadFeed();      
+        this.loadFeed(true, 2, 0);
+        this.sum = 2;
     }
 
-    loadFeed(){
-        let loading = this.loadingCtrl.create({
-            content: 'Loading...'
-        });
-        loading.present();
-        this.feedService.getVols().then(res => {
-            this.vols = res.vols;
-            for (let i = 0; i < this.vols.length; i++) {
-                this.feedService.countLikes(this.vols[i].vol.id_vol)
-                    .then(res => {
-                    this.vols[i].vol.likes = res.likes;
-                })
-                this.feedService.checkLike(this.vols[i].vol.id_vol)
-                    .then(res => {
-                    this.vols[i].vol.likeState = parseInt(res.state);
-                    if(i == (this.vols.length-1)){
-                        loading.dismiss();
-                        this.showFeed = true;
-                    }
-                }).catch(err =>{
-                    console.log("ERRRO CHECK",err);
-                    loading.dismiss();
-                });
-            }        
+    doRefresh(refresher) {
+        this.sum = 0;
+
+
+        this.loadFeed(true, 2, 0).then(res => {
+
+            refresher.complete();
+            console.log("end")
         })
-        .catch(err => console.log(err));
+
+    }
+
+    doInfinite(infiniteScroll) {
+        console.log('Begin async operation');
+
+
+        this.loadFeed(false, 2, this.sum + 2).then(res => {
+            this.sum = this.sum + 2;
+
+            infiniteScroll.complete();
+            console.log("end")
+        })
+
+
+    }
+
+    loadFeed(replace, amount, startAt) {
+
+        return this.feedService.getVols(amount, startAt).then(res => {
+            if (replace) {
+                this.vols = res.vols;
+
+            } else {
+                this.vols = this.vols.concat(res.vols);
+
+            }
+
+            for (let i = 0; i < res.vols.length; i++) {
+                let index = this.vols.findIndex(x => x.vol.id_vol == res.vols[i].vol.id_vol);
+                console.log("index", index)
+
+                this.feedService.countLikes(this.vols[index].vol.id_vol)
+                    .then(res => {
+                        this.vols[index].vol.likes = res.likes;
+                    })
+                this.feedService.checkLike(this.vols[index].vol.id_vol)
+                    .then(res => {
+                        this.vols[index].vol.likeState = parseInt(res.state);
+
+                    }).catch(err => {
+                        console.log("ERRRO CHECK", err);
+                    });
+            }
+
+        })
+            .catch(err => console.log(err));
     }
 
 
+
+    /*
+    
+                */
     //POPOVER HEADER
-    openMenus(ev){
+    openMenus(ev) {
         let popover = this.popoverCtrl.create("Popover", { typePopOver: '0' });
         popover.present({
-              ev: ev
-          });
+            ev: ev
+        });
     }
 
 }

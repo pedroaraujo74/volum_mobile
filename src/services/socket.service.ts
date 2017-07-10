@@ -15,7 +15,26 @@ export class SocketService {
     private socket;
     constructor() {
         this.socket = io(this.url);
+    }
 
+
+    onConnect(id_user) {
+        this.socket.emit("user", id_user);
+    }
+
+
+    onNotification() {
+        let observable = new Observable(observer => {
+
+            this.socket.on('notification', (data) => {
+                observer.next(data);
+            });
+            return () => {
+                this.socket.disconnect();
+            };
+        })
+
+        return observable;
     }
 
     onMessage() {

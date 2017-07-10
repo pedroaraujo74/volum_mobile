@@ -13,17 +13,25 @@
 
 <!-- UTILIZAR COMPONENT USER!!!! -->
 <ion-content class="content-background">
-    <ion-list no-lines no-border margin-top>
-        <button ion-item class="fixAvatar" mode="md" (tap)="goMessage(conversation.id_conversation, conversation.name, conversation.photo_url)" (press)="openSettings(conversation.id_conversation)" *ngFor="let conversation of conversations">
+    <ion-list no-lines no-border margin-top *ngIf="ready">
+        <ng-container *ngFor="let conversation of conversations">
+            <button ion-item class="fixAvatar" mode="md" (tap)="goMessage(conversation.id_conversation, conversation.name, conversation.photo_url)"
+                (press)="openSettings(conversation.id_conversation)" *ngIf="conversation.message">
             <ion-avatar item-left>
                 <img [src]="conversation?.photo_url">
             </ion-avatar>
             <p text-wrap><span class="bold font-grey4">{{conversation?.name}}</span></p>
-            <p class="font-sm font-grey4 bold"><span>{{conversation?.message}}</span></p>
+            <p class="font-sm font-grey4 "><span>{{conversation?.message}}</span></p>
             <ion-note item-right>
                 <p class="font-grey4 font-sm bold">{{conversation?.date | date}} </p>
             </ion-note>
         </button>
+        </ng-container>
+        <div class="text-center">
+            <span class="font-grey-4" *ngIf="conversations && conversations.length == 0"> Sem Conversas </span>
+
+        </div>
 
     </ion-list>
+
 </ion-content>

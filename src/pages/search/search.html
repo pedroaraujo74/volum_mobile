@@ -13,37 +13,14 @@
 
 <ion-content class="content-background" padding-top>
 
-    <!-- INSTITUIÇÕES 
-    <span *ngIf="elements!=0">
-        <ion-list no-lines no-border no-shadow *ngIf="elements.type==2">
-            <ion-item class="font-md bold font-grey4 border-bottom">Instituições</ion-item>
-            <users *ngFor="let element of elements" [typeUser]="0" [user_id]="element.id" [name]="element.name" [photo]="element.photo_url"></users>
-
-            <button *ngIf="typeUser == 0" ion-item class="fixAvatar">
-                <ion-avatar item-left>
-                    <img [src]="photo">
-                </ion-avatar>
-                <p text-wrap><span class="bold font-grey4">{{name}}</span></p>
-                <p class="font-sm"><span color="grey3">233 ações criadas</span></p>
-            </button>     
-
-        </ion-list>
-    </span>
-    -->
-
-
-    <!--
     <ion-list no-lines no-border no-shadow>
-        <ion-item class="font-md bold font-grey4 border-bottom">Voluntários</ion-item>
-        <users [typeUser]="1"></users>     
-        <button ion-item mode="md" text-center class="border-top">
-            <p class="font-grey3 font-md">Ver mais<ion-icon name="ios-arrow-forward" class="iconViewAll"></ion-icon></p>
-        </button>
+        <ion-item class="font-md bold font-grey4 border-bottom" *ngIf="elements.length > 0">Resultados</ion-item>
+        <users *ngFor="let element of elements" [typeUser]="0" [user_id]="element.id" [name]="element.name" [photo]="element.photo_url"
+            (tap)="visit(element.id, element.name, element.type)"></users>
+
+
     </ion-list>
 
-    <ion-list no-lines no-border no-shadow>
-        <ion-item class="font-md bold font-grey4 border-bottom">Ações</ion-item>
-        <cardList></cardList>
-    </ion-list>
-    -->
+
+
 </ion-content>

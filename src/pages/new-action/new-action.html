@@ -1,0 +1,100 @@
+<ion-header no-border>
+  <ion-navbar color="primary">
+    <ion-title>
+        Nova ação
+    </ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only color="light" (click)="openMenusHeader($event)">
+            <ion-icon name="more"></ion-icon>
+        </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content class="content-background" padding-top>
+    <ion-list no-lines no-border>
+        <ion-item>
+            <ion-label fixed color="grey3" class="font-md2">Titulo</ion-label>
+            <ion-input type="text" class="inputColor font-md2"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label fixed color="grey3" class="font-md2">Descrição</ion-label>
+            <ion-textarea type="text" class="inputColor font-md2"></ion-textarea>
+        </ion-item>
+    </ion-list>
+
+    <ion-list no-lines>
+         <button ion-item (tap)="openModalLocation()">
+            <span class="font-grey3 font-md2">Localização</span>
+        </button>
+        <button ion-item (tap)="openModalCategory()">
+            <span class="font-grey3 font-md2">Categoria</span>
+        </button>
+        <ion-item>
+            <ion-label color="grey3" class="font-md2">Seguro</ion-label>
+            <ion-toggle checked="false"></ion-toggle>
+        </ion-item>
+        <ion-item>
+            <ion-label color="grey3" class="font-md2">Os convidados podem convidar</ion-label>
+            <ion-toggle checked="false"></ion-toggle>
+        </ion-item>
+    </ion-list>
+
+    <ion-list no-lines class="listLoadPicture">
+         <button ion-item>
+            <span class="font-grey3 font-md2">Carregar foto(s)</span>
+        </button>
+    </ion-list>
+    <!--
+    <ion-slides pager color="blue" class="newAction-Slide">
+        <ion-slide>
+            <img src="./assets/imgs/lel.png" />
+        </ion-slide>
+
+        <ion-slide>
+            <img src="./assets/imgs/lelel.jpg" />
+        </ion-slide>
+
+        <ion-slide>
+            <img src="./assets/imgs/lel.png" />
+        </ion-slide>
+    </ion-slides>       
+    -->
+
+    <ion-list no-lines class="marginList">
+        <ion-item>
+            <ion-label color="grey3" class="font-md2">Data de início</ion-label>
+            <ion-datetime displayFormat="MMM DD YYYY" class="inputColor"></ion-datetime>
+        </ion-item>
+        <ion-item>
+            <ion-label color="grey3" class="font-md2">Data de fim</ion-label>
+            <ion-datetime displayFormat="MMM DD YYYY" class="inputColor"></ion-datetime>
+        </ion-item>
+    </ion-list>
+
+    <ion-list no-lines>
+        <ion-item>
+            <ion-label color="grey3" class="font-md2">Hora de início</ion-label>
+            <ion-datetime displayFormat="H:mm" pickerFormat="H mm" class="inputColor"></ion-datetime>
+        </ion-item>
+        <ion-item>
+            <ion-label color="grey3" class="font-md2">Hora de fim</ion-label>
+            <ion-datetime displayFormat="H:mm" pickerFormat="H mm" class="inputColor"></ion-datetime>
+        </ion-item>
+        <ion-item>
+            <ion-label color="grey3" class="font-md2">Horas diárias</ion-label>
+            <ion-datetime displayFormat="H:mm" pickerFormat="H mm" class="inputColor"></ion-datetime>
+        </ion-item>
+    </ion-list>  
+
+</ion-content>
+
+<!--
+<ion-footer no-border>
+    <ion-toolbar color="light" padding>
+        <button class="btnNewAction" ion-button color="secondary"  no-margin full mode="ios" disabled>Criar ação</button>
+    </ion-toolbar>
+</ion-footer>
+-->

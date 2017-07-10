@@ -7,12 +7,12 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class FeedService {
 
-    constructor(public httpClient : HttpClient) {
+    constructor(public httpClient: HttpClient) {
 
     }
 
-    getVols() {
-        return this.httpClient.get(`${GlobalConstants.API_ENDPOINT}/vols`, { amount: 100, startAt: 0}).toPromise()
+    getVols(amount, startAt) {
+        return this.httpClient.get(`${GlobalConstants.API_ENDPOINT}/vols`, { amount: amount, startAt: startAt }).toPromise()
             .then(res => {
                 return res.json();
             })
@@ -23,16 +23,16 @@ export class FeedService {
 
     // COUNT LIKES
     countLikes(id_vol) {
-        return this.httpClient.get(`${GlobalConstants.API_ENDPOINT}/vols/`+ id_vol + `/likes/count`).toPromise()
-        .then(res => { return res.json() })
-        .catch(error => console.log(error));
+        return this.httpClient.get(`${GlobalConstants.API_ENDPOINT}/vols/` + id_vol + `/likes/count`).toPromise()
+            .then(res => { return res.json() })
+            .catch(error => console.log(error));
     }
 
     // CHECK LIKE
     checkLike(id_vol) {
-        return this.httpClient.get(`${GlobalConstants.API_ENDPOINT}/vols/`+ id_vol + `/checkLike`).toPromise()
-        .then(res => { return res.json() })
-        .catch(error => console.log(error));
+        return this.httpClient.get(`${GlobalConstants.API_ENDPOINT}/vols/` + id_vol + `/checkLike`).toPromise()
+            .then(res => { return res.json() })
+            .catch(error => console.log(error));
     }
-    
+
 }

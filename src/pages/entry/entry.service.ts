@@ -22,12 +22,17 @@ export class EntryService {
             .catch(error => console.log(error));
     }
 
-    registerUser(email, birth_date, name, gender, type, password) {
-        let body = {email: email, birth_date: birth_date, name: name, gender: gender, type: type, password: password}
+    registerUser(email, birth_date, name, gender, type, password, photo_url) {
+        let body = { email: email, birth_date: birth_date, name: name, gender: gender, type: type, password: password, photo_url: photo_url }
         return this.http.post(`${GlobalConstants.API_ENDPOINT}/auth/register`, body).toPromise()
+            .then(res => { return res.json() })
+            .catch(error => console.log(error.json()));
+    }
+    registerSocialUser(email, birth_date, name, gender, type, photo_url) {
+        let body = { email: email, birth_date: birth_date, name: name, gender: gender, type: type, photo_url: photo_url }
+        return this.http.post(`${GlobalConstants.API_ENDPOINT}/auth/social-register`, body).toPromise()
             .then(res => { return res.json() })
             .catch(error => console.log(error));
     }
 
-    
 }

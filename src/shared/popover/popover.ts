@@ -55,9 +55,10 @@ export class Popover {
     }
 
     logout() {
+        this.auth.logout();
+
         this.viewCtrl.dismiss().then(() => {
             this.app.getRootNav().push("Entry");
-            this.auth.logout();
         })
     }
 

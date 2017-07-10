@@ -65,16 +65,19 @@ export class Register6 {
                 this.categoryChecked.push(this.categories[i].id_category);
             }
         }
-        if (this.type == 0) {
-            this.entryService.registerUser(this.email, new Date(this.birthday), this.name, this.gender, this.type, this.password).then((res: any) => {
-                this.navCtrl.push("Register7");
-            })
+
+        this.entryService.registerUser(this.email, new Date(this.birthday), this.name, 0, this.type, this.password, null).then((res: any) => {
+            if (res.success) {
+                this.navCtrl.push("Register7", { email: this.email, password: this.password })
+
+            } else {
+                console.log(res)
+            }
+        })
             .catch(err => {
                 console.log("ERRO")
             });
-        }
-        else {
-        }
+
         this.categoryChecked = [];
     }
 

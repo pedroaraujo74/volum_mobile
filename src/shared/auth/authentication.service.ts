@@ -47,7 +47,7 @@ export class AuthenticationService {
     login(loginInfo) {
         return this.http.post(`${GlobalConstants.API_ENDPOINT}/auth/login`, loginInfo).toPromise()
             .then(res => {
-                this.storeUserCredentials(res.json().id_token);
+                this.storeUserCredentials(res.json().id_token, res.json().id_user);
                 this.storage.set("USER_ID", res.json().id_user);
                 return res.json();
             })
@@ -58,6 +58,7 @@ export class AuthenticationService {
     }
     logout() {
         this.destroyUserCredentials();
+
     }
     register(value) {
         return this.http.post(`${GlobalConstants.API_ENDPOINT}/auth/register`, value).toPromise()
@@ -95,7 +96,8 @@ export class AuthenticationService {
 
     }
 
-    public storeUserCredentials(token: string) {
+    public storeUserCredentials(token: string, id: string) {
+        this.storage.set("USER_ID", id);
         this.storage.set(this.LOCAL_TOKEN_KEY, token);
         this.useCredentials(token);
     }
@@ -112,5 +114,6 @@ export class AuthenticationService {
         this.authenticated = false;
         this.http.removeAuthHeader();
         this.storage.clear();
+        this.userPromise = null;
     }
 }

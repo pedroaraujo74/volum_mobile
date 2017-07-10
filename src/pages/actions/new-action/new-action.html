@@ -13,7 +13,7 @@
 
 
 <ion-content class="content-background" padding-top>
-    <form [formGroup]="newAction">
+    <form [formGroup]="form">
         <ion-list no-lines no-border>
             <ion-item>
                 <ion-label fixed color="grey3" class="font-md2">Titulo</ion-label>
@@ -75,11 +75,11 @@
         <ion-list no-lines class="marginList">
             <ion-item>
                 <ion-label color="grey3" class="font-md2">Data de início</ion-label>
-                <ion-datetime displayFormat="MMM DD YYYY" class="inputColor font-md2" formControlName="dateBegin"></ion-datetime>
+                <ion-datetime displayFormat="MMM DD YYYY" class="inputColor font-md2" formControlName="date_begin"></ion-datetime>
             </ion-item>
             <ion-item>
                 <ion-label color="grey3" class="font-md2">Data de fim</ion-label>
-                <ion-datetime displayFormat="MMM DD YYYY" class="inputColor font-md2" formControlName="dateEnd"></ion-datetime>
+                <ion-datetime displayFormat="MMM DD YYYY" class="inputColor font-md2" formControlName="date_end"></ion-datetime>
             </ion-item>
         </ion-list>
 
@@ -103,6 +103,6 @@
 
 <ion-footer no-border>
     <ion-toolbar color="light" padding>
-        <button class="btnNewAction" ion-button color="secondary"  no-margin full mode="ios" (tap)="teste()">Criar ação</button>
+        <button class="btnNewAction" ion-button color="secondary"  no-margin full mode="ios" (tap)="onSubmit(form)">Criar ação</button>
     </ion-toolbar>
 </ion-footer>

@@ -22,8 +22,8 @@ export class NewActionsService {
 
     getCategories() {
         return this.httpClient.get(`${GlobalConstants.API_ENDPOINT}/vols/list/categories`).toPromise()
-        .then(res => { return res.json() })
-        .catch(error => console.log(error));
+            .then(res => { return res.json() })
+            .catch(error => console.log(error));
     }
 
     search(term) {
@@ -37,5 +37,14 @@ export class NewActionsService {
             .get(url, { params })
             .map(response => array = response.json().results);
     }
+
+
+    newAction(body) {
+        return this.httpClient.post(`${GlobalConstants.API_ENDPOINT}/vols/`, body).toPromise()
+            .then(res => { return res.json() })
+            .catch(error => { return error.json() });
+    }
+
+
 
 }

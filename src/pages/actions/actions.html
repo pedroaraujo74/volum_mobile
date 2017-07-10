@@ -16,9 +16,7 @@
         <ion-segment-button value="myActions" color="white">
             Minhas ações
         </ion-segment-button>
-        <ion-segment-button value="invites" color="white">
-            Convites
-        </ion-segment-button>
+
     </ion-segment>
 </ion-header>
 
@@ -29,15 +27,15 @@
     <div *ngSwitchCase="'nextActions'">
         <ion-list no-lines no-border margin-top *ngIf="my_confirmeds">
             <ion-item class="font-md bold font-grey4 border-bottom">Ações próximas</ion-item>
-            <cardList *ngFor="let vol of my_confirmeds" [name]="vol.name" [photo]="vol.photos[0]" [date]="vol.date_begin"></cardList>
+            <cardList *ngFor="let vol of my_confirmeds" [name]="vol.name" [photo]="vol.photos[0]" [date]="vol.date_begin" [creator]="vol.user_creator.name"
+                (tap)="visit(vol.id_vol)"></cardList>
         </ion-list>
 
         <ion-list no-lines no-border *ngIf="my_applies">
             <ion-item class="font-md bold font-grey4 border-bottom">Ações a aguardar confirmação</ion-item>
-            <cardList *ngFor="let vol of my_applies" [name]="vol.name" [photo]="vol.photos[0]" [date]="vol.date_begin"></cardList>
-            <button ion-item mode="md" text-center class="border-top">
-                <p class="font-grey3 font-md">Ver tudo<ion-icon name="ios-arrow-forward" class="iconViewAll"></ion-icon></p>
-            </button>
+            <cardList *ngFor="let vol of my_applies" [name]="vol.name" [photo]="vol.photos[0]" [date]="vol.date_begin" [creator]="vol.user_creator.name"
+                (tap)="visit(vol.id_vol)"></cardList>
+
         </ion-list>
     </div>
     <!-- NEXT ACTIONS -->
@@ -46,11 +44,12 @@
     <div *ngSwitchCase="'myActions'">
         <ion-list no-lines no-border margin-top>
             <ion-item class="font-md bold font-grey4 border-bottom">Ações ativas</ion-item>
-            <cardList></cardList>
+            <cardList *ngFor="let vol of actions" [name]="vol.name" [photo]="vol.photos[0]" [date]="vol.date_begin" (tap)="visit(vol.id_vol)"></cardList>
             <button ion-item mode="md" text-center class="border-top">
                 <p class="font-grey3 font-md">Ver tudo<ion-icon name="ios-arrow-forward" class="iconViewAll"></ion-icon></p>
             </button>
         </ion-list>
+        <!-- PREGUIÇA - NAO VALE A PENA POR SO PARA APRESENTAR
 
         <ion-list no-lines no-border margin-top>
             <ion-item class="font-md bold font-grey4 border-bottom">Ações passadas que criaste</ion-item>
@@ -67,13 +66,13 @@
                 <p class="font-grey3 font-md">Ver tudo<ion-icon name="ios-arrow-forward" class="iconViewAll"></ion-icon></p>
             </button>
         </ion-list>
+
+        -->
     </div>
     <!-- MINE -->
 
     <!-- INVITES -->
-    <div *ngSwitchCase="'invites'">
-        <invite></invite>
-    </div>
+
     <!-- INVITES -->
 
     <ion-fab right bottom>

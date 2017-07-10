@@ -13,7 +13,7 @@ import { Camera, CameraOptions } from "@ionic-native/camera";
 })
 export class NewAction {
 
-    public newAction: FormGroup;
+    public form: FormGroup;
 
     // CATEGORY
     public categorySelectedChecked: boolean = false;
@@ -26,32 +26,34 @@ export class NewAction {
     public locationLng: any;
     public locationName = {};
     public address: any;
-    
+
     // GALLERY
-    public base64Image : any;
+    public base64Image: any;
     public imageSrc: string;
 
     //DISABLE GALLERY
-    public disableGallery : boolean = true;
+    public disableGallery: boolean = true;
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController, public modalController: ModalController, public _fb: FormBuilder, public newActionsService: NewActionsService, public camera : Camera, public platform : Platform) {
-        
-        if (this.platform.is('ios')  || this.platform.is('android') || this.platform.is('windows')) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController, public modalController: ModalController, public _fb: FormBuilder, public newActionsService: NewActionsService, public camera: Camera, public platform: Platform) {
+
+        if (this.platform.is('ios') || this.platform.is('android') || this.platform.is('windows')) {
             this.disableGallery = false;
         }
 
-        this.newAction = this._fb.group({
+        this.form = this._fb.group({
             name: ['', [Validators.required, Validators.minLength(3)]],
             description: ['', [Validators.required, Validators.minLength(3)]],
-            insurance:[true],
-            publicAction:[true],
-            acceptCandidates:[true],
-            publicComments:[true],
-            dateBegin:['',[Validators.required]],
-            dateEnd:[],
-            timeBegin:['',[Validators.required]],
-            timeEnd:[],  
-            dailyHours:[]
+            insurance: [true],
+            category: [],
+            publicAction: [true],
+            photos: [[]],
+            acceptCandidates: [true],
+            publicComments: [true],
+            date_begin: ['', [Validators.required]],
+            date_end: [],
+            timeBegin: ['', [Validators.required]],
+            timeEnd: [],
+            dailyHours: []
         });
 
     }
@@ -112,7 +114,7 @@ export class NewAction {
     }
 
     // CHOOSE PHOTOS
-    choosePhotos(){
+    choosePhotos() {
         let cameraOptions: CameraOptions = {
             sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
             quality: 100,
@@ -123,23 +125,31 @@ export class NewAction {
         this.camera.getPicture(cameraOptions)
             .then(file_uri => {
                 this.imageSrc = 'data:image/jpeg;base64,' + file_uri;
-                console.log("FOTO",  this.imageSrc);
-            }); 
+             
+            });
     }
 
 
+    onSubmit(form: any) {
+
+        console.log(this.categoryCheckedId);
+        console.log(this.categorySelectedChecked);
+        form.value.category = this.categoryCheckedId;
+
+        console.log('you submitted value:', form.value);
+        form.value.photos = [this.imageSrc]
+
+        console.log("VALUE", form.value);
+        this.newActionsService.newAction(form.value).then(res => {
+            console.log(res);
+  this.navCtrl.push("Tabs");
+            if (res.success) {
+            } else {
 
 
-    /*
-    chooseImages(){
-        Camera.getPicture({
-      sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM,
-      destinationType: Camera.DestinationType.DATA_URL
-    }).then((imageData) => {
-        this.base64Image = 'data:image/jpeg;base64,'+imageData;
-    }, (err) => {
-        console.log(err);
-    });
+            }
+        }).catch(error => console.log(error))
     }
-    */
+
+
 }

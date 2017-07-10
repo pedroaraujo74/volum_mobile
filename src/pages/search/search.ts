@@ -23,50 +23,62 @@ export class Search {
 
     public search_query: any;
     public searchResult: any;
-    public elements: any;
+    public elements = []
 
     public searchInput = new FormControl('')
 
-    constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController, public searchService : SearchService) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController, public searchService: SearchService) {
     }
 
     ionViewDidLoad() {
+
         this.searchInput.valueChanges.filter((term) => {
             if (term) {
                 this.showSpinner = true
                 this.isError = false;
                 return term
-            } 
+            }
             else {
                 this.elements = [];
                 this.showSpinner = false;
             }
         })
-        .debounceTime(500)
-        .switchMap(term => this.searchService.search(term))
-        .do(() => this.showSpinner = false)
-        .subscribe(
-        results => {
-            console.log(results);
-            this.searchResult = results;
-            if (this.searchResult.success==true) {
-                this.elements = this.searchResult.message;
-            } 
-            else {
-                this.elements = 0;
-            }
-        },
-        err => console.log(err)
-      )
+            .debounceTime(500)
+            .switchMap(term => this.searchService.search(term))
+            .do(() => this.showSpinner = false)
+            .subscribe(
+            results => {
+                console.log(results);
+                this.searchResult = results;
+                if (this.searchResult.success == true) {
+                    this.elements = this.searchResult.message;
+                }
+                else {
+                    this.elements = []
+                }
+            },
+            err => console.log(err)
+            )
     }
 
 
-  //POPOVER HEADER
-  openMenusHeader(ev){
-      let popover = this.popoverCtrl.create("Popover", { typePopOver: '0', userId: '1'});
-      popover.present({
-          ev: ev
-      });
-  }
+    visit(id, name, type) {
+        if (type == 2) {
+
+            this.navCtrl.push("Profile", { id_user: id });
+
+        } else {
+            this.navCtrl.push("CardDetails", { volId: id, volName: name });
+
+        }
+    }
+
+    //POPOVER HEADER
+    openMenusHeader(ev) {
+        let popover = this.popoverCtrl.create("Popover", { typePopOver: '0', userId: '1' });
+        popover.present({
+            ev: ev
+        });
+    }
 
 }

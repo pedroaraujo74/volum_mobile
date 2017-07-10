@@ -24,7 +24,7 @@ export class CardDetails {
     public photo: any;
 
     // VOL CREATER
-    public volCreator : any;
+    public volCreator: any;
 
     // ADDRESS
     public addressData: any;
@@ -132,6 +132,13 @@ export class CardDetails {
         }
     }
 
+    visit(id) {
+
+        this.navCtrl.push("Profile", { id_user: id });
+
+
+    }
+
     getTime(start, end) {
         if (start != null && end != null) {
             this.hora_inicio = start.slice(0, 2);
@@ -199,7 +206,7 @@ export class CardDetails {
                 {
                     text: 'Fechar',
                     cssClass: 'closeAlert',
-                    
+
                     handler: () => {
                         console.log('Disagree clicked');
                     }
@@ -231,10 +238,10 @@ export class CardDetails {
                     text: 'Confirmar',
                     cssClass: 'confirmAlert',
                     handler: () => {
-                        if(this.state == 1){
+                        if (this.state == 1) {
                             this.applyCancel(id_vol);
                         }
-                        else if(this.state == 2){
+                        else if (this.state == 2) {
                             this.applyCancelConfirm(id_vol);
                         }
                     }
@@ -259,7 +266,7 @@ export class CardDetails {
             this.getCandidates(id_vol, 10);
         })
             .catch(err => {
-        });
+            });
     }
 
     // APPLY CANCEL

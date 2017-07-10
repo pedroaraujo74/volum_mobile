@@ -13,6 +13,6 @@ import { Login } from './login';
   ],
   exports: [
     Login
-  ],providers:[HttpClient]
+  ]
 })
 export class LoginModule {}

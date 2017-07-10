@@ -11,8 +11,8 @@ export class VolsService {
 
     }
 
-    getVols() {
-        return this.httpClient.get(`${GlobalConstants.API_ENDPOINT}/vols`, { amount: 100, startAt: 0}).toPromise()
+    getVols(amount, startAt) {
+        return this.httpClient.get(`${GlobalConstants.API_ENDPOINT}/vols`, { amount: amount, startAt: startAt }).toPromise()
             .then(res => {
                 return res.json();
             })
@@ -33,11 +33,39 @@ export class VolsService {
             .catch(error => console.log(error));
     }
 
+    userVolScore(id_user, id_vol) {
+        return this.httpClient.post(`${GlobalConstants.API_ENDPOINT}/users/` + id_user + `/getVolScore`, { id_vol: id_vol }).toPromise()
+            .then(res => { return res.json() })
+            .catch(error => console.log(error));
+    }
+
+    getMessage(idVol) {
+        return this.httpClient.get(`${GlobalConstants.API_ENDPOINT}/vols/` + idVol + '/score/message').toPromise()
+            .then(res => {
+                return res.json();
+            })
+            .catch((error: any) => console.log(error))
+    }
+
+    insertTestimony(body) {
+        return this.httpClient.post(`${GlobalConstants.API_ENDPOINT}/users/score`, body).toPromise()
+            .then(res => { return res.json() })
+            .catch(error => console.log(error));
+    }
+
     getMyApplies() {
         return this.httpClient.get(`${GlobalConstants.API_ENDPOINT}/users/vols/my-applies`).toPromise()
             .then(res => { return res.json() })
             .catch(error => console.log(error));
     }
+
+    listInvites() {
+        return this.http.get(`${GlobalConstants.API_ENDPOINT}/notifications/7`).toPromise()
+            .then(res => { return res.json() })
+            .catch(error => console.log(error));
+    }
+
+
 
     getMyConfirms() {
         return this.httpClient.get(`${GlobalConstants.API_ENDPOINT}/users/vols/confirmed`).toPromise()
@@ -94,27 +122,27 @@ export class VolsService {
     // GET COMMENTS
     getComments(id) {
         return this.httpClient.get(`${GlobalConstants.API_ENDPOINT}/vols/` + id + `/comments`).toPromise()
-        .then(res => { return res.json()})
-        .catch(error => console.log(error));
+            .then(res => { return res.json() })
+            .catch(error => console.log(error));
     }
 
     // SEND COMMENT
     sendComment(message, id_vol) {
-        return this.httpClient.post(`${GlobalConstants.API_ENDPOINT}/vols/` + id_vol + `/comment`, {  message: message}).toPromise()
-        .then(res => { return res.json() })
-        .catch(error => console.log(error));
+        return this.httpClient.post(`${GlobalConstants.API_ENDPOINT}/vols/` + id_vol + `/comment`, { message: message }).toPromise()
+            .then(res => { return res.json() })
+            .catch(error => console.log(error));
     }
 
     // LIKE
     like(id_vol) {
-        return this.httpClient.post(`${GlobalConstants.API_ENDPOINT}/vols/`+ id_vol + `/like`,null).toPromise()
+        return this.httpClient.post(`${GlobalConstants.API_ENDPOINT}/vols/` + id_vol + `/like`, null).toPromise()
             .then(res => { return res.json(); })
             .catch(error => console.log(error));
     }
 
     // DISLIKE
     dislike(id_vol) {
-        return this.httpClient.post(`${GlobalConstants.API_ENDPOINT}/vols/`+ id_vol + `/dislike`,null).toPromise()
+        return this.httpClient.post(`${GlobalConstants.API_ENDPOINT}/vols/` + id_vol + `/dislike`, null).toPromise()
             .then(res => { return res.json() })
             .catch(error => console.log(error));
     }
@@ -128,7 +156,7 @@ export class VolsService {
 
     // APPLY CANCEL
     cancelApply(id_user, id_vol) {
-       return this.httpClient.post(`${GlobalConstants.API_ENDPOINT}/vols/`+id_vol+`/applies/cancel`, {id_user: id_user}).toPromise()
+        return this.httpClient.post(`${GlobalConstants.API_ENDPOINT}/vols/` + id_vol + `/applies/cancel`, { id_user: id_user }).toPromise()
             .then(res => { return res.json() })
             .catch(error => console.log(error));
     }

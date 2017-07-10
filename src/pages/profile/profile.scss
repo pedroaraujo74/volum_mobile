@@ -17,6 +17,18 @@
     object-fit: cover;
 }
 
+.esquerdo{
+        position: absolute;
+    top: 215px;
+    left: 15%;
+}
+
+.direito{
+     position: absolute;
+    top: 215px;
+    right: 15%;
+}
+
 .headerName{
     width: 100%;
     text-align: center;
@@ -30,6 +42,7 @@
 }
 
 .headerScore{
+  
     width: 100%;
     text-align: center;
 }

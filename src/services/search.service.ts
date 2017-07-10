@@ -12,9 +12,13 @@ export class SearchService {
     }
 
     search(query) {
-        return this.httpClient.get(`${GlobalConstants.API_ENDPOINT}/search?search=` + query).toPromise()
+        console.log("quey", query.length)
+
+
+        return this.httpClient.get(`${GlobalConstants.API_ENDPOINT}/search`, { search: query, amount: 100, startAt: 0 }).toPromise()
             .then(res => { return res.json() })
             .catch(error => console.log(error));
-    } 
-    
+
+    }
+
 }

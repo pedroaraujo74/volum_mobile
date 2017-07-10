@@ -1,3 +1,4 @@
+import { AuthenticationService } from './../../shared/auth/authentication.service';
 import { VolsService } from './../../services/vols.service';
 import { UsersService } from './../../services/users.service';
 import { Component } from '@angular/core';
@@ -14,8 +15,10 @@ export class Actions {
   public tabsActions: any;
   public my_applies = [];
   public my_confirmeds = [];
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController, public volsService: VolsService) {
+  public invites = [];
+  public actions = [];
+  public user: any;
+  constructor(public navCtrl: NavController, public auth: AuthenticationService, public navParams: NavParams, public popoverCtrl: PopoverController, public volsService: VolsService) {
     this.tabsActions = "nextActions";
   }
 
@@ -23,6 +26,11 @@ export class Actions {
     console.log('ionViewDidLoad Actions');
     this.getMyApplies();
     this.getMyConfirmed();
+
+    this.auth.userPromise.then(res => {
+      this.user = res.user;
+      this.getActions(this.user.id_user);
+    });
   }
 
   //POPOVER HEADER
@@ -40,26 +48,52 @@ export class Actions {
 
   getMyApplies() {
     this.volsService.getMyApplies().then(res => {
-      
-      if(res){
+
+      if (res) {
         this.my_applies = res.vols;
+        console.log("APPLIES", this.my_applies)
       }
-      else{
+      else {
         console.log("LEL", res)
       }
     })
+
+  }
+
+  getInvites() {
+    this.volsService.listInvites().then(res => {
+
+      if (res) {
+        this.invites = res.vols;
+      }
+      else {
+      }
+    })
+  }
+  visit(id_vol, name) {
+
+    this.navCtrl.push("CardDetails", { volId: id_vol, volName: name });
+
+  }
+
+  getActions(id) {
+    this.volsService.getMyVols(id).then(res => {
+      this.actions = res.vols;
+      console.log("ACTIOS", this.actions);
+
+    });
   }
 
   getMyConfirmed() {
     this.volsService.getMyConfirms().then(res => {
       console.log("a", res)
-       if(res){
-         this.my_confirmeds = res.vols;
+      if (res) {
+        this.my_confirmeds = res.vols;
       }
-      else{
-         console.log("LUL", res)
+      else {
+        console.log("LUL", res)
       }
-     
+
     })
   }
 

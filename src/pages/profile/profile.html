@@ -14,24 +14,31 @@
 
 <ion-content class="content-background" [ngSwitch]="tabsProfile">
     <div class="headerCover">
-        <img [src]="user.photo" />
+        <img [src]="user.cover_photo" />
     </div>
+
+    <div class="esquerdo" *ngIf="scoreReady && active_id != user.id_user">
+        <ion-icon name="person-add" mode="md" style="font-size: 1.7em;" color="primary" (tap)="follow()" *ngIf="state == 0"></ion-icon>
+        <ion-icon name="remove" mode="md" style="font-size: 1.7em;" color="primary" (tap)="unfollow()" *ngIf="state == 1"></ion-icon>
+
+    </div>
+
     <div style="background-color:#FFF">
         <div class="headerPrifilePicture">
             <img [src]="user.photo" />
         </div>
         <div class="headerName">
-            <span class="font-lg bold font-grey4">{{user.username}}</span>
+            <span class="font-lg bold font-grey4">{{user.name}}</span>
         </div>
         <div class="headerLocation">
-            <span class="font-sm font-grey3">Vila Nova de Gaia, Avintes</span>
+            <span class="font-sm font-grey3">{{user?.region}}</span>
+            <span class="font-sm font-grey3" *ngIf="user.region">-</span>
+            <span class="font-sm font-grey3">{{user.country}}</span>
         </div>
         <div class="headerScore">
-            <ion-icon name="star" class="font-md2" color="secondary"></ion-icon>
-            <ion-icon name="star" class="font-md2" color="secondary"></ion-icon>
-            <ion-icon name="star" class="font-md2" color="secondary"></ion-icon>
-            <ion-icon name="star" class="font-md2" color="secondary"></ion-icon>
-            <ion-icon name="star" class="font-md2" color="secondary"></ion-icon>
+            <ion-icon *ngFor="let star of user?.score" name="star" class="font-md2" color="secondary"></ion-icon>
+            <ion-icon *ngFor="let star of user?.negative_score" name="star-outline" class="font-md2" color="secondary"></ion-icon>
+
         </div>
         <ion-grid no-padding class="margin-item">
             <ion-segment [(ngModel)]="tabsProfile" color="primary" mode="md">
@@ -42,26 +49,30 @@
                     Sobre
                 </ion-segment-button>
                 <ion-segment-button value="follows">
-                    Seguidores
+                    A seguir
                 </ion-segment-button>
             </ion-segment>
         </ion-grid>
     </div>
+
+    <div class="direito" *ngIf="scoreReady && active_id != user.id_user">
+        <ion-icon name="mail" mode="md" style="font-size: 1.7em;" color="primary" (tap)="engageConversation()"></ion-icon>
+    </div>
     <div *ngSwitchCase="'actions'">
-        <ion-list no-lines no-border margin-top >
+        <ion-list no-lines no-border margin-top *ngIf="user.type == 1">
             <ion-item class="font-md bold font-grey4 border-bottom">Ações criadas</ion-item>
-            <cardList *ngFor="let vol of my_vols" [name]="vol.name"  [photo]="vol.photos[0]" [date]="vol.date_begin"></cardList>
+            <cardList *ngFor="let vol of my_vols" [name]="vol.name" [photo]="vol.photos[0]" [date]="vol.date_begin" (tap)="visit(vol.id_vol, vol.name)"></cardList>
+            <p class="font-sm bold font-grey4 " *ngIf="my_vols.length == 0" style="padding: 25px">As suas Ações de Voluntariado irão aparecer aqui</p>
         </ion-list>
 
-        <ion-list no-lines no-border margin-top *ngIf="user.type != 1">
-            <ion-item class="font-md bold font-grey4 border-bottom">Ações onde que vai</ion-item>
-            <cardList></cardList>
+        <ion-list no-lines no-border margin-top *ngIf="user.type == 2">
+            <ion-item class="font-md bold font-grey4 border-bottom">Ações</ion-item>
+            <cardList *ngFor="let vol of all_vols" [name]="vol.vol.name" [photo]="vol.vol.photos[0]" [date]="vol.vol.date_begin" [creator]="vol.user.name"
+                (tap)="visit(vol.vol.id_vol, vol.vol.name)"></cardList>
+            <p class="font-sm bold font-grey4 " *ngIf="all_vols.length == 0" style="padding: 25px">As Ações de Voluntariado em que participares vão aparecer aqui</p>
+
         </ion-list>
 
-        <ion-list no-lines no-border margin-top *ngIf="user.type != 1">
-            <ion-item class="font-md bold font-grey4 border-bottom">Ações próximas</ion-item>
-            <cardList></cardList>
-        </ion-list>
     </div>
     <div *ngSwitchCase="'about'">
         <ion-list no-lines no-border margin-top>
@@ -75,13 +86,15 @@
             <ion-item>
                 <p class="font-grey3">Género</p>
                 <ion-note item-right>
-                    <p class="font-grey4 bold">Masculino</p>
+                    <p class="font-grey4 bold" *ngIf="user.gender == 0">Masculino</p>
+                    <p class="font-grey4 bold" *ngIf="user.gender == 1">Feminino</p>
+
                 </ion-note>
             </ion-item>
             <ion-item>
                 <p class="font-grey3">Telemóvel</p>
                 <ion-note item-right>
-                    <p class="font-grey4 bold">915682568</p>
+                    <p class="font-grey4 bold">{{user.phone}}</p>
                 </ion-note>
             </ion-item>
         </ion-list>
@@ -94,15 +107,11 @@
             </ion-item>
             <ion-item>
                 <p class="font-grey4 bold">Hobbies e interesses</p>
-                <p class="font-grey4" text-wrap>A Bolsa de Voluntariado é "uma porta de entrada para qualquer pessoa ou entidade que queira oferecer o seu
-                    tempo, trabalho, conhecimento e experiência", refere a Entrajuda, instituição criada pelo Banco Alimentar
-                    para apoiar outras "entidades não lucrativas" ao nível da organização e gestão.</p>
+                <p class="font-grey4" text-wrap>{{user.hobbies}}</p>
             </ion-item>
             <ion-item>
                 <p class="font-grey4 bold">Tipos de voluntariado favoritos</p>
-                <p class="font-grey4" text-wrap>Segundo a coordenadora da plataforma, Marta Vinhas, a Bolsa do Voluntariado foi "o primeiro site português
-                    a promover o encontro entre pessoas que querem dar o seu tempo" e "as organizações que precisam deste
-                    voluntariado".
+                <p class="font-grey4" text-wrap>
                 </p>
             </ion-item>
             <button ion-item mode="md" text-center class="border-top">
@@ -112,54 +121,34 @@
 
         <ion-list no-lines no-border margin-top>
             <ion-item class="font-md bold font-grey4 border-bottom">Educação e Formação</ion-item>
-            <ion-item>
-                <p class="font-grey4 bold">Licenciatura em Medicina</p>
-                <p class="font-grey4" text-wrap>Instituições, empresas, escolas, universidades e outros grupos, permitindo assim o encontro entre as diferentes
-                    partes.
+            <ion-item *ngFor="let edu of education">
+                <p class="font-grey4 bold">{{edu.name}}</p>
+                <p class="font-grey4" text-wrap>{{edu.institution}} - {{edu.start_at}}
                 </p>
             </ion-item>
-            <ion-item>
-                <p class="font-grey4 bold">Mestrado em apoio auxiliar</p>
-                <p class="font-grey4" text-wrap>Instituição criada pelo Banco Alimentar para apoiar outras "entidades não lucrativas" ao nível da organização
-                    e gestão.</p>
-            </ion-item>
-            <ion-item>
-                <p class="font-grey4 bold">Formação em Voluntariado</p>
-                <p class="font-grey4" text-wrap>Primeiro site português a promover o encontro entre pessoas que querem dar o seu tempo" e "as organizações
-                    que precisam deste voluntariado".</p>
-            </ion-item>
-            <button ion-item mode="md" text-center class="border-top">
-                <p class="font-grey3 font-md">Ver mais<ion-icon name="ios-arrow-forward" class="iconViewAll"></ion-icon></p>
-            </button>
+
         </ion-list>
 
-        <ion-list no-lines no-border margin-top>
-            <ion-item class="font-md bold font-grey4 border-bottom">Redes Sociais</ion-item>
-            <button ion-item>
-                <ion-icon name="logo-facebook" color="facebook" item-left></ion-icon>
-                <span class="font-grey4 font-md">Facebook</span>
-            </button>
-            <button ion-item>
-                <ion-icon name="logo-google" color="google" item-left></ion-icon>
-                <span class="font-grey4 font-md">Google+</span>
-            </button>
-        </ion-list>
+
 
     </div>
-    <div *ngSwitchCase="'follows'">
+    <div *ngSwitchCase="'follows'" style="text-align: center">
+        <p class="font-sm bold font-grey4 " style="padding: 25px" *ngIf="inst_followers.length == 0 && user_followers.length == 0">Ainda não tens seguidores</p>
+
         <ion-list no-lines no-border margin-top>
-            <ion-item class="font-md bold font-grey4 border-bottom">Instituições</ion-item>
-            <users [typeUser]="0"></users>
-            <button ion-item mode="md" text-center class="border-top">
-                <p class="font-grey3 font-md">Ver mais<ion-icon name="ios-arrow-forward" class="iconViewAll"></ion-icon></p>
-            </button>
+            <ion-item class="font-md bold font-grey4 border-bottom" *ngIf="user_followers.length > 0">Voluntários</ion-item>
+            <ng-container *ngFor="let user of user_followers">
+                <users [typeUser]="0" [name]="user.name" [user_id]="user.id_user" [photo]="user.photo_url"></users>
+
+            </ng-container>
+
         </ion-list>
         <ion-list no-lines no-border margin-top>
-            <ion-item class="font-md bold font-grey4 border-bottom">Voluntários</ion-item>
-            <users [typeUser]="1"></users>
-            <button ion-item mode="md" text-center class="border-top">
-                <p class="font-grey3 font-md">Ver mais<ion-icon name="ios-arrow-forward" class="iconViewAll"></ion-icon></p>
-            </button>
+            <ion-item class="font-md bold font-grey4 border-bottom" *ngIf="inst_followers.length > 0">Instituiçoes</ion-item>
+            <ng-container *ngFor=" let user of inst_followers ">
+                <users [typeUser]="0 " [name]="user.name " [user_id]="user.id_user " [photo]="user.photo_url "></users>
+
+            </ng-container>
         </ion-list>
     </div>
 </ion-content>

@@ -23,8 +23,8 @@ export class NotificationsService {
             .then(res => { return res.json() })
             .catch(error => console.log(error));
     };
-    getNotifications() {
-        return this.http.get(`${GlobalConstants.API_ENDPOINT}/notifications/`).toPromise()
+    getNotifications(amount, startAt) {
+        return this.http.get(`${GlobalConstants.API_ENDPOINT}/notifications/list/all`, { amount: amount, startAt: startAt }).toPromise()
             .then(res => { return res.json() })
             .catch(error => console.log(error));
     };

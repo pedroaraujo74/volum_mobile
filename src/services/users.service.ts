@@ -20,6 +20,12 @@ export class UsersService {
             .catch(error => console.log(error));
     }
 
+    getEducation(id) {
+        return this.http.get(`${GlobalConstants.API_ENDPOINT}/users/${id}/education/`).toPromise()
+            .then(res => { return res.json() })
+            .catch(error => console.log(error));
+    }
+
     follow(id_user) {
         return this.http.post(`${GlobalConstants.API_ENDPOINT}/users/follow`, { id_user: id_user }).toPromise()
             .then(res => { return res.json() })
@@ -28,6 +34,24 @@ export class UsersService {
 
     unfollow(id_user) {
         return this.http.post(`${GlobalConstants.API_ENDPOINT}/users/unfollow`, { id_user: id_user }).toPromise()
+            .then(res => { return res.json() })
+            .catch(error => console.log(error));
+    }
+
+    cleanNotifications(id_user) {
+        return this.http.post(`${GlobalConstants.API_ENDPOINT}/notifications/read-all`, null).toPromise()
+            .then(res => { return res.json() })
+            .catch(error => console.log(error));
+    }
+
+    newNotificationCount(id_user) {
+        return this.http.get(`${GlobalConstants.API_ENDPOINT}/notifications/not-read/count`).toPromise()
+            .then(res => { return res.json() })
+            .catch(error => console.log(error));
+    };
+
+    getScore(id) {
+        return this.http.get(`${GlobalConstants.API_ENDPOINT}/users/` + id + `/score`).toPromise()
             .then(res => { return res.json() })
             .catch(error => console.log(error));
     }
@@ -45,6 +69,8 @@ export class UsersService {
                 .catch(error => console.log(error));
         }
     }
+
+
 
     countFollows(id_user, type) {
         if (type == 1) {
@@ -65,8 +91,6 @@ export class UsersService {
             .then(res => { return res.json() })
             .catch(error => console.log(error));
     }
-
-  
 
     engageConversation(id_user) {
         return this.http.post(`${GlobalConstants.API_ENDPOINT}/chat/`, { id_user: id_user }).toPromise()

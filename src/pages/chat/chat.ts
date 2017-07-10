@@ -1,3 +1,4 @@
+import { AuthenticationService } from './../../shared/auth/authentication.service';
 import { UsersService } from './../../services/users.service';
 import { ChatService } from './../../services/chat.service';
 import { Component } from '@angular/core';
@@ -18,19 +19,25 @@ import { IonicPage, NavController, NavParams, ActionSheetController, Platform } 
 export class Chat {
 
   public conversations = [];
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, public userService: UsersService, public actionSheetCtrl: ActionSheetController, public chatService: ChatService, public platform: Platform) {
+  public ready: boolean = false;
+  constructor(public navCtrl: NavController, public auth: AuthenticationService, public navParams: NavParams, public userService: UsersService, public actionSheetCtrl: ActionSheetController, public chatService: ChatService, public platform: Platform) {
   }
 
-  ionViewDidLoad() {
-    this.chatService.getConversations().then(res => {
+  ionViewWillEnter() {
 
-      console.log("res", res);
-      this.conversations = res.conversations;
-      this.getUsersAndLastMessage();
+    console.log("loaded chat")
+    console.log(this.auth.isAuthenticated())
+    if (this.auth.isAuthenticated()) {
+      this.chatService.getConversations().then(res => {
 
-    });
+        console.log("res", res);
+        this.conversations = res.conversations;
+        this.getUsersAndLastMessage();
+        this.ready = true;
 
+      });
+
+    }
   }
 
   getUsersAndLastMessage() {
@@ -38,15 +45,22 @@ export class Chat {
 
       this.userService.getProfile(this.conversations[i].id_user).then(res => {
         this.conversations[i].photo_url = res.user.photo;
-        this.conversations[i].name = res.user.username;
+        this.conversations[i].name = res.user.name;
         console.log(res);
       });
 
 
       this.chatService.getLastMessage(this.conversations[i].id_conversation).then(res => {
-        this.conversations[i].message = res.messages[0].message;
-        this.conversations[i].date = res.messages[0].date;
-        console.log(res);
+
+        console.log("last message", res);
+        console.log("conversations", this.conversations)
+        if (res.messages.length > 0) {
+          this.conversations[i].message = res.messages[0].message;
+          this.conversations[i].date = res.messages[0].date;
+
+        } else {
+        }
+        console.log("end conversation", this.conversations)
       });
 
     }

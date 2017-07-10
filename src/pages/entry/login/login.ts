@@ -9,7 +9,6 @@ import { CustomValidators } from "ng2-validation/dist";
 @Component({
     selector: 'page-login',
     templateUrl: 'login.html',
-    providers: [AuthenticationService]
 })
 export class Login {
 
@@ -21,6 +20,11 @@ export class Login {
             email: ['', [Validators.required, Validators.minLength(3), CustomValidators.email]],
             password: ['', [Validators.required, Validators.minLength(3)]],
         });
+
+        if (this.authenticationService.isAuthenticated()) {
+            this.navCtrl.push("Tabs");
+        }
+
     }
 
     validate(value) {
@@ -54,21 +58,41 @@ export class Login {
         }
     }
 
+
     onSubmit(value, valid) {
+
+
         this.login.controls.email.markAsTouched();
         this.login.controls.password.markAsTouched();
         console.log("wtf")
         if (valid = true) {
+
+
             this.authenticationService.login(value).then(res => {
                 console.log("res", res)
                 if (res.success) {
                     this.authenticationService.reloadUser(res.id_user, true).then(result => {
-                        if (this.authenticationService.isAuthenticated()) {
 
-                            this.navCtrl.push("Tabs");
-                            location.reload();
 
-                        }
+                        this.navCtrl.push("Tabs").catch(err => {
+                            let toast = this.toastCtrl.create({
+                                message: err,
+                                duration: 3000,
+                                cssClass: "toast-error"
+                            });
+                            toast.present();
+                        }).then(test => {
+                            let toast = this.toastCtrl.create({
+                                message: test,
+                                duration: 3000,
+                                cssClass: "toast-error"
+                            });
+                            toast.present();
+                        })
+
+                        location.reload();
+
+
                     })
 
                 }

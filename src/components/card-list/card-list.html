@@ -5,7 +5,7 @@
                 </ion-thumbnail>
                 <div style="margin-top:-2px; overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
                     <p><span class="bold font-grey4">{{name}}</span></p>
-                    <p class="font-sm"><span class="font-grey4">Criado por <span class="bold font-third">Banco Alimentar</span></span></p>
-                    <p class="font-sm"><span class="font-grey3">{{date}} </span></p>
+                    <p class="font-sm" *ngIf="creator"><span class="font-grey4" >Criado por <span class="bold font-third">{{creator}}</span></span></p>
+                    <p class="font-sm"><span class="font-grey3">{{date | date}} </span></p>
                 </div>
             </button>
